@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
-import { PostgresCreateUserRepositorie } from '../respositories/postgres/create-user';
-import { PostgresGetUserByEmailRepositorie } from '../respositories/postgres/get-user-by-email';
+import { PostgresCreateUserRepositorie } from '../respositories/postgres/create-user.js';
+import { PostgresGetUserByEmailRepositorie } from '../respositories/postgres/get-user-by-email.js';
 
 export class CreateUserUseCase {
     async execute(createUserParams) {
