@@ -26,7 +26,7 @@ export class UpdateUserController {
             }
 
             if (params.password) {
-                const isPasswordValid = params.password >= 5;
+                const isPasswordValid = params.password.length >= 5;
 
                 if (!isPasswordValid) {
                     return {
@@ -36,12 +36,11 @@ export class UpdateUserController {
                 }
             }
 
+            const userId = httpRequest.params.userId;
+
             const updateUserUseCase = new UpdateUserUseCase();
 
-            const updatedUser = await updateUserUseCase.execute(
-                httpRequest.params.userId,
-                params
-            );
+            const updatedUser = await updateUserUseCase.execute(userId, params);
 
             return { statusCode: 200, body: updatedUser };
         } catch (error) {
