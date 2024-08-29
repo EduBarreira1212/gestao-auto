@@ -12,7 +12,7 @@ export class UpdateUserUseCase {
                 updateUserParams.email
             );
 
-            if (!userWithProvidedEmail && userWithProvidedEmail.id !== userId) {
+            if (userWithProvidedEmail && userWithProvidedEmail.id !== userId) {
                 throw new Error('Email already in use');
             }
         }
