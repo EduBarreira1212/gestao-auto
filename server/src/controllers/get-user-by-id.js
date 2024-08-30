@@ -1,7 +1,9 @@
 import { validate } from 'uuid';
-import { GetUserById } from '../use-cases/get-user-by-id.js';
 
 export class GetUserByIdCrontroller {
+    constructor(getUserByIdUseCase) {
+        this.getUserByIdUseCase = getUserByIdUseCase;
+    }
     async execute(httpRequest) {
         try {
             const isIdValid = validate(httpRequest.params.userId);
@@ -10,9 +12,9 @@ export class GetUserByIdCrontroller {
                 return { statusCode: 404, body: { message: 'ID invalid' } };
             }
 
-            const getUserById = new GetUserById();
-
-            const user = await getUserById.execute(httpRequest.params.userId);
+            const user = await this.getUserByIdUseCase.execute(
+                httpRequest.params.userId
+            );
 
             if (!user) {
                 return { statusCode: 404, body: { message: 'User not found' } };

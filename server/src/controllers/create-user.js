@@ -1,6 +1,7 @@
-import { CreateUserUseCase } from '../use-cases/create-user.js';
-
 export class CreateUserController {
+    constructor(createUserUseCase) {
+        this.createUserUseCase = createUserUseCase;
+    }
     async execute(httpRequest) {
         try {
             const params = httpRequest.body;
@@ -22,9 +23,7 @@ export class CreateUserController {
                 return { statusCode: 404, body: { message: 'Password invalid' } };
             }
 
-            const createUserUseCase = new CreateUserUseCase();
-
-            const user = await createUserUseCase.execute(params);
+            const user = await this.createUserUseCase.execute(params);
 
             return { statusCode: 201, body: user };
         } catch (error) {

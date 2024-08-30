@@ -1,7 +1,9 @@
 import { validate } from 'uuid';
-import { UpdateUserUseCase } from '../use-cases/update-user.js';
 
 export class UpdateUserController {
+    constructor(updateUserUseCase) {
+        this.updateUserUseCase = updateUserUseCase;
+    }
     async execute(httpRequest) {
         try {
             const isIdValid = validate(httpRequest.params.userId);
@@ -38,9 +40,7 @@ export class UpdateUserController {
 
             const userId = httpRequest.params.userId;
 
-            const updateUserUseCase = new UpdateUserUseCase();
-
-            const updatedUser = await updateUserUseCase.execute(userId, params);
+            const updatedUser = await this.updateUserUseCase.execute(userId, params);
 
             return { statusCode: 200, body: updatedUser };
         } catch (error) {
