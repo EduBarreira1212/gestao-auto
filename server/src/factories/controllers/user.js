@@ -1,16 +1,16 @@
-import { PostgresGetUserById } from '../../respositories/postgres/get-user-by-id.js';
-import { GetUserByIdUseCase } from '../../use-cases/get-user-by-id.js';
-import { GetUserByIdCrontroller } from '../../controllers/get-user-by-id.js';
-import { PostgresGetUserByEmailRepositorie } from '../../respositories/postgres/get-user-by-email.js';
-import { PostgresCreateUserRepositorie } from '../../respositories/postgres/create-user.js';
-import { CreateUserUseCase } from '../../use-cases/create-user.js';
-import { CreateUserController } from '../../controllers/create-user.js';
-import { UpdateUserController } from '../../controllers/update-user.js';
-import { DeleteUserController } from '../../controllers/delete-user.js';
-import { PostgresUpdateUserRepository } from '../../respositories/postgres/update-user.js';
-import { UpdateUserUseCase } from '../../use-cases/update-user.js';
-import { PostgresDeleteUserRepository } from '../../respositories/postgres/delete-user.js';
-import { DeleteUserUseCase } from '../../use-cases/delete-user.js';
+import { PostgresGetUserById } from '../../respositories/postgres/user/get-user-by-id.js';
+import { GetUserByIdUseCase } from '../../use-cases/user/get-user-by-id.js';
+import { GetUserByIdCrontroller } from '../../controllers/user/get-user-by-id.js';
+import { PostgresGetUserByEmailRepositorie } from '../../respositories/postgres/user/get-user-by-email.js';
+import { PostgresCreateUserRepositorie } from '../../respositories/postgres/user/create-user.js';
+import { CreateUserUseCase } from '../../use-cases/user/create-user.js';
+import { CreateUserController } from '../../controllers/user/create-user.js';
+import { UpdateUserController } from '../../controllers/user/update-user.js';
+import { DeleteUserController } from '../../controllers/user/delete-user.js';
+import { PostgresUpdateUserRepository } from '../../respositories/postgres/user/update-user.js';
+import { UpdateUserUseCase } from '../../use-cases/user/update-user.js';
+import { PostgresDeleteUserRepository } from '../../respositories/postgres/user/delete-user.js';
+import { DeleteUserUseCase } from '../../use-cases/user/delete-user.js';
 
 export const makeGetUserByIdController = () => {
     const postgresGetUserById = new PostgresGetUserById();
