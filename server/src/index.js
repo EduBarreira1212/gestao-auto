@@ -8,6 +8,8 @@ import {
     makeUpdateUserController,
 } from './factories/controllers/user.js';
 
+import { makeCreateCarController } from './factories/controllers/car.js';
+
 dotenv.config({ path: '.env' });
 
 const app = express();
@@ -42,6 +44,14 @@ app.delete('/api/delete-user/:userId', async (req, res) => {
     const deleteUserController = makeDeleteUserController();
 
     const { statusCode, body } = await deleteUserController.execute(req);
+
+    res.status(statusCode).send(body);
+});
+
+app.post('/api/create-car', async (req, res) => {
+    const createCarController = makeCreateCarController();
+
+    const { statusCode, body } = await createCarController.execute(req);
 
     res.status(statusCode).send(body);
 });
