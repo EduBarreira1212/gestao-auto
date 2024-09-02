@@ -11,6 +11,7 @@ import {
 import {
     makeCreateCarController,
     makeGetCarByIdController,
+    makeGetCarsByUserIdController,
 } from './factories/controllers/car.js';
 
 dotenv.config({ path: '.env' });
@@ -55,6 +56,14 @@ app.get('/api/get-car/:carId', async (req, res) => {
     const getCarByIdController = makeGetCarByIdController();
 
     const { statusCode, body } = await getCarByIdController.execute(req);
+
+    res.status(statusCode).send(body);
+});
+
+app.get('/api/get-cars', async (req, res) => {
+    const getCarsByUserIdController = makeGetCarsByUserIdController();
+
+    const { statusCode, body } = await getCarsByUserIdController.execute(req);
 
     res.status(statusCode).send(body);
 });
