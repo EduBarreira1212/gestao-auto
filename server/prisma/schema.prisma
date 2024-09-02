@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,8 +12,8 @@ model User {
   name     String
   email    String   @unique
   password String
-  Cars     Car[]
-  Sells    Sell[]
+  Cars     Car[]    @relation("UserCars")
+  Sells    Sell[]   @relation("UserSells")
 }
 
 model Car {
@@ -30,17 +24,19 @@ model Car {
   year        Int
   plate       String
   entry_price Float
-  expenses    Float
-  user        User    @relation(fields: [user_id], references: [id])
-  Sells       Sell[]
+  expenses    Float   @default(0.00)
+  user        User    @relation(fields: [user_id], references: [id], name: "UserCars", onDelete: Cascade)
+  sell  Sell? @relation(name: "CarSell")
+
+  @@index([user_id])
 }
 
 model Sell {
   id       String   @id @default(uuid())
   user_id  String
-  car_id   String
+  car_id   String   @unique
   amount   Float
-  profit   Float
-  user     User    @relation(fields: [user_id], references: [id])
-  car      Car    @relation(fields: [car_id], references: [id])
+  profit   Float    @default(0.0)
+  user     User     @relation(fields: [user_id], references: [id], name: "UserSells", onDelete: Cascade)
+  car      Car      @relation(fields: [car_id], references: [id], name: "CarSell", onDelete: Cascade)
 }
