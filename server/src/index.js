@@ -10,6 +10,7 @@ import {
 
 import {
     makeCreateCarController,
+    makeDeleteCarController,
     makeGetCarByIdController,
     makeGetCarsByUserIdController,
     makeUpdateCarController,
@@ -81,6 +82,14 @@ app.patch('/api/update-car/:carId', async (req, res) => {
     const updateCarController = makeUpdateCarController();
 
     const { statusCode, body } = await updateCarController.execute(req);
+
+    res.status(statusCode).send(body);
+});
+
+app.delete('/api/delete-car/:carId', async (req, res) => {
+    const deleteCarController = makeDeleteCarController();
+
+    const { statusCode, body } = await deleteCarController.execute(req);
 
     res.status(statusCode).send(body);
 });
