@@ -1,4 +1,6 @@
 import { validate } from 'uuid';
+import { ZodError } from 'zod';
+import { updateCarSchema } from '../../schemas/car.js';
 
 export class UpdateCarController {
     constructor(updateCarUseCase) {
@@ -16,64 +18,19 @@ export class UpdateCarController {
 
             const params = httpRequest.body;
 
-            const allowedFields = [
-                'brand',
-                'name',
-                'year',
-                'plate',
-                'entry_price',
-                'expenses',
-            ];
-
-            const someFieldIsNotAllowed = Object.keys(params).some(
-                (field) => !allowedFields.includes(field)
-            );
-
-            if (someFieldIsNotAllowed) {
-                return {
-                    statusCode: 400,
-                    body: { message: 'Some provided field is not allowed' },
-                };
-            }
-
-            if (params.year) {
-                const isYearValid = params.year > 0;
-
-                if (!isYearValid) {
-                    return {
-                        statusCode: 400,
-                        body: { message: 'Year must be positive number' },
-                    };
-                }
-            }
-
-            if (params.entry_price) {
-                const isEntryPriceValid = params.entry_price > 0;
-
-                if (!isEntryPriceValid) {
-                    return {
-                        statusCode: 400,
-                        body: { message: 'Entry Price must be positive number' },
-                    };
-                }
-            }
-
-            if (params.expenses) {
-                const isExpensesValid = params.expenses > 0;
-
-                if (!isExpensesValid) {
-                    return {
-                        statusCode: 400,
-                        body: { message: 'Expenses must be positive number' },
-                    };
-                }
-            }
+            await updateCarSchema.parseAsync(params);
 
             const updatedCar = await this.updateCarUseCase.execute(carId, params);
 
             return { statusCode: 200, body: updatedCar };
         } catch (error) {
             console.error(error);
+            if (error instanceof ZodError) {
+                return {
+                    statusCode: 400,
+                    body: { message: error.errors[0].message },
+                };
+            }
             return { statusCode: 500, body: { error } };
         }
     }

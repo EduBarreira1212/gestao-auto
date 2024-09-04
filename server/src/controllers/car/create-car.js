@@ -1,3 +1,6 @@
+import { ZodError } from 'zod';
+import { createCarSchema } from '../../schemas/car.js';
+
 export class CreateCarController {
     constructor(createCarUseCase) {
         this.createCarUseCase = createCarUseCase;
@@ -6,47 +9,19 @@ export class CreateCarController {
         try {
             const params = httpRequest.body;
 
-            const requiredFields = [
-                'user_id',
-                'brand',
-                'name',
-                'year',
-                'plate',
-                'entry_price',
-            ];
-
-            for (const field of requiredFields) {
-                if (!params[field] || params[field].toString().trim().length === 0) {
-                    return {
-                        statusCode: 404,
-                        body: { message: `Missing ${field}` },
-                    };
-                }
-            }
-
-            const year = params.year;
-
-            if (year <= 0) {
-                return {
-                    statusCode: 400,
-                    body: { message: 'Year must be positive number' },
-                };
-            }
-
-            const entry_price = params.entry_price;
-
-            if (entry_price <= 0) {
-                return {
-                    statusCode: 400,
-                    body: { message: 'Entry price must be positive number' },
-                };
-            }
+            await createCarSchema.parseAsync(params);
 
             const createdCar = await this.createCarUseCase.execute(params);
 
             return { statusCode: 201, body: createdCar };
         } catch (error) {
             console.error(error);
+            if (error instanceof ZodError) {
+                return {
+                    statusCode: 400,
+                    body: { message: error.errors[0].message },
+                };
+            }
             return { statusCode: 404, body: error };
         }
     }
