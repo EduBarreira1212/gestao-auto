@@ -1,4 +1,6 @@
 import { validate } from 'uuid';
+import { ZodError } from 'zod';
+import { updateUserSchema } from '../../schemas/user.js';
 
 export class UpdateUserController {
     constructor(updateUserUseCase) {
@@ -14,29 +16,7 @@ export class UpdateUserController {
 
             const params = httpRequest.body;
 
-            const allowedFields = ['name', 'email', 'password'];
-
-            const someFieldIsNotAllowed = Object.keys(params).some(
-                (field) => !allowedFields.includes(field)
-            );
-
-            if (someFieldIsNotAllowed) {
-                return {
-                    statusCode: 404,
-                    body: { message: 'Some provided field is not allowed' },
-                };
-            }
-
-            if (params.password) {
-                const isPasswordValid = params.password.length >= 5;
-
-                if (!isPasswordValid) {
-                    return {
-                        statusCode: 404,
-                        body: { message: 'Password invalid' },
-                    };
-                }
-            }
+            await updateUserSchema.parseAsync(params);
 
             const userId = httpRequest.params.userId;
 
@@ -45,6 +25,12 @@ export class UpdateUserController {
             return { statusCode: 200, body: updatedUser };
         } catch (error) {
             console.log(error);
+            if (error instanceof ZodError) {
+                return {
+                    statusCode: 400,
+                    body: { message: error.errors[0].message },
+                };
+            }
             return { statusCode: 500, body: error };
         }
     }
