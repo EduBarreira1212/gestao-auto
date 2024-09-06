@@ -17,6 +17,7 @@ import {
 } from './factories/controllers/car.js';
 import {
     makeCreateSellController,
+    makeDeleteSellController,
     makeGetSellByIdController,
     makeGetSellsByUserIdController,
     makeUpdateSellController,
@@ -128,6 +129,14 @@ app.patch('/api/update-sell/:sellId', async (req, res) => {
     const updateSellController = makeUpdateSellController();
 
     const { statusCode, body } = await updateSellController.execute(req);
+
+    res.status(statusCode).send(body);
+});
+
+app.delete('/api/delete-sell/:sellId', async (req, res) => {
+    const deleteSellController = makeDeleteSellController();
+
+    const { statusCode, body } = await deleteSellController.execute(req);
 
     res.status(statusCode).send(body);
 });
