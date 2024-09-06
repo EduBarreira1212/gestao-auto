@@ -15,6 +15,7 @@ import {
     makeGetCarsByUserIdController,
     makeUpdateCarController,
 } from './factories/controllers/car.js';
+import { makeCreateSellController } from './factories/controllers/sell.js';
 
 dotenv.config({ path: '.env' });
 
@@ -90,6 +91,14 @@ app.delete('/api/delete-car/:carId', async (req, res) => {
     const deleteCarController = makeDeleteCarController();
 
     const { statusCode, body } = await deleteCarController.execute(req);
+
+    res.status(statusCode).send(body);
+});
+
+app.post('/api/create-sell', async (req, res) => {
+    const createSellController = makeCreateSellController();
+
+    const { statusCode, body } = await createSellController.execute(req);
 
     res.status(statusCode).send(body);
 });
