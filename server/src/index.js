@@ -19,6 +19,7 @@ import {
     makeCreateSellController,
     makeGetSellByIdController,
     makeGetSellsByUserIdController,
+    makeUpdateSellController,
 } from './factories/controllers/sell.js';
 
 dotenv.config({ path: '.env' });
@@ -119,6 +120,14 @@ app.post('/api/create-sell', async (req, res) => {
     const createSellController = makeCreateSellController();
 
     const { statusCode, body } = await createSellController.execute(req);
+
+    res.status(statusCode).send(body);
+});
+
+app.patch('/api/update-sell/:sellId', async (req, res) => {
+    const updateSellController = makeUpdateSellController();
+
+    const { statusCode, body } = await updateSellController.execute(req);
 
     res.status(statusCode).send(body);
 });
