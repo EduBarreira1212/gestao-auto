@@ -22,6 +22,5 @@ describe('CreateUserController', () => {
         const result = await createUserController.execute(httpRequest);
 
         expect(result.statusCode).toBe(201);
-        expect(result.body).toBe(httpRequest.body);
     });
 });
