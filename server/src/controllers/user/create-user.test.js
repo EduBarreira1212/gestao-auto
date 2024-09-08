@@ -14,7 +14,7 @@ describe('CreateUserController', () => {
         return sut;
     };
 
-    test('should return 201 and body when user is created sucessfully', async () => {
+    test('should return 201 and body when user is created sucessfuly', async () => {
         const sut = makeSut();
 
         const httpRequest = {
