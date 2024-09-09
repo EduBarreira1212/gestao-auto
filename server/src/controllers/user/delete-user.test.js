@@ -67,4 +67,20 @@ describe('DeleteUserController', () => {
 
         expect(result.statusCode).toBe(500);
     });
+
+    test('should call DeleteUserUseCase with correct params', async () => {
+        const sut = makeSut();
+
+        const httpRequest = {
+            params: {
+                userId: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
+            },
+        };
+
+        const executeSpy = jest.spyOn(sut.deleteUserUseCase, 'execute');
+
+        await sut.execute(httpRequest);
+
+        expect(executeSpy).toHaveBeenCalledWith(httpRequest.params.userId);
+    });
 });
