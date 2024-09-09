@@ -71,4 +71,20 @@ describe('DeleteUserController', () => {
 
         expect(result.statusCode).toBe(500);
     });
+
+    test('should call DeleteCarUseCase with correct params', async () => {
+        const sut = makeSut();
+
+        const httpRequest = {
+            params: {
+                carId: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
+            },
+        };
+
+        const executeSpy = jest.spyOn(sut.deleteCarUseCase, 'execute');
+
+        await sut.execute(httpRequest);
+
+        expect(executeSpy).toHaveBeenCalledWith(httpRequest.params.carId);
+    });
 });

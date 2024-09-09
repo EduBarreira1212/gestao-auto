@@ -132,4 +132,31 @@ describe('UpdateCarController', () => {
 
         expect(result.statusCode).toBe(500);
     });
+
+    test('should call UpdateCarUseCase with correct params', async () => {
+        const sut = makeSut();
+
+        const httpRequest = {
+            params: {
+                carId: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
+            },
+            body: {
+                user_id: '6000edd1-2b56-42f9-00b0-2f86ba234c41',
+                brand: 'Ferrari',
+                name: '488',
+                year: 2018,
+                plate: 'FFF0F00',
+                entry_price: 2500000,
+            },
+        };
+
+        const executeSpy = jest.spyOn(sut.updateCarUseCase, 'execute');
+
+        await sut.execute(httpRequest);
+
+        expect(executeSpy).toHaveBeenCalledWith(
+            httpRequest.params.carId,
+            httpRequest.body
+        );
+    });
 });

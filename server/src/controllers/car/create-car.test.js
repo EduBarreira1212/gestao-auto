@@ -70,4 +70,25 @@ describe('CreateUserController', () => {
 
         expect(result.statusCode).toBe(404);
     });
+
+    test('should call CreateCarUseCase with correct params', async () => {
+        const sut = makeSut();
+
+        const httpRequest = {
+            body: {
+                user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
+                brand: 'Ferrari',
+                name: '488',
+                year: 2018,
+                plate: 'FFF0F00',
+                entry_price: 2500000,
+            },
+        };
+
+        const executeSpy = jest.spyOn(sut.createCarUseCase, 'execute');
+
+        await sut.execute(httpRequest);
+
+        expect(executeSpy).toHaveBeenCalledWith(httpRequest.body);
+    });
 });

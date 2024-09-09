@@ -117,4 +117,28 @@ describe('CreateUserController', () => {
 
         expect(result.statusCode).toBe(500);
     });
+
+    test('should call UpdateUserUseCase with correct params', async () => {
+        const sut = makeSut();
+
+        const httpRequest = {
+            params: {
+                userId: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
+            },
+            body: {
+                name: 'Eduardo',
+                email: 'edu@gmail.com',
+                password: '12345',
+            },
+        };
+
+        const executeSpy = jest.spyOn(sut.updateUserUseCase, 'execute');
+
+        await sut.execute(httpRequest);
+
+        expect(executeSpy).toHaveBeenCalledWith(
+            httpRequest.params.userId,
+            httpRequest.body
+        );
+    });
 });
