@@ -1,9 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
-
 export class CreateCarUseCase {
-    constructor(postgresGetUserByIdRepository, postgresCreateCarRepository) {
+    constructor(
+        postgresGetUserByIdRepository,
+        postgresCreateCarRepository,
+        idGeneratorAdapter
+    ) {
         this.postgresGetUserByIdRepository = postgresGetUserByIdRepository;
         this.postgresCreateCarRepository = postgresCreateCarRepository;
+        this.idGeneratorAdapter = idGeneratorAdapter;
     }
     async execute(createCarParams) {
         const userId = createCarParams.user_id;
@@ -14,7 +17,7 @@ export class CreateCarUseCase {
             throw new Error('User ID invalid');
         }
 
-        const carId = uuidv4();
+        const carId = this.idGeneratorAdapter.execute();
 
         const car = {
             ...createCarParams,

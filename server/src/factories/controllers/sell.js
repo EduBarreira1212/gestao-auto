@@ -1,3 +1,4 @@
+import { IdGeneratorAdapter } from '../../adapters/id-generator.js';
 import { CreateSellController } from '../../controllers/sell/create-sell.js';
 import { DeleteSellController } from '../../controllers/sell/delete-sell.js';
 import { GetSellByIdController } from '../../controllers/sell/get-sell-by-id.js';
@@ -20,11 +21,13 @@ export const makeCreateSellController = () => {
     const postgresGetUserByIdRepository = new PostgresGetUserById();
     const postgresGetCarByIdRepository = new PostgresGetCarByIdRepository();
     const postgresCreateSellRepository = new PostgresCreateSellRepository();
+    const idGeneratorAdapter = new IdGeneratorAdapter();
 
     const createSellUseCase = new CreateSellUseCase(
         postgresGetUserByIdRepository,
         postgresGetCarByIdRepository,
-        postgresCreateSellRepository
+        postgresCreateSellRepository,
+        idGeneratorAdapter
     );
 
     const createSellController = new CreateSellController(createSellUseCase);
