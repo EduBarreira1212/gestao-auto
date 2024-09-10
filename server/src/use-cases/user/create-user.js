@@ -1,10 +1,14 @@
-import { v4 as uuidv4 } from 'uuid';
-import bcrypt from 'bcrypt';
-
 export class CreateUserUseCase {
-    constructor(postgresGetUserByEmailRepositorie, postgresCreateUserRepositorie) {
+    constructor(
+        postgresGetUserByEmailRepositorie,
+        postgresCreateUserRepositorie,
+        passwordHasherAdapter,
+        idGeneratorAdapter
+    ) {
         this.postgresGetUserByEmailRepositorie = postgresGetUserByEmailRepositorie;
         this.postgresCreateUserRepositorie = postgresCreateUserRepositorie;
+        this.passwordHasherAdapter = passwordHasherAdapter;
+        this.idGeneratorAdapter = idGeneratorAdapter;
     }
     async execute(createUserParams) {
         const emailExists = await this.postgresGetUserByEmailRepositorie.execute(
@@ -15,9 +19,11 @@ export class CreateUserUseCase {
             throw new Error('Email already exists');
         }
 
-        const userId = uuidv4();
+        const userId = this.idGeneratorAdapter.execute();
 
-        const encryptedPassword = bcrypt.hashSync(createUserParams.password, 10);
+        const encryptedPassword = this.passwordHasherAdapter.execute(
+            createUserParams.password
+        );
 
         const user = {
             ...createUserParams,

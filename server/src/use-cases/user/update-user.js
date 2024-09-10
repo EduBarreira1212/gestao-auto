@@ -1,9 +1,12 @@
-import bcrypt from 'bcrypt';
-
 export class UpdateUserUseCase {
-    constructor(postgresGetUserByEmailRepositorie, postgresUpdateUserRepository) {
+    constructor(
+        postgresGetUserByEmailRepositorie,
+        postgresUpdateUserRepository,
+        passwordHasherAdapter
+    ) {
         this.postgresGetUserByEmailRepositorie = postgresGetUserByEmailRepositorie;
         this.postgresUpdateUserRepository = postgresUpdateUserRepository;
+        this.passwordHasherAdapter = passwordHasherAdapter;
     }
     async execute(userId, updateUserParams) {
         if (updateUserParams.email) {
@@ -20,7 +23,9 @@ export class UpdateUserUseCase {
         const user = { ...updateUserParams };
 
         if (updateUserParams.password) {
-            const encryptedPassword = bcrypt.hashSync(updateUserParams.password, 10);
+            const encryptedPassword = this.passwordHasherAdapter.execute(
+                updateUserParams.password
+            );
 
             user.password = encryptedPassword;
         }

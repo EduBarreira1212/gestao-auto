@@ -1,14 +1,14 @@
-import { v4 as uuidv4 } from 'uuid';
-
 export class CreateSellUseCase {
     constructor(
         postgresGetUserByIdRepository,
         postgresGetCarByIdRepository,
-        postgresCreateSellRepository
+        postgresCreateSellRepository,
+        idGeneratorAdapter
     ) {
         this.postgresGetUserByIdRepository = postgresGetUserByIdRepository;
         this.postgresGetCarByIdRepository = postgresGetCarByIdRepository;
         this.postgresCreateSellRepository = postgresCreateSellRepository;
+        this.idGeneratorAdapter = idGeneratorAdapter;
     }
     async execute(createSellParams) {
         const userId = createSellParams.user_id;
@@ -29,7 +29,7 @@ export class CreateSellUseCase {
             throw new Error('Car with ID not found');
         }
 
-        const sellId = uuidv4();
+        const sellId = this.idGeneratorAdapter.execute();
 
         const sell = {
             ...createSellParams,
