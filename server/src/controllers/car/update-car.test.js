@@ -25,7 +25,6 @@ describe('UpdateCarController', () => {
                 carId: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
             },
             body: {
-                user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
                 brand: 'Ferrari',
                 name: '488',
                 year: 2018,
@@ -115,7 +114,6 @@ describe('UpdateCarController', () => {
                 carId: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
             },
             body: {
-                user_id: '6000edd1-2b56-42f9-00b0-2f86ba234c41',
                 brand: 'Ferrari',
                 name: '488',
                 year: 2018,
@@ -141,7 +139,6 @@ describe('UpdateCarController', () => {
                 carId: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
             },
             body: {
-                user_id: '6000edd1-2b56-42f9-00b0-2f86ba234c41',
                 brand: 'Ferrari',
                 name: '488',
                 year: 2018,
