@@ -2,16 +2,15 @@ import { DeleteSellController } from './delete-sell.js';
 
 describe('DeleteSellController', () => {
     class DeleteSellUseCaseStub {
-        async execute(carId) {
-            const car = {
-                user_id: carId,
-                brand: 'Ferrari',
-                name: '488',
-                year: 2018,
-                plate: 'FFF0F00',
-                entry_price: 2500000,
+        async execute(sellId) {
+            const sell = {
+                sell_id: sellId,
+                user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
+                car_id: '1125edd1-2b16-41f9-84b4-2f86ba034c11',
+                amount: 100000,
+                profit: 10000,
             };
-            return car;
+            return sell;
         }
     }
 
