@@ -1,3 +1,4 @@
+import { IdGeneratorAdapter } from '../../adapters/id-generator.js';
 import { CreateCarController } from '../../controllers/car/create-car.js';
 import { DeleteCarController } from '../../controllers/car/delete-car.js';
 import { GetCarByIdController } from '../../controllers/car/get-car-by-id.js';
@@ -18,10 +19,12 @@ import { UpdateCarUseCase } from '../../use-cases/car/update-car.js';
 export const makeCreateCarController = () => {
     const postgresGetUserByIdRepository = new PostgresGetUserById();
     const postgresCreateCarRepository = new PostgresCreateCarRepository();
+    const idGeneratorAdapter = new IdGeneratorAdapter();
 
     const createCarUseCase = new CreateCarUseCase(
         postgresGetUserByIdRepository,
-        postgresCreateCarRepository
+        postgresCreateCarRepository,
+        idGeneratorAdapter
     );
 
     const createCarController = new CreateCarController(createCarUseCase);

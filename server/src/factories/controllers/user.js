@@ -11,6 +11,8 @@ import { PostgresUpdateUserRepository } from '../../respositories/postgres/user/
 import { UpdateUserUseCase } from '../../use-cases/user/update-user.js';
 import { PostgresDeleteUserRepository } from '../../respositories/postgres/user/delete-user.js';
 import { DeleteUserUseCase } from '../../use-cases/user/delete-user.js';
+import { PasswordHasherAdapter } from '../../adapters/password-hasher.js';
+import { IdGeneratorAdapter } from '../../adapters/id-generator.js';
 
 export const makeGetUserByIdController = () => {
     const postgresGetUserById = new PostgresGetUserById();
@@ -25,10 +27,14 @@ export const makeGetUserByIdController = () => {
 export const makeCreateUserController = () => {
     const postgresGetUserByEmail = new PostgresGetUserByEmailRepositorie();
     const postgresCreateUserRepositorie = new PostgresCreateUserRepositorie();
+    const passwordHasherAdapter = new PasswordHasherAdapter();
+    const idGeneratorAdapter = new IdGeneratorAdapter();
 
     const createUserUseCase = new CreateUserUseCase(
         postgresGetUserByEmail,
-        postgresCreateUserRepositorie
+        postgresCreateUserRepositorie,
+        passwordHasherAdapter,
+        idGeneratorAdapter
     );
 
     const createUserController = new CreateUserController(createUserUseCase);
@@ -39,10 +45,12 @@ export const makeCreateUserController = () => {
 export const makeUpdateUserController = () => {
     const postgresGetUserByEmail = new PostgresGetUserByEmailRepositorie();
     const postgresUpdateUserRepository = new PostgresUpdateUserRepository();
+    const passwordHasherAdapter = new PasswordHasherAdapter();
 
     const updateUserUseCase = new UpdateUserUseCase(
         postgresGetUserByEmail,
-        postgresUpdateUserRepository
+        postgresUpdateUserRepository,
+        passwordHasherAdapter
     );
 
     const updateUserController = new UpdateUserController(updateUserUseCase);
