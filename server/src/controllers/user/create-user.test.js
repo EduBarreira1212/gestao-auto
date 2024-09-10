@@ -30,6 +30,22 @@ describe('CreateUserController', () => {
         expect(result.statusCode).toBe(201);
     });
 
+    test('should return 400 when body is send with invalid data', async () => {
+        const sut = makeSut();
+
+        const httpRequest = {
+            body: {
+                name: 'Eduardo',
+                email: 'edugmail.com',
+                password: '123',
+            },
+        };
+
+        const result = await sut.execute(httpRequest);
+
+        expect(result.statusCode).toBe(400);
+    });
+
     test('should return 404 when execute throw an error', async () => {
         const sut = makeSut();
 
