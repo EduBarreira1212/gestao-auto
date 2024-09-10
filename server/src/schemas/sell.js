@@ -13,4 +13,7 @@ export const createSellSchema = z.object({
     profit: z.number({ required_error: 'Profit is required.' }),
 });
 
-export const updateSellSchema = createSellSchema.partial().strict();
+export const updateSellSchema = createSellSchema
+    .omit({ user_id: true, car_id: true })
+    .partial()
+    .strict();

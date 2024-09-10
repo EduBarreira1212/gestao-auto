@@ -29,6 +29,9 @@ export const createCarSchema = z.object({
         .optional(),
 });
 
-export const updateCarSchema = createCarSchema.partial().strict({
-    message: 'Some provided field is not allowed',
-});
+export const updateCarSchema = createCarSchema
+    .omit({ user_id: true })
+    .partial()
+    .strict({
+        message: 'Some provided field is not allowed',
+    });
