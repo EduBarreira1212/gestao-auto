@@ -55,19 +55,19 @@ describe('DeleteUserUseCase', () => {
         expect(result).toStrictEqual(car);
     });
 
-    test('should throw a car already exists error', async () => {
+    test('should throw a car do not exists error', async () => {
         const sut = makeSut();
 
         jest.spyOn(
             sut.postgresGetCarByIdRepository,
             'execute'
         ).mockImplementationOnce(() => {
-            return car;
+            return null;
         });
 
-        const result = await sut.execute(car.id);
+        const promise = sut.execute(car.id);
 
-        expect(result).toStrictEqual(car);
+        await expect(promise).rejects.toThrow(new Error('Car do not exists'));
     });
 
     test('should ensure PostgresDeleteCarRepository is called', async () => {
