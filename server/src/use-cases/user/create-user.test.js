@@ -1,12 +1,12 @@
 import { CreateUserUseCase } from './create-user.js';
 
+import { userFixture } from '../../tests/fixtures/user.js';
+
 describe('CreateUserUseCase', () => {
     const user = {
-        name: 'Eduardo',
-        email: 'edu@gmail.com',
-        password: '12345',
+        ...userFixture,
+        id: undefined,
     };
-
     class PostgresGetUserByEmailRepositorieStub {
         async execute() {
             return null;

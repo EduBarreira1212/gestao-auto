@@ -1,16 +1,8 @@
 import { GetCarsByUserIdUseCase } from './get-cars-by-user-id.js';
+import { carFixture as car } from '../../tests/fixtures/car.js';
 
 describe('GetCarsByUserIdUseCase', () => {
     const userId = '6625edd1-2b56-42f9-84b4-2f86ba234c41';
-    const car = {
-        id: '1234edd1-2b00-42f8-00b4-2f86ba114c99',
-        user_id: userId,
-        brand: 'Ferrari',
-        name: '488',
-        year: 2018,
-        plate: 'FFF0F00',
-        entry_price: 2500000,
-    };
 
     class PostgresGetUserByIdRepositorieStub {
         async execute(userId) {

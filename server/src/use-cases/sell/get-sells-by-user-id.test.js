@@ -1,14 +1,8 @@
 import { GetSellsByUserIdUseCase } from './get-sells-by-user-id.js';
+import { sellFixture as sell } from '../../tests/fixtures/sell.js';
 
 describe('GetSellsByUserIdUseCase', () => {
     const userId = '6625edd1-2b56-42f9-84b4-2f86ba234c41';
-    const sell = {
-        id: '1234edd1-2b00-42f8-00b4-2f86ba114c99',
-        user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
-        car_id: '0124edd1-2b89-42f9-13b4-2f86ba234c41',
-        amount: 100000,
-        profit: 10500,
-    };
 
     class PostgresGetUserByIdRepositorieStub {
         async execute(userId) {

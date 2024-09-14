@@ -1,11 +1,12 @@
 import { UpdateUserUseCase } from './update-user.js';
 
+import { userFixture } from '../../tests/fixtures/user.js';
+
 describe('UpdateUserUseCase', () => {
     const userId = 'valid_id';
     const user = {
-        name: 'Eduardo',
-        email: 'edu@gmail.com',
-        password: '12345',
+        ...userFixture,
+        id: undefined,
     };
 
     class PostgresGetUserByEmailRepositorieStub {

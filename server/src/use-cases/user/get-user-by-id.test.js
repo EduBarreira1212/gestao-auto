@@ -1,13 +1,8 @@
 import { GetUserByIdUseCase } from './get-user-by-id.js';
 
-describe('GetUserByIdUseCase', () => {
-    const user = {
-        id: 'valid_id',
-        name: 'Eduardo',
-        email: 'edu@gmail.com',
-        password: '12345',
-    };
+import { userFixture as user } from '../../tests/fixtures/user.js';
 
+describe('GetUserByIdUseCase', () => {
     class PostgresGetUserByIdRepositorieStub {
         async execute(userId) {
             const userToReturn = {

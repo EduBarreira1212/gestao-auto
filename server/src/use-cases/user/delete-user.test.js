@@ -1,20 +1,13 @@
 import { DeleteUserUseCase } from './delete-user.js';
 
-describe('DeleteUserUseCase', () => {
-    const user = {
-        id: 'valid_id',
-        name: 'Eduardo',
-        email: 'edu@gmail.com',
-        password: '12345',
-    };
+import { userFixture as user } from '../../tests/fixtures/user.js';
 
+describe('DeleteUserUseCase', () => {
     class PostgresDeleteUSerRepositorieStub {
         async execute(userId) {
             const userToReturn = {
+                ...user,
                 id: userId,
-                name: 'Eduardo',
-                email: 'edu@gmail.com',
-                password: '12345',
             };
             return userToReturn;
         }

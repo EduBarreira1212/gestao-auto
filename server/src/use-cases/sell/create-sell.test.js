@@ -1,11 +1,10 @@
 import { CreateSellUseCase } from './create-sell.js';
+import { sellFixture } from '../../tests/fixtures/sell.js';
 
 describe('CreateSellUseCase', () => {
     const sell = {
-        user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
-        car_id: '0124edd1-2b89-42f9-13b4-2f86ba234c41',
-        amount: 100000,
-        profit: 10500,
+        ...sellFixture,
+        id: undefined,
     };
 
     class PostgresGetUserByIdRepositoryStub {

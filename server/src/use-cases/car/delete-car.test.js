@@ -1,16 +1,7 @@
 import { DeleteCarUseCase } from './delete-car.js';
+import { carFixture as car } from '../../tests/fixtures/car.js';
 
 describe('DeleteUserUseCase', () => {
-    const car = {
-        id: '1234edd1-2b00-42f8-00b4-2f86ba114c99',
-        user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
-        brand: 'Ferrari',
-        name: '488',
-        year: 2018,
-        plate: 'FFF0F00',
-        entry_price: 2500000,
-    };
-
     class PostgresGetCarByIdRepositoryStub {
         async execute(carId) {
             const carToReturn = {

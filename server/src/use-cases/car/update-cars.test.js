@@ -1,13 +1,11 @@
 import { UpdateCarUseCase } from './update-car.js';
+import { carFixture } from '../../tests/fixtures/car.js';
 
 describe('UpdateCarUseCase', () => {
     const carId = 'valid_id';
     const car = {
-        brand: 'Ferrari',
-        name: '488',
-        year: 2018,
-        plate: 'FFF0F00',
-        entry_price: 2500000,
+        ...carFixture,
+        id: undefined,
     };
 
     class PostgresGetByIdRepositoryStub {
