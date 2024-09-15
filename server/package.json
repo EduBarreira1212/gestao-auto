@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "dotenv -e .env.test -- jest --watch",
+    "test:coverage": "npm run test -- --coverage"
   },
   "type": "module",
   "keywords": [],
