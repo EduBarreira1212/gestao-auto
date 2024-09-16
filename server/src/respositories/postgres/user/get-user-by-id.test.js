@@ -15,10 +15,10 @@ describe('PostgresGetUserByIdRepository', () => {
         const result = await sut.execute(createdUser.id);
 
         expect(result).toStrictEqual({
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            password: user.password,
+            id: createdUser.id,
+            name: createdUser.name,
+            email: createdUser.email,
+            password: createdUser.password,
         });
     });
 });
