@@ -2,7 +2,7 @@ import { GetSellsByUserIdUseCase } from './get-sells-by-user-id.js';
 import { sellFixture as sell } from '../../tests/fixtures/sell.js';
 
 describe('GetSellsByUserIdUseCase', () => {
-    const userId = '6625edd1-2b56-42f9-84b4-2f86ba234c41';
+    const userId = sell.user_id;
 
     class PostgresGetUserByIdRepositorieStub {
         async execute(userId) {
@@ -41,7 +41,7 @@ describe('GetSellsByUserIdUseCase', () => {
         return sut;
     };
 
-    test('should get cars sucessfully', async () => {
+    test('should get sell sucessfully', async () => {
         const sut = makeSut();
 
         const result = await sut.execute(userId);
