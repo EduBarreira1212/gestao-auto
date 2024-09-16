@@ -8,11 +8,11 @@ describe('PostgresGetUserByEmailRepository', () => {
     const sut = new PostgresGetUserByEmailRepositorie();
 
     test('should get a user by email sucessfully', async () => {
-        await prisma.user.create({
+        const createdUser = await prisma.user.create({
             data: user,
         });
 
-        const result = await sut.execute(user.email);
+        const result = await sut.execute(createdUser.email);
 
         expect(result).toStrictEqual({
             id: user.id,

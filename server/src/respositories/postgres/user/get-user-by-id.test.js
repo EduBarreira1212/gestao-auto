@@ -8,11 +8,11 @@ describe('PostgresGetUserByIdRepository', () => {
     const sut = new PostgresGetUserById();
 
     test('should get a user by id sucessfully', async () => {
-        await prisma.user.create({
+        const createdUser = await prisma.user.create({
             data: user,
         });
 
-        const result = await sut.execute(user.id);
+        const result = await sut.execute(createdUser.id);
 
         expect(result).toStrictEqual({
             id: user.id,
