@@ -1,7 +1,9 @@
+import { faker } from '@faker-js/faker';
+
 export const sellFixture = {
-    id: 'valid_id',
-    user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
-    car_id: '0124edd1-2b89-42f9-13b4-2f86ba234c41',
-    amount: 100000,
-    profit: 10500,
+    id: faker.string.uuid(),
+    user_id: faker.string.uuid(),
+    car_id: faker.string.uuid(),
+    amount: Number(faker.commerce.price({ min: 20000, max: 1000000 })),
+    profit: Number(faker.commerce.price({ min: 1000, max: 100000 })),
 };
