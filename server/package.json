@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "dotenv -e .env.test -- jest --watch",
-    "test:coverage": "dotenv -e .env.test -- jest --coverage"
+    "test": "dotenv -e .env.test -- jest --watch --runInBand",
+    "test:coverage": "dotenv -e .env.test -- jest --coverage --runInBand"
   },
   "type": "module",
   "keywords": [],
