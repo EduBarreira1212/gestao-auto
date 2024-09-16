@@ -1,0 +1,24 @@
+import { PostgresGetUserByEmailRepositorie } from './get-user-by-email.js';
+import { userFixture as user } from '../../../tests/fixtures/user.js';
+
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+
+describe('PostgresGetUserByEmailRepository', () => {
+    const sut = new PostgresGetUserByEmailRepositorie();
+
+    test('should get a user by email sucessfully', async () => {
+        await prisma.user.create({
+            data: user,
+        });
+
+        const result = await sut.execute(user.email);
+
+        expect(result).toStrictEqual({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+        });
+    });
+});
