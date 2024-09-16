@@ -6,10 +6,8 @@ describe('GetUserByIdUseCase', () => {
     class PostgresGetUserByIdRepositorieStub {
         async execute(userId) {
             const userToReturn = {
+                ...user,
                 id: userId,
-                name: 'Eduardo',
-                email: 'edu@gmail.com',
-                password: '12345',
             };
             return userToReturn;
         }
