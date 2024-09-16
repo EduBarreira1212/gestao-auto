@@ -1,9 +1,11 @@
+import { faker } from '@faker-js/faker';
+
 export const carFixture = {
-    id: 'valid_id',
-    user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
-    brand: 'Ferrari',
-    name: '488',
+    id: faker.string.uuid(),
+    user_id: faker.string.uuid(),
+    brand: faker.vehicle.manufacturer(),
+    name: faker.vehicle.model(),
     year: 2018,
-    plate: 'FFF0F00',
-    entry_price: 2500000,
+    plate: 'AAA0A00',
+    entry_price: Number(faker.commerce.price({ min: 20000, max: 1000000 })),
 };
