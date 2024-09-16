@@ -5,11 +5,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 describe('PostgresUpdateUserRepository', () => {
-    const updateUserParams = {
-        ...user,
-        id: undefined,
-    };
-
     const sut = new PostgresUpdateUserRepository();
 
     test('should update a user sucessfully', async () => {
@@ -17,9 +12,7 @@ describe('PostgresUpdateUserRepository', () => {
             data: user,
         });
 
-        const result = await sut.execute(createdUser.id, updateUserParams);
-
-        console.log(result);
+        const result = await sut.execute(createdUser.id, user);
 
         expect(result).toStrictEqual({
             id: user.id,
