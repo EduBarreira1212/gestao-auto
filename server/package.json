@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "dotenv -e .env.test -- jest --watch",
-    "test:coverage": "npm run test -- --coverage"
+    "test:coverage": "dotenv -e .env.test -- jest --coverage"
   },
   "type": "module",
   "keywords": [],
