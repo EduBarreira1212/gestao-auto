@@ -48,6 +48,38 @@ describe('Cars Routes E2E Tests', () => {
         expect(response.body).toStrictEqual(carCreated);
     });
 
+    test('GET /api/cars?userId', async () => {
+        const { body: userCreated } = await request(app)
+            .post('/api/users')
+            .send({
+                ...userFixture,
+                id: undefined,
+            });
+
+        const { body: carCreated1 } = await request(app)
+            .post('/api/cars')
+            .send({
+                ...carFixture,
+                user_id: userCreated.id,
+                id: undefined,
+            });
+
+        const { body: carCreated2 } = await request(app)
+            .post('/api/cars')
+            .send({
+                ...carFixture,
+                user_id: userCreated.id,
+                id: undefined,
+            });
+
+        const response = await request(app).get(
+            `/api/cars?userId=${userCreated.id}`
+        );
+
+        expect(response.status).toBe(200);
+        expect(response.body).toStrictEqual([carCreated1, carCreated2]);
+    });
+
     test('PATCH /api/users/:userId', async () => {
         const { body: userCreated } = await request(app)
             .post('/api/users')
