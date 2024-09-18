@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from '../../../../prisma/prisma.js';
 
 export class PostgresUpdateSellRepository {
     async execute(sellId, updateSellParams) {

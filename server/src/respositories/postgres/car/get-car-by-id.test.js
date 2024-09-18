@@ -2,8 +2,7 @@ import { PostgresGetCarByIdRepository } from './get-car-by-id.js';
 import { userFixture as user } from '../../../tests/fixtures/user.js';
 import { carFixture as car } from '../../../tests/fixtures/car.js';
 
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from '../../../../prisma/prisma.js';
 
 describe('PostgresGetCarByIdRepository', () => {
     const sut = new PostgresGetCarByIdRepository();

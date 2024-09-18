@@ -1,8 +1,7 @@
 import { PostgresUpdateUserRepository } from './update-user.js';
 import { userFixture as user } from '../../../tests/fixtures/user.js';
 
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from '../../../../prisma/prisma.js';
 
 describe('PostgresUpdateUserRepository', () => {
     const sut = new PostgresUpdateUserRepository();

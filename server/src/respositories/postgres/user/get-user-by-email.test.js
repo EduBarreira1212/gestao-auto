@@ -1,8 +1,7 @@
 import { PostgresGetUserByEmailRepositorie } from './get-user-by-email.js';
 import { userFixture as user } from '../../../tests/fixtures/user.js';
 
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from '../../../../prisma/prisma.js';
 
 describe('PostgresGetUserByEmailRepository', () => {
     const sut = new PostgresGetUserByEmailRepositorie();
