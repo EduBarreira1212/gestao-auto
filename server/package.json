@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "dotenv -e .env.test -- jest --watch --runInBand",
-    "test:coverage": "dotenv -e .env.test -- jest --coverage --runInBand"
+    "test": "dotenv -e .env.test -- node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "test:watch": "npm run test -- --watch",
+    "test:coverage": "npm run test -- --coverage"
   },
   "type": "module",
   "keywords": [],
