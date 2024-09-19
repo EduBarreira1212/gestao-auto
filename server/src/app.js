@@ -2,6 +2,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 import { usersRouter } from './routes/user.js';
 import { carsRouter } from './routes/car.js';
@@ -15,8 +16,11 @@ app.use('/api/users', usersRouter);
 app.use('/api/cars', carsRouter);
 app.use('/api/sells', sellsRouter);
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const swaggerDocument = JSON.parse(
-    fs.readFileSync(path.join(import.meta.dirname, '../docs/swagger.json'), 'utf8')
+    fs.readFileSync(path.join(__dirname, '../docs/swagger.json'), 'utf8')
 );
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
