@@ -1,0 +1,409 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Car Manager API",
+      "description": "API documentation for managing car stores."
+    },
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/users": {
+        "post": {
+          "summary": "Create a new user",
+          "tags": ["User"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "user",
+              "description": "User to create",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User created"
+            }
+          }
+        }
+      },
+      "/users/{userId}": {
+        "get": {
+          "summary": "Get a user by ID",
+          "tags": ["User"],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User details",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "patch": {
+          "summary": "Update a user by ID",
+          "tags": ["User"],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "user",
+              "description": "User object to update",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User updated"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a user by ID",
+          "tags": ["User"],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "User deleted"
+            }
+          }
+        }
+      },
+      "/cars": {
+        "post": {
+          "summary": "Create a new car",
+          "tags": ["Car"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "car",
+              "description": "Car to create",
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Car created"
+            }
+          }
+        }
+      },
+      "/cars?userId={userId}": {
+        "get": {
+          "summary": "Get all cars of an user",
+          "tags": ["Car"],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "query",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A list of cars",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Car"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/cars/{carId}": {
+        "get": {
+          "summary": "Get a car by ID",
+          "tags": ["Car"],
+          "parameters": [
+            {
+              "name": "carId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Car details",
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          }
+        },
+        "patch": {
+          "summary": "Update a car by ID",
+          "tags": ["Car"],
+          "parameters": [
+            {
+              "name": "carId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "car",
+              "description": "Car object to update",
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Car updated"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a car by ID",
+          "tags": ["Car"],
+          "parameters": [
+            {
+              "name": "carId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Car deleted"
+            }
+          }
+        }
+      },
+      "/sells": {
+        "post": {
+          "summary": "Create a new sell",
+          "tags": ["Sell"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "sell",
+              "description": "Sell to create",
+              "schema": {
+                "$ref": "#/definitions/Sell"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Sell created"
+            }
+          }
+        }
+      },
+      "/sells?userId={userId}": {
+        "get": {
+          "summary": "Get all sells of an user",
+          "tags": ["Sell"],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "userId",
+              "description": "User ID",
+              "schema": {
+                "$ref": "#/definitions/Sell"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A list of sells",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Sell"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/sells/{sellId}": {
+        "get": {
+          "summary": "Get a sell by ID",
+          "tags": ["Sell"],
+          "parameters": [
+            {
+              "name": "sellId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sell details",
+              "schema": {
+                "$ref": "#/definitions/Sell"
+              }
+            }
+          }
+        },
+        "patch": {
+          "summary": "Update a sell by ID",
+          "tags": ["Sell"],
+          "parameters": [
+            {
+              "name": "sellId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "sell",
+              "description": "Sell object to update",
+              "schema": {
+                "$ref": "#/definitions/Sell"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sell updated"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a sell by ID",
+          "tags": ["Sell"],
+          "parameters": [
+            {
+              "name": "sellId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Sell deleted"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "uuid",
+            "description": "User ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email address"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password"
+          }
+        }
+      },
+      "Car": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "uuid",
+            "description": "Car ID"
+          },
+          "user_id": {
+            "type": "uuid",
+            "description": "ID of the user who owns the car"
+          },
+          "brand": {
+            "type": "string",
+            "description": "Car brand"
+          },
+          "name": {
+            "type": "string",
+            "description": "Car model"
+          },
+          "year": {
+            "type": "integer",
+            "description": "Year of manufacture"
+          },
+          "plate": {
+            "type": "string",
+            "description": "Plate of car"
+          },
+          "entry_price": {
+            "type": "number",
+            "description": "Car entry price"
+          }
+        }
+      },
+      "Sell": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "uuid",
+            "description": "Sell ID"
+          },
+          "car_id": {
+            "type": "uuid",
+            "description": "ID of the car being sold"
+          },
+          "user_id": {
+            "type": "uuid",
+            "description": "ID of the user making the sell"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the sell"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Amount of the sell"
+          },
+          "profit": {
+            "type": "number",
+            "description": "Profit of the sell"
+          }
+        }
+      }
+    }
+  }
+  
