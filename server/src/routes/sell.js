@@ -6,7 +6,7 @@ import {
     makeGetSellByIdController,
     makeGetSellsByUserIdController,
     makeUpdateSellController,
-} from '../factories/controllers/sell';
+} from '../factories/controllers/sell.js';
 
 export const sellsRouter = Router();
 
