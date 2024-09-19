@@ -76,7 +76,7 @@ describe('GetCarsByUserIdController', () => {
             },
         };
 
-        jest.spyOn(sut.getCarsByUserIdUseCase, 'execute').mockImplementationOnce(
+        import.meta.jest.spyOn(sut.getCarsByUserIdUseCase, 'execute').mockImplementationOnce(
             () => {
                 throw new Error();
             }
@@ -96,7 +96,7 @@ describe('GetCarsByUserIdController', () => {
             },
         };
 
-        const executeSpy = jest.spyOn(sut.getCarsByUserIdUseCase, 'execute');
+        const executeSpy = import.meta.jest.spyOn(sut.getCarsByUserIdUseCase, 'execute');
 
         await sut.execute(httpRequest);
 

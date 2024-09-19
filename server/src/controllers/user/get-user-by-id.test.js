@@ -58,7 +58,7 @@ describe('GetUserByIdController', () => {
             },
         };
 
-        jest.spyOn(sut.getUserByIdUseCase, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.getUserByIdUseCase, 'execute').mockImplementationOnce(() => {
             return null;
         });
 
@@ -77,7 +77,7 @@ describe('GetUserByIdController', () => {
             },
         };
 
-        jest.spyOn(sut.getUserByIdUseCase, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.getUserByIdUseCase, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 
@@ -95,7 +95,7 @@ describe('GetUserByIdController', () => {
             },
         };
 
-        const executeSpy = jest.spyOn(sut.getUserByIdUseCase, 'execute');
+        const executeSpy = import.meta.jest.spyOn(sut.getUserByIdUseCase, 'execute');
 
         await sut.execute(httpRequest);
 

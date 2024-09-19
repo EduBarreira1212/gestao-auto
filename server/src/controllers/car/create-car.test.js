@@ -62,7 +62,7 @@ describe('CreateUserController', () => {
             },
         };
 
-        jest.spyOn(sut.createCarUseCase, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.createCarUseCase, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 
@@ -85,7 +85,7 @@ describe('CreateUserController', () => {
             },
         };
 
-        const executeSpy = jest.spyOn(sut.createCarUseCase, 'execute');
+        const executeSpy = import.meta.jest.spyOn(sut.createCarUseCase, 'execute');
 
         await sut.execute(httpRequest);
 

@@ -54,7 +54,7 @@ describe('UpdateUserUseCase', () => {
     test('should throw a email already exists error', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresGetUserByEmailRepositorie,
             'execute'
         ).mockImplementationOnce(() => {
@@ -74,12 +74,12 @@ describe('UpdateUserUseCase', () => {
             password: 'hashed_password',
         };
 
-        const passwordHasherAdapterSpy = jest.spyOn(
+        const passwordHasherAdapterSpy = import.meta.jest.spyOn(
             sut.passwordHasherAdapter,
             'execute'
         );
 
-        const updateUserRepositorySpy = jest.spyOn(
+        const updateUserRepositorySpy = import.meta.jest.spyOn(
             sut.postgresUpdateUserRepository,
             'execute'
         );
@@ -96,7 +96,7 @@ describe('UpdateUserUseCase', () => {
     test('should throw if passwordHasherAdapter throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(sut.passwordHasherAdapter, 'execute').mockImplementationOnce(
+        import.meta.jest.spyOn(sut.passwordHasherAdapter, 'execute').mockImplementationOnce(
             () => {
                 throw new Error();
             }
@@ -110,7 +110,7 @@ describe('UpdateUserUseCase', () => {
     test('should throw if postgresUpdateUserRepository throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresUpdateUserRepository,
             'execute'
         ).mockImplementationOnce(() => {

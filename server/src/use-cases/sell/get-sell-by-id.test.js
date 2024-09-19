@@ -32,7 +32,7 @@ describe('GetSellByIdUseCase', () => {
     test('should return falsy if sell do not exists', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresGetSellByIdRepository,
             'execute'
         ).mockImplementationOnce(() => {
@@ -47,7 +47,7 @@ describe('GetSellByIdUseCase', () => {
     test('should ensure PostgresGetSellByIdRepository is called', async () => {
         const sut = makeSut();
 
-        const getCarByIdRepository = jest.spyOn(
+        const getCarByIdRepository = import.meta.jest.spyOn(
             sut.postgresGetSellByIdRepository,
             'execute'
         );
@@ -61,7 +61,7 @@ describe('GetSellByIdUseCase', () => {
     test('should throw if PostgresGetSellByIdRepository throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresGetSellByIdRepository,
             'execute'
         ).mockImplementationOnce(() => {

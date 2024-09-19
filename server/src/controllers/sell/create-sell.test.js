@@ -58,7 +58,7 @@ describe('CreateSellController', () => {
             },
         };
 
-        jest.spyOn(sut.createSellUseCase, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.createSellUseCase, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 
@@ -79,7 +79,7 @@ describe('CreateSellController', () => {
             },
         };
 
-        const executeSpy = jest.spyOn(sut.createSellUseCase, 'execute');
+        const executeSpy = import.meta.jest.spyOn(sut.createSellUseCase, 'execute');
 
         await sut.execute(httpRequest);
 

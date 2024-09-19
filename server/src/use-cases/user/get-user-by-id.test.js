@@ -33,7 +33,7 @@ describe('GetUserByIdUseCase', () => {
     test('should return falsy if user do no exists', async () => {
         const sut = makeSut();
 
-        jest.spyOn(sut.postgresGetUserById, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.postgresGetUserById, 'execute').mockImplementationOnce(() => {
             return null;
         });
 
@@ -45,7 +45,7 @@ describe('GetUserByIdUseCase', () => {
     test('should ensure PostgresGetUserById is called', async () => {
         const sut = makeSut();
 
-        const getUserByIdRepository = jest.spyOn(sut.postgresGetUserById, 'execute');
+        const getUserByIdRepository = import.meta.jest.spyOn(sut.postgresGetUserById, 'execute');
 
         await sut.execute(user.id);
 
@@ -56,7 +56,7 @@ describe('GetUserByIdUseCase', () => {
     test('should throw if postgresDeleteUserRepositorie throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(sut.postgresGetUserById, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.postgresGetUserById, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 

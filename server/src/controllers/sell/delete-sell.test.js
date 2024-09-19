@@ -62,7 +62,7 @@ describe('DeleteSellController', () => {
             },
         };
 
-        jest.spyOn(sut.deleteSellUseCase, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.deleteSellUseCase, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 
@@ -80,7 +80,7 @@ describe('DeleteSellController', () => {
             },
         };
 
-        const executeSpy = jest.spyOn(sut.deleteSellUseCase, 'execute');
+        const executeSpy = import.meta.jest.spyOn(sut.deleteSellUseCase, 'execute');
 
         await sut.execute(httpRequest);
 

@@ -59,7 +59,7 @@ describe('CreateUserUseCase', () => {
     test('should throw a email already exists error', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresGetUserByEmailRepositorie,
             'execute'
         ).mockImplementationOnce(() => {
@@ -74,9 +74,9 @@ describe('CreateUserUseCase', () => {
     test('should ensure idGeneratorAdapter is called', async () => {
         const sut = makeSut();
 
-        const idGeneratorSpy = jest.spyOn(sut.idGeneratorAdapter, 'execute');
+        const idGeneratorSpy = import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute');
 
-        const createUserRepositorySpy = jest.spyOn(
+        const createUserRepositorySpy = import.meta.jest.spyOn(
             sut.postgresCreateUserRepositorie,
             'execute'
         );
@@ -94,12 +94,12 @@ describe('CreateUserUseCase', () => {
     test('should ensure passwordHasherAdapter is called', async () => {
         const sut = makeSut();
 
-        const passwordHasherAdapterSpy = jest.spyOn(
+        const passwordHasherAdapterSpy = import.meta.jest.spyOn(
             sut.passwordHasherAdapter,
             'execute'
         );
 
-        const createUserRepositorySpy = jest.spyOn(
+        const createUserRepositorySpy = import.meta.jest.spyOn(
             sut.postgresCreateUserRepositorie,
             'execute'
         );
@@ -117,7 +117,7 @@ describe('CreateUserUseCase', () => {
     test('should throw if idGeneratorAdapter throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(sut.idGeneratorAdapter, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 
@@ -129,7 +129,7 @@ describe('CreateUserUseCase', () => {
     test('should throw if passwordHasherAdapter throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(sut.passwordHasherAdapter, 'execute').mockImplementationOnce(
+        import.meta.jest.spyOn(sut.passwordHasherAdapter, 'execute').mockImplementationOnce(
             () => {
                 throw new Error();
             }
@@ -143,7 +143,7 @@ describe('CreateUserUseCase', () => {
     test('should throw if postgresCreateUserRepositorie throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresCreateUserRepositorie,
             'execute'
         ).mockImplementationOnce(() => {

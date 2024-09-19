@@ -53,7 +53,7 @@ describe('CreateCarUseCase', () => {
     test('should throw user with id provided not found', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresGetUserByIdRepository,
             'execute'
         ).mockImplementationOnce(() => {
@@ -68,9 +68,9 @@ describe('CreateCarUseCase', () => {
     test('should ensure idGeneratorAdapter is called', async () => {
         const sut = makeSut();
 
-        const idGeneratorSpy = jest.spyOn(sut.idGeneratorAdapter, 'execute');
+        const idGeneratorSpy = import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute');
 
-        const createCarRepositorySpy = jest.spyOn(
+        const createCarRepositorySpy = import.meta.jest.spyOn(
             sut.postgresCreateCarRepository,
             'execute'
         );
@@ -88,7 +88,7 @@ describe('CreateCarUseCase', () => {
     test('should throw if idGeneratorAdapter throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(sut.idGeneratorAdapter, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 
@@ -100,7 +100,7 @@ describe('CreateCarUseCase', () => {
     test('should throw if postgresCreateCarRepository throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresCreateCarRepository,
             'execute'
         ).mockImplementationOnce(() => {

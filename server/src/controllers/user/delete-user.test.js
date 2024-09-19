@@ -59,7 +59,7 @@ describe('DeleteUserController', () => {
             },
         };
 
-        jest.spyOn(sut.deleteUserUseCase, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.deleteUserUseCase, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 
@@ -77,7 +77,7 @@ describe('DeleteUserController', () => {
             },
         };
 
-        const executeSpy = jest.spyOn(sut.deleteUserUseCase, 'execute');
+        const executeSpy = import.meta.jest.spyOn(sut.deleteUserUseCase, 'execute');
 
         await sut.execute(httpRequest);
 

@@ -50,7 +50,7 @@ describe('UpdateSellUseCase', () => {
     test('should throw a sell not found error', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresGetSellByIdRepository,
             'execute'
         ).mockImplementationOnce(() => {
@@ -65,7 +65,7 @@ describe('UpdateSellUseCase', () => {
     test('should ensure PostgresGetSellByIdRepository is called', async () => {
         const sut = makeSut();
 
-        const getSellByIdRepositorySpy = jest.spyOn(
+        const getSellByIdRepositorySpy = import.meta.jest.spyOn(
             sut.postgresGetSellByIdRepository,
             'execute'
         );
@@ -79,7 +79,7 @@ describe('UpdateSellUseCase', () => {
     test('should ensure PostgresUpdateSellRepository is called', async () => {
         const sut = makeSut();
 
-        const updateCarRepositorySpy = jest.spyOn(
+        const updateCarRepositorySpy = import.meta.jest.spyOn(
             sut.postgresUpdateSellRepository,
             'execute'
         );
@@ -93,7 +93,7 @@ describe('UpdateSellUseCase', () => {
     test('should throw if PostgresGetSellByIdRepository throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresGetSellByIdRepository,
             'execute'
         ).mockImplementationOnce(() => {
@@ -108,7 +108,7 @@ describe('UpdateSellUseCase', () => {
     test('should throw if PostgresUpdateSellRepository throws', async () => {
         const sut = makeSut();
 
-        jest.spyOn(
+        import.meta.jest.spyOn(
             sut.postgresUpdateSellRepository,
             'execute'
         ).mockImplementationOnce(() => {

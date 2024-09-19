@@ -75,7 +75,7 @@ describe('GetSellsByUserIdController', () => {
             },
         };
 
-        jest.spyOn(sut.getSellsByUserIdUseCase, 'execute').mockImplementationOnce(
+        import.meta.jest.spyOn(sut.getSellsByUserIdUseCase, 'execute').mockImplementationOnce(
             () => {
                 throw new Error();
             }
@@ -95,7 +95,7 @@ describe('GetSellsByUserIdController', () => {
             },
         };
 
-        const executeSpy = jest.spyOn(sut.getSellsByUserIdUseCase, 'execute');
+        const executeSpy = import.meta.jest.spyOn(sut.getSellsByUserIdUseCase, 'execute');
 
         await sut.execute(httpRequest);
 

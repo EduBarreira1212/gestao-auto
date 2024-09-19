@@ -109,7 +109,7 @@ describe('CreateUserController', () => {
             },
         };
 
-        jest.spyOn(sut.updateUserUseCase, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.updateUserUseCase, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 
@@ -132,7 +132,7 @@ describe('CreateUserController', () => {
             },
         };
 
-        const executeSpy = jest.spyOn(sut.updateUserUseCase, 'execute');
+        const executeSpy = import.meta.jest.spyOn(sut.updateUserUseCase, 'execute');
 
         await sut.execute(httpRequest);
 

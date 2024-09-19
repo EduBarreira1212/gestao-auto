@@ -60,7 +60,7 @@ describe('GetUserByIdController', () => {
             },
         };
 
-        jest.spyOn(sut.getCarByIdUseCase, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.getCarByIdUseCase, 'execute').mockImplementationOnce(() => {
             return null;
         });
 
@@ -79,7 +79,7 @@ describe('GetUserByIdController', () => {
             },
         };
 
-        jest.spyOn(sut.getCarByIdUseCase, 'execute').mockImplementationOnce(() => {
+        import.meta.jest.spyOn(sut.getCarByIdUseCase, 'execute').mockImplementationOnce(() => {
             throw new Error();
         });
 
@@ -97,7 +97,7 @@ describe('GetUserByIdController', () => {
             },
         };
 
-        const executeSpy = jest.spyOn(sut.getCarByIdUseCase, 'execute');
+        const executeSpy = import.meta.jest.spyOn(sut.getCarByIdUseCase, 'execute');
 
         await sut.execute(httpRequest);
 
