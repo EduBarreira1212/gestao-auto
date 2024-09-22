@@ -1,12 +1,16 @@
-name: CI/CD Pipeline
+name: Server CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'server/**'
   pull_request:
     branches:
       - main
+    paths:
+      - 'server/**'
 
 jobs:
   build-and-test:
@@ -22,16 +26,20 @@ jobs:
           node-version: '20'
 
       - name: Create .env.test file
-        run: echo ${{ secrets.DATABASE_URL }} >> .env.test
+        run: echo ${{ secrets.DATABASE_URL }} >> server/.env.test
 
       - name: Install dependencies
         run: npm ci --include=dev
+        working-directory: server
 
       - name: Run ESLint
         run: npm run eslint:check
+        working-directory: server
 
       - name: Run Prettier
         run: npm run prettier:check
+        working-directory: server
 
       - name: Run tests with Jest
         run: npm run test
+        working-directory: server
