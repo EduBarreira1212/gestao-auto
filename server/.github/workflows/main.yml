@@ -25,7 +25,7 @@ jobs:
 			  run: echo ${{ secrets.DATABASE_URL }} >> .env.test
 
 		  - name: Install dependencies
-		    run: npm install
+		    run: npm ci --include=dev
 
       - name: Run ESLint
         run: npm run eslint:check
