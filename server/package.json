@@ -6,7 +6,8 @@
     "test": "dotenv -e .env.test -- node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
     "test:watch": "npm run test -- --watch",
     "test:coverage": "npm run test -- --coverage",
-    "eslint:check": "eslint src .js",
+    "eslint:check": "eslint src",
+    "eslint:fix": "eslint src --fix",
     "prettier:check": "prettier --check src"
   },
   "type": "module",
