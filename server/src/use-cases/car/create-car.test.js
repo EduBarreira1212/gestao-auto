@@ -53,12 +53,11 @@ describe('CreateCarUseCase', () => {
     test('should throw user with id provided not found', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetUserByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return null;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetUserByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
 
         const promise = sut.execute(car);
 
@@ -68,7 +67,10 @@ describe('CreateCarUseCase', () => {
     test('should ensure idGeneratorAdapter is called', async () => {
         const sut = makeSut();
 
-        const idGeneratorSpy = import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute');
+        const idGeneratorSpy = import.meta.jest.spyOn(
+            sut.idGeneratorAdapter,
+            'execute'
+        );
 
         const createCarRepositorySpy = import.meta.jest.spyOn(
             sut.postgresCreateCarRepository,
@@ -88,9 +90,11 @@ describe('CreateCarUseCase', () => {
     test('should throw if idGeneratorAdapter throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute').mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.idGeneratorAdapter, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(car);
 
@@ -100,12 +104,11 @@ describe('CreateCarUseCase', () => {
     test('should throw if postgresCreateCarRepository throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresCreateCarRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresCreateCarRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(car);
 

@@ -62,9 +62,11 @@ describe('DeleteSellController', () => {
             },
         };
 
-        import.meta.jest.spyOn(sut.deleteSellUseCase, 'execute').mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.deleteSellUseCase, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const result = await sut.execute(httpRequest);
 

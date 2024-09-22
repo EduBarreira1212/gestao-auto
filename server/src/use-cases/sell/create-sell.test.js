@@ -61,12 +61,11 @@ describe('CreateSellUseCase', () => {
     test('should throw user with id provided not found', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetUserByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return null;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetUserByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
 
         const promise = sut.execute(sell.user_id);
 
@@ -76,12 +75,11 @@ describe('CreateSellUseCase', () => {
     test('should throw car with id provided not found', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetCarByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return null;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetCarByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
 
         const promise = sut.execute(sell);
 
@@ -91,7 +89,10 @@ describe('CreateSellUseCase', () => {
     test('should ensure PostgresGetUserByIdRepository is called', async () => {
         const sut = makeSut();
 
-        const executeSpy = import.meta.jest.spyOn(sut.postgresGetUserByIdRepository, 'execute');
+        const executeSpy = import.meta.jest.spyOn(
+            sut.postgresGetUserByIdRepository,
+            'execute'
+        );
 
         await sut.execute(sell);
 
@@ -101,7 +102,10 @@ describe('CreateSellUseCase', () => {
     test('should ensure idGeneratorAdapter is called', async () => {
         const sut = makeSut();
 
-        const idGeneratorSpy = import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute');
+        const idGeneratorSpy = import.meta.jest.spyOn(
+            sut.idGeneratorAdapter,
+            'execute'
+        );
 
         const createSellRepositorySpy = import.meta.jest.spyOn(
             sut.postgresCreateSellRepository,
@@ -120,7 +124,10 @@ describe('CreateSellUseCase', () => {
     test('should ensure PostgresGetCarByIdRepository is called', async () => {
         const sut = makeSut();
 
-        const executeSpy = import.meta.jest.spyOn(sut.postgresGetCarByIdRepository, 'execute');
+        const executeSpy = import.meta.jest.spyOn(
+            sut.postgresGetCarByIdRepository,
+            'execute'
+        );
 
         await sut.execute(sell);
 
@@ -130,9 +137,11 @@ describe('CreateSellUseCase', () => {
     test('should throw if idGeneratorAdapter throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute').mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.idGeneratorAdapter, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(sell);
 
@@ -142,12 +151,11 @@ describe('CreateSellUseCase', () => {
     test('should throw if PostgresCreateSellRepository throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresCreateSellRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresCreateSellRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(sell);
 

@@ -49,12 +49,11 @@ describe('DeleteUserUseCase', () => {
     test('should throw a car do not exists error', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetCarByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return null;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetCarByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
 
         const promise = sut.execute(car.id);
 
@@ -78,12 +77,11 @@ describe('DeleteUserUseCase', () => {
     test('should throw if postgresDeleteUserRepositorie throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresDeleteCarRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresDeleteCarRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(car.id);
 

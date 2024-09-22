@@ -32,12 +32,11 @@ describe('DeleteUserUseCase', () => {
     test('should throw a email already exists error', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresDeleteUserRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return null;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresDeleteUserRepository, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
 
         const result = await sut.execute(user);
 
@@ -61,12 +60,11 @@ describe('DeleteUserUseCase', () => {
     test('should throw if postgresDeleteUserRepositorie throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresDeleteUserRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresDeleteUserRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(user);
 

@@ -49,12 +49,11 @@ describe('UpdateCarUseCase', () => {
     test('should throw a car do not exists error', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetCarByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return null;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetCarByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
 
         const promise = sut.execute(carId, car);
 
@@ -92,12 +91,11 @@ describe('UpdateCarUseCase', () => {
     test('should throw if PostgresGetCarByIdRepository throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetCarByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetCarByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(carId, car);
 
@@ -107,12 +105,11 @@ describe('UpdateCarUseCase', () => {
     test('should throw if PostgresUpdateCarRepository throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresUpdateCarRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresUpdateCarRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(carId, car);
 

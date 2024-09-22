@@ -122,9 +122,11 @@ describe('UpdateCarController', () => {
             },
         };
 
-        import.meta.jest.spyOn(sut.updateCarUseCase, 'execute').mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.updateCarUseCase, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const result = await sut.execute(httpRequest);
 

@@ -49,12 +49,11 @@ describe('DeleteSellUseCase', () => {
     test('should throw a sell do not exists error', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetSellByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return null;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetSellByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
 
         const promise = sut.execute(sell.id);
 
@@ -92,12 +91,11 @@ describe('DeleteSellUseCase', () => {
     test('should throw if PostgresDeleteSellrepository throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresDeleteSellrepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresDeleteSellrepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(sell.id);
 

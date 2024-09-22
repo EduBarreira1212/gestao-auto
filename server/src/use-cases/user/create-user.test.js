@@ -59,12 +59,11 @@ describe('CreateUserUseCase', () => {
     test('should throw a email already exists error', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetUserByEmailRepositorie,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return user;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetUserByEmailRepositorie, 'execute')
+            .mockImplementationOnce(() => {
+                return user;
+            });
 
         const promise = sut.execute(user);
 
@@ -74,7 +73,10 @@ describe('CreateUserUseCase', () => {
     test('should ensure idGeneratorAdapter is called', async () => {
         const sut = makeSut();
 
-        const idGeneratorSpy = import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute');
+        const idGeneratorSpy = import.meta.jest.spyOn(
+            sut.idGeneratorAdapter,
+            'execute'
+        );
 
         const createUserRepositorySpy = import.meta.jest.spyOn(
             sut.postgresCreateUserRepositorie,
@@ -117,9 +119,11 @@ describe('CreateUserUseCase', () => {
     test('should throw if idGeneratorAdapter throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(sut.idGeneratorAdapter, 'execute').mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.idGeneratorAdapter, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(user);
 
@@ -129,11 +133,11 @@ describe('CreateUserUseCase', () => {
     test('should throw if passwordHasherAdapter throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(sut.passwordHasherAdapter, 'execute').mockImplementationOnce(
-            () => {
+        import.meta.jest
+            .spyOn(sut.passwordHasherAdapter, 'execute')
+            .mockImplementationOnce(() => {
                 throw new Error();
-            }
-        );
+            });
 
         const promise = sut.execute(user);
 
@@ -143,12 +147,11 @@ describe('CreateUserUseCase', () => {
     test('should throw if postgresCreateUserRepositorie throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresCreateUserRepositorie,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresCreateUserRepositorie, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(user);
 

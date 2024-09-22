@@ -54,12 +54,11 @@ describe('UpdateUserUseCase', () => {
     test('should throw a email already exists error', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetUserByEmailRepositorie,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return user;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetUserByEmailRepositorie, 'execute')
+            .mockImplementationOnce(() => {
+                return user;
+            });
 
         const promise = sut.execute(userId, user);
 
@@ -96,11 +95,11 @@ describe('UpdateUserUseCase', () => {
     test('should throw if passwordHasherAdapter throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(sut.passwordHasherAdapter, 'execute').mockImplementationOnce(
-            () => {
+        import.meta.jest
+            .spyOn(sut.passwordHasherAdapter, 'execute')
+            .mockImplementationOnce(() => {
                 throw new Error();
-            }
-        );
+            });
 
         const promise = sut.execute(userId, user);
 
@@ -110,12 +109,11 @@ describe('UpdateUserUseCase', () => {
     test('should throw if postgresUpdateUserRepository throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresUpdateUserRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresUpdateUserRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(userId, user);
 

@@ -52,12 +52,11 @@ describe('GetCarsByUserIdUseCase', () => {
     test('should return falsy if user do not exists', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetUserByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return null;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetUserByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
 
         const promise = sut.execute(userId);
 
@@ -95,12 +94,11 @@ describe('GetCarsByUserIdUseCase', () => {
     test('should throw if PostgresGetUserByIdRepository throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetUserByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetUserByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(userId);
 
@@ -110,12 +108,11 @@ describe('GetCarsByUserIdUseCase', () => {
     test('should throw if PostgresGetCarsByUserIdRepository throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetCarsByUserIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetCarsByUserIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(userId);
 

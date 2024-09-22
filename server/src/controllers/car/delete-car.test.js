@@ -63,9 +63,11 @@ describe('DeleteUserController', () => {
             },
         };
 
-        import.meta.jest.spyOn(sut.deleteCarUseCase, 'execute').mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.deleteCarUseCase, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const result = await sut.execute(httpRequest);
 

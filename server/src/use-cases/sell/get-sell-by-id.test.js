@@ -32,12 +32,11 @@ describe('GetSellByIdUseCase', () => {
     test('should return falsy if sell do not exists', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetSellByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            return null;
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetSellByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
 
         const result = await sut.execute(sell.id);
 
@@ -61,12 +60,11 @@ describe('GetSellByIdUseCase', () => {
     test('should throw if PostgresGetSellByIdRepository throws', async () => {
         const sut = makeSut();
 
-        import.meta.jest.spyOn(
-            sut.postgresGetSellByIdRepository,
-            'execute'
-        ).mockImplementationOnce(() => {
-            throw new Error();
-        });
+        import.meta.jest
+            .spyOn(sut.postgresGetSellByIdRepository, 'execute')
+            .mockImplementationOnce(() => {
+                throw new Error();
+            });
 
         const promise = sut.execute(sell.id);
 
