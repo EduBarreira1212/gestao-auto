@@ -21,6 +21,9 @@ jobs:
 		    with:
 		      node-version: '20'
 
+			- name: Create .env.test file
+			  run: echo ${{ secrets.DATABASE_URL }} >> .env.test
+
 		  - name: Install dependencies
 		    run: npm install
 
