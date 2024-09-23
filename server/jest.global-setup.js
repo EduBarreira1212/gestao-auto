@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 
 async function init() {
-    execSync('docker start car-manager-test');
+    execSync('docker compose up -d --wait');
     execSync('npx prisma db push');
 }
 
