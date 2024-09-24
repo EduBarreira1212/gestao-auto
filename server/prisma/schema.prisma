@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(uuid())
-  name     String
-  email    String   @unique
-  password String
-  Cars     Car[]    @relation("UserCars")
-  Sells    Sell[]   @relation("UserSells")
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  Cars      Car[]    @relation("UserCars")
+  Sells     Sell[]   @relation("UserSells")
 }
 
 model Car {
@@ -24,19 +25,21 @@ model Car {
   year        Int
   plate       String
   entry_price Float
-  expenses    Float   @default(0.00)
-  user        User    @relation(fields: [user_id], references: [id], name: "UserCars", onDelete: Cascade)
-  sell  Sell? @relation(name: "CarSell")
+  expenses    Float    @default(0.00)
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [user_id], references: [id], name: "UserCars", onDelete: Cascade)
+  sell        Sell?    @relation(name: "CarSell")
 
   @@index([user_id])
 }
 
 model Sell {
-  id       String   @id @default(uuid())
-  user_id  String
-  car_id   String   @unique
-  amount   Float
-  profit   Float    @default(0.0)
-  user     User     @relation(fields: [user_id], references: [id], name: "UserSells", onDelete: Cascade)
-  car      Car      @relation(fields: [car_id], references: [id], name: "CarSell", onDelete: Cascade)
+  id        String   @id @default(uuid())
+  user_id   String
+  car_id    String   @unique
+  amount    Float
+  profit    Float    @default(0.0)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [user_id], references: [id], name: "UserSells", onDelete: Cascade)
+  car       Car      @relation(fields: [car_id], references: [id], name: "CarSell", onDelete: Cascade)
 }
