@@ -18,6 +18,7 @@ describe('PostgresGetUserByIdRepository', () => {
             name: createdUser.name,
             email: createdUser.email,
             password: createdUser.password,
+            createdAt: result.createdAt,
         });
     });
 });

@@ -36,6 +36,7 @@ describe('PostgresGetSellsByUserIdRepository', () => {
                 car_id: car.id,
                 amount: sell.amount,
                 profit: sell.profit,
+                createdAt: result[0].createdAt,
             },
         ]);
     });

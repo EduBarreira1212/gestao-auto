@@ -29,6 +29,7 @@ describe('PostgresCreateCarRepository', () => {
             plate: car.plate,
             expenses: 0,
             entry_price: car.entry_price,
+            createdAt: result.createdAt,
         });
     });
 });
