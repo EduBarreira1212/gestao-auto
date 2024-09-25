@@ -18,19 +18,28 @@ model User {
 }
 
 model Car {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   user_id     String
   brand       String
   name        String
   year        Int
   plate       String
   entry_price Float
-  expenses    Float    @default(0.00)
-  createdAt   DateTime @default(now())
-  user        User     @relation(fields: [user_id], references: [id], name: "UserCars", onDelete: Cascade)
-  sell        Sell?    @relation(name: "CarSell")
+  expenses    Expense[] @relation("CarExpenses")
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [user_id], references: [id], name: "UserCars", onDelete: Cascade)
+  sell        Sell?     @relation(name: "CarSell")
 
   @@index([user_id])
+}
+
+model Expense {
+  id          String   @id @default(uuid())
+  car_id      String
+  amount      Float
+  description String
+  createdAt   DateTime @default(now())
+  car         Car      @relation(fields: [car_id], references: [id], name: "CarExpenses", onDelete: Cascade)
 }
 
 model Sell {
