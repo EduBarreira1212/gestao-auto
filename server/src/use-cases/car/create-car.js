@@ -22,7 +22,6 @@ export class CreateCarUseCase {
         const car = {
             ...createCarParams,
             id: carId,
-            expenses: 0,
         };
 
         const carCreated = this.postgresCreateCarRepository.execute(car);
