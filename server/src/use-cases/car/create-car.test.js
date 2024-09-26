@@ -83,7 +83,6 @@ describe('CreateCarUseCase', () => {
         expect(createCarRepositorySpy).toHaveBeenCalledWith({
             ...car,
             id: 'Generated_UUID',
-            expenses: 0,
         });
     });
 
