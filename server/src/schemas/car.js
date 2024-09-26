@@ -23,10 +23,6 @@ export const createCarSchema = z.object({
     entry_price: z
         .number({ required_error: 'Entry price is required.' })
         .positive({ message: 'Entry price must be a positive number.' }),
-    expenses: z
-        .number()
-        .positive({ message: 'Entry price must be a positive number.' })
-        .optional(),
 });
 
 export const updateCarSchema = createCarSchema
