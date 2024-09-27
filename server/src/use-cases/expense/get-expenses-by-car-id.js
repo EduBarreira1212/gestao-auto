@@ -1,4 +1,4 @@
-export class GetExpensesByCarIdRepository {
+export class GetExpensesByCarIdUseCase {
     constructor(getCarByIdRepository, getExpensesByCarIdRepository) {
         this.getCarByIdRepository = getCarByIdRepository;
         this.getExpensesByCarIdRepository = getExpensesByCarIdRepository;
