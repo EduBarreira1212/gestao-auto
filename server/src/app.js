@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 
 import { usersRouter } from './routes/user.js';
 import { carsRouter } from './routes/car.js';
+import { expensesRouter } from './routes/expense.js';
 import { sellsRouter } from './routes/sell.js';
 
 export const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use('/api/users', usersRouter);
 app.use('/api/cars', carsRouter);
+app.use('/api/expenses', expensesRouter);
 app.use('/api/sells', sellsRouter);
 
 const __filename = fileURLToPath(import.meta.url);
