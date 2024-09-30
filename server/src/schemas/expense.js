@@ -11,6 +11,6 @@ export const createExpenseSchema = z.object({
 });
 
 export const updateExpenseSchema = createExpenseSchema
-    .omit({ user_id: true, car_id: true })
+    .omit({ car_id: true })
     .partial()
     .strict();
