@@ -6,15 +6,15 @@ export class GetExpensesByCarIdController {
     }
     async execute(httpParams) {
         try {
-            const expenseId = httpParams.query.expenseId;
+            const carId = httpParams.query.carId;
 
-            const isIdValid = validate(expenseId);
+            const isIdValid = validate(carId);
 
             if (!isIdValid) {
                 return { statusCode: 400, body: { message: 'ID invalid' } };
             }
 
-            const expenses = await this.getExpensesByCarIdUseCase.execute(expenseId);
+            const expenses = await this.getExpensesByCarIdUseCase.execute(carId);
 
             if (!expenses) {
                 return { statusCode: 404, body: { message: 'No expense found' } };
