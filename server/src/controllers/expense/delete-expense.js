@@ -1,4 +1,4 @@
-import { UuidValidatorAdapter } from '../../adapters/uuid-validator.js';
+import { validate } from 'uuid';
 
 export class DeleteExpenseController {
     constructor(deleteExpenseUseCase) {
@@ -8,7 +8,7 @@ export class DeleteExpenseController {
         try {
             const expenseId = httpParams.params.expenseId;
 
-            const isIdValid = UuidValidatorAdapter.execute(expenseId);
+            const isIdValid = validate(expenseId);
 
             if (!isIdValid) {
                 return { statusCode: 400, body: { message: 'ID invalid' } };

@@ -1,7 +1,7 @@
 import { ZodError } from 'zod';
+import { validate } from 'uuid';
 
 import { updateExpenseSchema } from '../../schemas/expense.js';
-import { UuidValidatorAdapter } from '../../adapters/uuid-validator.js';
 
 export class UpdateExpenseController {
     constructor(updateExpenseUseCase) {
@@ -11,7 +11,7 @@ export class UpdateExpenseController {
         try {
             const expenseId = httpParams.params.expenseId;
 
-            const isIdValid = UuidValidatorAdapter.execute(expenseId);
+            const isIdValid = validate(expenseId);
 
             if (!isIdValid) {
                 return { statusCode: 400, body: { message: 'ID invalid' } };
