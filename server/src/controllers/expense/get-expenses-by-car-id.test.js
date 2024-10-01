@@ -62,6 +62,26 @@ describe('GetExpensesByCarIdController', () => {
         expect(result.body.message).toBe('ID invalid');
     });
 
+    test('return 404 if expense not founded', async () => {
+        const sut = makeSut();
+
+        const httpRequest = {
+            query: {
+                carId: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
+            },
+        };
+
+        import.meta.jest
+            .spyOn(sut.getExpensesByCarIdUseCase, 'execute')
+            .mockImplementationOnce(() => {
+                return null;
+            });
+
+        const result = await sut.execute(httpRequest);
+
+        expect(result.statusCode).toBe(404);
+    });
+
     test('should return 500 when execute throws an error', async () => {
         const sut = makeSut();
 
