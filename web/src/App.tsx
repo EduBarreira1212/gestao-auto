@@ -1,8 +1,14 @@
+import Header from './components/Header';
+import Navbar from './components/Navbar';
+
 const App = () => {
     return (
-        <>
-            <h1 className="text-center text-5xl">CARS-CRM</h1>
-        </>
+        <div className="flex flex-row">
+            <Navbar />
+            <div className="w-full">
+                <Header />
+            </div>
+        </div>
     );
 };
 
