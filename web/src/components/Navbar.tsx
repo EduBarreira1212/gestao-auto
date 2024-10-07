@@ -7,7 +7,7 @@ import ANavbar from './ANavbar';
 
 const Navbar = () => {
     return (
-        <nav className="flex h-screen flex-col items-center gap-8 bg-green-400 p-5">
+        <nav className="bg-brand-primary flex h-screen flex-col items-center gap-8 p-5">
             <div>
                 <a href="#">
                     <img src={logo} alt="logo" className="h-16" />
