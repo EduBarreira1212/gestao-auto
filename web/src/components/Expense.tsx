@@ -1,6 +1,6 @@
 const Expense = () => {
     return (
-        <div className="flex w-fit flex-col gap-3 rounded-md border-solid bg-slate-100 p-5 text-center shadow-md">
+        <div className="shadow-brand-primary text-brand-secondary flex w-fit flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 p-5 text-center shadow-md">
             <span>Car</span>
             <span>Amount</span>
             <span>description</span>
