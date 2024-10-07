@@ -6,7 +6,7 @@ type ANavbarprops = {
 
 const ANavbar = ({ href, iconURL, children }: ANavbarprops) => {
     return (
-        <a href={href} className="flex items-center gap-1">
+        <a href={href} className="hover:text-brand-accent flex items-center gap-1">
             <img src={iconURL} className="h-4" />
             {children}
         </a>
