@@ -1,22 +1,17 @@
-import Expense from './components/Expense';
-import Header from './components/Header';
-import Navbar from './components/Navbar';
-import Sell from './components/Sell';
-import Vehicle from './components/Vehicle';
+import { Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import Sells from './pages/Sells';
+import Vehicles from './pages/Vehicles';
+import Expenses from './pages/Expenses';
 
 const App = () => {
     return (
-        <div className="flex flex-row">
-            <Navbar />
-            <div className="bg-brand-neutral w-full">
-                <Header />
-                <div className="p-3">
-                    <Vehicle />
-                    <Sell />
-                    <Expense />
-                </div>
-            </div>
-        </div>
+        <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/vendas" element={<Sells />} />
+            <Route path="/veiculos" element={<Vehicles />} />
+            <Route path="/despesas" element={<Expenses />} />
+        </Routes>
     );
 };
 
