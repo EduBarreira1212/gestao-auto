@@ -1,15 +1,17 @@
+import { Link } from 'react-router-dom';
+
 type ANavbarprops = {
-    href: string;
-    iconURL: string; // wrong type (Correct later)
+    to: string;
+    iconURL: string;
     children: React.ReactNode;
 };
 
-const ANavbar = ({ href, iconURL, children }: ANavbarprops) => {
+const ANavbar = ({ to, iconURL, children }: ANavbarprops) => {
     return (
-        <a href={href} className="hover:text-brand-accent flex items-center gap-1">
+        <Link to={to} className="flex items-center gap-1 hover:text-brand-accent">
             <img src={iconURL} className="h-4" />
             {children}
-        </a>
+        </Link>
     );
 };
 
