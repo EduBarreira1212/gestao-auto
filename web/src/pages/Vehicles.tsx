@@ -4,11 +4,19 @@ import Vehicle from '../components/Vehicle';
 
 const Vehicles = () => {
     return (
-        <div className="flex flex-row">
+        <div className="flex h-screen w-full">
             <Navbar />
-            <div className="w-full bg-brand-neutral">
+            <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
-                <div className="p-3">
+                <div className="flex h-full flex-1 flex-row flex-wrap items-center justify-center gap-5 overflow-auto p-3">
+                    <Vehicle />
+                    <Vehicle />
+                    <Vehicle />
+                    <Vehicle />
+                    <Vehicle />
+                    <Vehicle />
+                    <Vehicle />
+                    <Vehicle />
                     <Vehicle />
                 </div>
             </div>
