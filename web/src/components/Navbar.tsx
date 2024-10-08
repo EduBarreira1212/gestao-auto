@@ -16,7 +16,7 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className="flex flex-col items-center gap-5 border-y-2 p-5">
-                <ANavbar to="/" iconURL={graphicIcon}>
+                <ANavbar to="/vendas" iconURL={graphicIcon}>
                     Vendas
                 </ANavbar>
                 <ANavbar to="/veiculos" iconURL={carIcon}>
