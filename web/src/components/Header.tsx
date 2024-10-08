@@ -1,22 +1,23 @@
+import { Link } from 'react-router-dom';
 import arrowIcon from '../assets/setaBaixo.png';
 
 const Header = () => {
     return (
-        <header className="bg-brand-secondary text-brand-primary flex flex-row justify-between px-8 py-3 shadow-sm shadow-black">
+        <header className="flex flex-row justify-between bg-brand-secondary px-8 py-3 text-brand-primary shadow-sm shadow-black">
             <h2>Dashboard</h2>
             <div className="flex gap-4">
-                <a className="hover:text-brand-accent" href="#">
+                <Link className="hover:text-brand-accent" to="/">
                     Vendas
-                </a>
-                <a className="hover:text-brand-accent" href="#">
+                </Link>
+                <Link className="hover:text-brand-accent" to="/veiculos">
                     Veículos
-                </a>
-                <a className="hover:text-brand-accent" href="#">
+                </Link>
+                <Link className="hover:text-brand-accent" to="/despesas">
                     Despesas
-                </a>
-                <a className="hover:text-brand-accent" href="#">
+                </Link>
+                <Link className="hover:text-brand-accent" to="#">
                     Leads
-                </a>
+                </Link>
             </div>
             <div className="flex items-center gap-2">
                 username
