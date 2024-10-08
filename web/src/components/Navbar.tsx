@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import logo from '../assets/logo.png';
 import moneyIcon from '../assets/saco-de-dolar.png';
 import carIcon from '../assets/carro-alt.png';
@@ -7,23 +9,23 @@ import ANavbar from './ANavbar';
 
 const Navbar = () => {
     return (
-        <nav className="bg-brand-primary flex h-screen flex-col items-center gap-8 p-5">
+        <nav className="flex h-screen flex-col items-center gap-8 bg-brand-primary p-5">
             <div>
-                <a href="#">
+                <Link to="/">
                     <img src={logo} alt="logo" className="h-16" />
-                </a>
+                </Link>
             </div>
             <div className="flex flex-col items-center gap-5 border-y-2 p-5">
-                <ANavbar href="#" iconURL={graphicIcon}>
+                <ANavbar to="/" iconURL={graphicIcon}>
                     Vendas
                 </ANavbar>
-                <ANavbar href="#" iconURL={carIcon}>
+                <ANavbar to="/veiculos" iconURL={carIcon}>
                     Veículos
                 </ANavbar>
-                <ANavbar href="#" iconURL={moneyIcon}>
+                <ANavbar to="/despesas" iconURL={moneyIcon}>
                     Despesas
                 </ANavbar>
-                <ANavbar href="#" iconURL={leadsIcon}>
+                <ANavbar to="#" iconURL={leadsIcon}>
                     Leads
                 </ANavbar>
             </div>
