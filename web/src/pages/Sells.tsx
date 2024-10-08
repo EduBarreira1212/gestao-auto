@@ -6,9 +6,9 @@ const Sells = () => {
     return (
         <div className="flex flex-row">
             <Navbar />
-            <div className="w-full bg-brand-neutral">
+            <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
-                <div className="p-3">
+                <div className="flex h-full flex-col items-center justify-center p-3">
                     <Sell />
                 </div>
             </div>
