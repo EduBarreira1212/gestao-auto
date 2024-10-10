@@ -8,7 +8,14 @@ const Sells = () => {
             <Navbar />
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
-                <div className="flex h-full flex-col items-center justify-center p-3">
+                <div className="flex h-full flex-1 flex-row flex-wrap items-center justify-center gap-5 overflow-auto p-3">
+                    <Sell />
+                    <Sell />
+                    <Sell />
+                    <Sell />
+                    <Sell />
+                    <Sell />
+                    <Sell />
                     <Sell />
                 </div>
             </div>
