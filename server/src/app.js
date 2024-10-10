@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import fs from 'fs';
 import path from 'path';
@@ -12,6 +13,7 @@ import { sellsRouter } from './routes/sell.js';
 export const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/users', usersRouter);
 app.use('/api/cars', carsRouter);
