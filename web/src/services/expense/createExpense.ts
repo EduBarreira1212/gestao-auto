@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { CreateExpense } from '../../types';
 
-const createExpense = async (createExpenseParams: any) => {
+const createExpense = async (createExpenseParams: CreateExpense) => {
     try {
         const response = await axios.post(
             `http://localhost:3000/api/expenses`,

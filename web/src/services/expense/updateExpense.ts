@@ -1,6 +1,10 @@
 import axios from 'axios';
+import { UpdateExpense } from '../../types';
 
-const updateExpense = async (expenseId: string, updateExpenseParams: any) => {
+const updateExpense = async (
+    expenseId: string,
+    updateExpenseParams: UpdateExpense
+) => {
     try {
         const response = await axios.patch(
             `http://localhost:3000/api/expenses/${expenseId}`,
