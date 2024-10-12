@@ -5,9 +5,13 @@ import Vehicle from '../components/Vehicle';
 import getCarsByUserId from '../services/car/getCarsByUserId';
 import ContentSection from '../components/ContentSection';
 import AddButton from '../components/AddButton';
+import List from '../components/List';
+import { createPortal } from 'react-dom';
+import AddVehicleModal from '../components/AddVehicleModal';
 
 const Vehicles = () => {
     const [cars, setCars] = useState([]);
+    const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
 
     useEffect(() => {
         const getCars = async () => {
@@ -27,20 +31,29 @@ const Vehicles = () => {
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
                 <ContentSection>
-                    <AddButton>Adicionar novo veículo</AddButton>
+                    <AddButton onClick={() => setShowAddVehicleModal(true)}>
+                        Adicionar novo veículo
+                    </AddButton>
                     {cars.length > 0 ? (
-                        <ul className="flex list-none flex-row flex-wrap items-center justify-center gap-5">
+                        <List>
                             {cars.map((car, index) => (
                                 <li key={index}>
                                     <Vehicle car={car} />
                                 </li>
                             ))}
-                        </ul>
+                        </List>
                     ) : (
                         <div>Nenhum veículo encontrado</div>
                     )}
                 </ContentSection>
             </div>
+            {showAddVehicleModal &&
+                createPortal(
+                    <AddVehicleModal
+                        onClose={() => setShowAddVehicleModal(false)}
+                    />,
+                    document.body
+                )}
         </div>
     );
 };
