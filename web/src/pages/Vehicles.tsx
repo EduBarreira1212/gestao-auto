@@ -3,6 +3,8 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Vehicle from '../components/Vehicle';
 import getCarsByUserId from '../services/car/getCarsByUserId';
+import ContentSection from '../components/ContentSection';
+import AddButton from '../components/AddButton';
 
 const Vehicles = () => {
     const [cars, setCars] = useState([]);
@@ -24,17 +26,20 @@ const Vehicles = () => {
             <Navbar />
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
-                <div className="flex h-full flex-1 flex-row flex-wrap items-center justify-center gap-5 overflow-auto p-3">
+                <ContentSection>
+                    <AddButton>Adicionar novo veículo</AddButton>
                     {cars.length > 0 ? (
-                        cars.map((car, index) => (
-                            <li key={index}>
-                                <Vehicle car={car} />
-                            </li>
-                        ))
+                        <ul className="flex list-none flex-row flex-wrap items-center justify-center gap-5">
+                            {cars.map((car, index) => (
+                                <li key={index}>
+                                    <Vehicle car={car} />
+                                </li>
+                            ))}
+                        </ul>
                     ) : (
                         <div>Nenhum veículo encontrado</div>
                     )}
-                </div>
+                </ContentSection>
             </div>
         </div>
     );
