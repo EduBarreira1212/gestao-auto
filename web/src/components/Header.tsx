@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import arrowIcon from '../assets/setaBaixo.png';
+import { UserButton } from '@clerk/clerk-react';
 
 const Header = () => {
     return (
@@ -20,10 +20,7 @@ const Header = () => {
                 </Link>
             </div>
             <div className="flex items-center gap-2">
-                username
-                <button className="hover:text-brand-accent">
-                    <img src={arrowIcon} className="h-4" />
-                </button>
+                <UserButton />
             </div>
         </header>
     );
