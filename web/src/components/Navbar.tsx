@@ -11,7 +11,7 @@ const Navbar = () => {
     return (
         <nav className="flex h-screen flex-col items-center gap-8 bg-brand-primary p-5">
             <div>
-                <Link to="/">
+                <Link to="/dashboard">
                     <img src={logo} alt="logo" className="h-16" />
                 </Link>
             </div>
