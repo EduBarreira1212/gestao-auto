@@ -21,7 +21,7 @@ describe('CreateUserController', () => {
             body: {
                 name: 'Eduardo',
                 email: 'edu@gmail.com',
-                password: '12345',
+                password: '12345678910',
             },
         };
 
@@ -53,7 +53,7 @@ describe('CreateUserController', () => {
             body: {
                 name: 'Eduardo',
                 email: 'edu@gmail.com',
-                password: '12345',
+                password: '123456789',
             },
         };
 
@@ -75,7 +75,7 @@ describe('CreateUserController', () => {
             body: {
                 name: 'Eduardo',
                 email: 'edu@gmail.com',
-                password: '12345',
+                password: '123456789',
             },
         };
 

@@ -27,7 +27,7 @@ describe('CreateUserController', () => {
             body: {
                 name: 'Eduardo',
                 email: 'edu@gmail.com',
-                password: '12345',
+                password: '123456789',
             },
         };
 
@@ -47,7 +47,7 @@ describe('CreateUserController', () => {
             body: {
                 name: 'Eduardo',
                 email: 'edu@gmail.com',
-                password: '12345',
+                password: '123456789',
             },
         };
 
@@ -66,7 +66,7 @@ describe('CreateUserController', () => {
             body: {
                 name: 'Eduardo',
                 email: 'edu.com',
-                password: '12345',
+                password: '123456789',
             },
         };
 
@@ -85,7 +85,7 @@ describe('CreateUserController', () => {
             body: {
                 name: 'Eduardo',
                 email: 'edu@gmail.com',
-                password: '12345',
+                password: '123456789',
                 unnalowed_field: 'not_valid',
             },
         };
@@ -105,7 +105,7 @@ describe('CreateUserController', () => {
             body: {
                 name: 'Eduardo',
                 email: 'edu@gmail.com',
-                password: '12345',
+                password: '123456789',
             },
         };
 
@@ -130,7 +130,7 @@ describe('CreateUserController', () => {
             body: {
                 name: 'Eduardo',
                 email: 'edu@gmail.com',
-                password: '12345',
+                password: '123456789',
             },
         };
 
