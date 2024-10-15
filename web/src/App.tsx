@@ -7,6 +7,7 @@ import Vehicles from './pages/Vehicles';
 import Expenses from './pages/Expenses';
 import RootLayout from './layouts/RootLayout';
 import DashboardLayout from './layouts/DashboardLayout';
+import SignUp from './pages/SignUp';
 
 const App = () => {
     return (
@@ -17,7 +18,11 @@ const App = () => {
                     <Route path="/vendas" element={<Sells />} />
                     <Route path="/veiculos" element={<Vehicles />} />
                     <Route path="/despesas" element={<Expenses />} />
-                    <Route path="/sign-in" element={<SignIn />} />
+                    <Route
+                        path="/sign-in"
+                        element={<SignIn signUpUrl="/cadastro" />}
+                    />
+                    <Route path="/cadastro" element={<SignUp />} />
                 </Route>
             </Route>
         </Routes>
