@@ -27,6 +27,24 @@ describe('UpdateUserUseCase', () => {
         }
     }
 
+    class ClerkClientAdapterStub {
+        updateUser(userId, userUpdated) {
+            const userToReturn = {
+                ...userUpdated,
+                id: userId,
+            };
+            return userToReturn;
+        }
+
+        deleteEmail(emailId) {
+            return emailId;
+        }
+
+        createEmail(emailParams) {
+            return emailParams;
+        }
+    }
+
     const makeSut = () => {
         const postgresGetUserByEmailRepositoryStub =
             new PostgresGetUserByEmailRepositorieStub();
@@ -35,10 +53,13 @@ describe('UpdateUserUseCase', () => {
 
         const passwordHasherAdapterStub = new PasswordHasherAdapterStub();
 
+        const clerkClientAdapterStub = new ClerkClientAdapterStub();
+
         const sut = new UpdateUserUseCase(
             postgresGetUserByEmailRepositoryStub,
             postgresUpdateUserRepositoryStub,
-            passwordHasherAdapterStub
+            passwordHasherAdapterStub,
+            clerkClientAdapterStub
         );
 
         return sut;
