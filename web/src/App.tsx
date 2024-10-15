@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { SignInButton } from '@clerk/clerk-react';
+import { SignIn } from '@clerk/clerk-react';
 
 import Dashboard from './pages/Dashboard';
 import Sells from './pages/Sells';
@@ -17,7 +17,7 @@ const App = () => {
                     <Route path="/vendas" element={<Sells />} />
                     <Route path="/veiculos" element={<Vehicles />} />
                     <Route path="/despesas" element={<Expenses />} />
-                    <Route path="/sign-in" element={<SignInButton />} />
+                    <Route path="/sign-in" element={<SignIn />} />
                 </Route>
             </Route>
         </Routes>
