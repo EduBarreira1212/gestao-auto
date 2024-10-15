@@ -13,6 +13,7 @@ import { PostgresDeleteUserRepository } from '../../respositories/postgres/user/
 import { DeleteUserUseCase } from '../../use-cases/user/delete-user.js';
 import { PasswordHasherAdapter } from '../../adapters/password-hasher.js';
 import { IdGeneratorAdapter } from '../../adapters/id-generator.js';
+import { ClerkClientAdapter } from '../../adapters/clerk-client.js';
 
 export const makeGetUserByIdController = () => {
     const postgresGetUserById = new PostgresGetUserById();
@@ -29,12 +30,14 @@ export const makeCreateUserController = () => {
     const postgresCreateUserRepositorie = new PostgresCreateUserRepositorie();
     const passwordHasherAdapter = new PasswordHasherAdapter();
     const idGeneratorAdapter = new IdGeneratorAdapter();
+    const clientClerkAdapter = new ClerkClientAdapter();
 
     const createUserUseCase = new CreateUserUseCase(
         postgresGetUserByEmail,
         postgresCreateUserRepositorie,
         passwordHasherAdapter,
-        idGeneratorAdapter
+        idGeneratorAdapter,
+        clientClerkAdapter
     );
 
     const createUserController = new CreateUserController(createUserUseCase);
@@ -46,11 +49,13 @@ export const makeUpdateUserController = () => {
     const postgresGetUserByEmail = new PostgresGetUserByEmailRepositorie();
     const postgresUpdateUserRepository = new PostgresUpdateUserRepository();
     const passwordHasherAdapter = new PasswordHasherAdapter();
+    const clientClerkAdapter = new ClerkClientAdapter();
 
     const updateUserUseCase = new UpdateUserUseCase(
         postgresGetUserByEmail,
         postgresUpdateUserRepository,
-        passwordHasherAdapter
+        passwordHasherAdapter,
+        clientClerkAdapter
     );
 
     const updateUserController = new UpdateUserController(updateUserUseCase);
@@ -60,8 +65,12 @@ export const makeUpdateUserController = () => {
 
 export const makeDeleteUserController = () => {
     const postgresDeleteUserRepository = new PostgresDeleteUserRepository();
+    const clientClerkAdapter = new ClerkClientAdapter();
 
-    const deleteUserUseCase = new DeleteUserUseCase(postgresDeleteUserRepository);
+    const deleteUserUseCase = new DeleteUserUseCase(
+        postgresDeleteUserRepository,
+        clientClerkAdapter
+    );
 
     const deleteUserController = new DeleteUserController(deleteUserUseCase);
 
