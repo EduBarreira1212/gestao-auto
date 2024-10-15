@@ -12,6 +12,7 @@ describe('Sell Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
@@ -41,6 +42,7 @@ describe('Sell Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
@@ -72,6 +74,7 @@ describe('Sell Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
@@ -105,6 +108,7 @@ describe('Sell Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
@@ -141,6 +145,7 @@ describe('Sell Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 

@@ -44,7 +44,7 @@ describe('User Routes E2E Tests', () => {
             .send({
                 name: faker.person.firstName(),
                 email: faker.internet.email(),
-                password: faker.internet.password({ length: 5 }),
+                password: faker.internet.password({ length: 9 }),
             });
 
         expect(response.status).toBe(200);
