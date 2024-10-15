@@ -8,13 +8,14 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  Cars      Car[]    @relation("UserCars")
-  Sells     Sell[]   @relation("UserSells")
+  id          String   @id @default(uuid())
+  external_id String   @unique
+  name        String
+  email       String   @unique
+  password    String
+  createdAt   DateTime @default(now())
+  Cars        Car[]    @relation("UserCars")
+  Sells       Sell[]   @relation("UserSells")
 }
 
 model Car {
