@@ -3,12 +3,14 @@ export class CreateUserUseCase {
         postgresGetUserByEmailRepositorie,
         postgresCreateUserRepositorie,
         passwordHasherAdapter,
-        idGeneratorAdapter
+        idGeneratorAdapter,
+        clerkClientAdapter
     ) {
         this.postgresGetUserByEmailRepositorie = postgresGetUserByEmailRepositorie;
         this.postgresCreateUserRepositorie = postgresCreateUserRepositorie;
         this.passwordHasherAdapter = passwordHasherAdapter;
         this.idGeneratorAdapter = idGeneratorAdapter;
+        this.clerkClientAdapter = clerkClientAdapter;
     }
     async execute(createUserParams) {
         const emailExists = await this.postgresGetUserByEmailRepositorie.execute(
@@ -25,9 +27,17 @@ export class CreateUserUseCase {
             createUserParams.password
         );
 
+        const userCreatedAtClerk = await this.clerkClientAdapter.createUser({
+            firstName: createUserParams.name,
+            emailAddress: [createUserParams.email],
+            passwordDigest: encryptedPassword,
+            passwordHasher: 'bcrypt',
+        });
+
         const user = {
             ...createUserParams,
             id: userId,
+            external_id: userCreatedAtClerk.id,
             password: encryptedPassword,
         };
 

@@ -2,11 +2,13 @@ export class UpdateUserUseCase {
     constructor(
         postgresGetUserByEmailRepositorie,
         postgresUpdateUserRepository,
-        passwordHasherAdapter
+        passwordHasherAdapter,
+        clerkClientAdapter
     ) {
         this.postgresGetUserByEmailRepositorie = postgresGetUserByEmailRepositorie;
         this.postgresUpdateUserRepository = postgresUpdateUserRepository;
         this.passwordHasherAdapter = passwordHasherAdapter;
+        this.clerkClientAdapter = clerkClientAdapter;
     }
     async execute(userId, updateUserParams) {
         if (updateUserParams.email) {
@@ -34,6 +36,28 @@ export class UpdateUserUseCase {
             userId,
             user
         );
+
+        const clerkUpdatedUser = await this.clerkClientAdapter.updateUser(
+            updateUser.external_id,
+            {
+                firstName: updateUser.name,
+                passwordDigest: updateUser.password,
+                passwordHasher: 'bcrypt',
+            }
+        );
+
+        if (user.email) {
+            await this.clerkClientAdapter.createEmail({
+                userId: updateUser.external_id,
+                emailAddress: updateUser.email,
+                primary: true,
+                verified: true,
+            });
+
+            await this.clerkClientAdapter.deleteEmail(
+                clerkUpdatedUser.primaryEmailAddressId
+            );
+        }
 
         return updateUser;
     }
