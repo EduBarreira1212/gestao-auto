@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
-import { UserButton } from '@clerk/clerk-react';
+import { UserButton, useUser } from '@clerk/clerk-react';
 
 const Header = () => {
+    const { user } = useUser();
+
     return (
         <header className="flex flex-row justify-between bg-brand-secondary px-8 py-3 text-brand-primary shadow-sm shadow-black">
             <h2>Dashboard</h2>
@@ -21,6 +23,7 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-2">
                 <UserButton />
+                <span>{user?.fullName}</span>
             </div>
         </header>
     );
