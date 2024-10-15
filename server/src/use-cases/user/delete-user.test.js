@@ -13,11 +13,26 @@ describe('DeleteUserUseCase', () => {
         }
     }
 
+    class ClerkClientAdapterStub {
+        deleteUser(userId) {
+            const userToReturn = {
+                ...user,
+                id: userId,
+            };
+            return userToReturn;
+        }
+    }
+
     const makeSut = () => {
         const postgresDeleteUserRepositorieStub =
             new PostgresDeleteUSerRepositorieStub();
 
-        const sut = new DeleteUserUseCase(postgresDeleteUserRepositorieStub);
+        const clerkClientAdapterStub = new ClerkClientAdapterStub();
+
+        const sut = new DeleteUserUseCase(
+            postgresDeleteUserRepositorieStub,
+            clerkClientAdapterStub
+        );
 
         return sut;
     };
@@ -29,7 +44,7 @@ describe('DeleteUserUseCase', () => {
         expect(result).toStrictEqual(user);
     });
 
-    test('should throw a email already exists error', async () => {
+    test('should throw a user do not exists error', async () => {
         const sut = makeSut();
 
         import.meta.jest
@@ -38,9 +53,9 @@ describe('DeleteUserUseCase', () => {
                 return null;
             });
 
-        const result = await sut.execute(user);
+        const promise = sut.execute(user);
 
-        expect(result).toBeFalsy();
+        await expect(promise).rejects.toThrow(new Error('User do not exists'));
     });
 
     test('should ensure PostgresDeleteUserRepository is called', async () => {
