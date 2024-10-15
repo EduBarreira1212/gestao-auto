@@ -1,3 +1,15 @@
+export type CreateUser = {
+    name: string;
+    email: string;
+    password: number;
+};
+
+export type UpdateUser = {
+    name?: string;
+    email?: string;
+    password?: number;
+};
+
 export type CreateCar = {
     user_id: string;
     name: string;
@@ -8,11 +20,11 @@ export type CreateCar = {
 };
 
 export type UpdateCar = {
-    name: string;
-    brand: string;
-    year: number;
-    plate: string;
-    entry_price: number;
+    name?: string;
+    brand?: string;
+    year?: number;
+    plate?: string;
+    entry_price?: number;
 };
 
 export type CreateExpense = {
@@ -22,8 +34,8 @@ export type CreateExpense = {
 };
 
 export type UpdateExpense = {
-    amount: number;
-    description: string;
+    amount?: number;
+    description?: string;
 };
 
 export type CreateSell = {
@@ -34,6 +46,6 @@ export type CreateSell = {
 };
 
 export type UpdateSell = {
-    amount: number;
-    profit: number;
+    amount?: number;
+    profit?: number;
 };
