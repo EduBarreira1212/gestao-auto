@@ -15,6 +15,7 @@ describe('PostgresGetUserByIdRepository', () => {
 
         expect(result).toStrictEqual({
             id: createdUser.id,
+            external_id: user.external_id,
             name: createdUser.name,
             email: createdUser.email,
             password: createdUser.password,
