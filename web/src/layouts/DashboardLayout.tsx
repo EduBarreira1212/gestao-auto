@@ -4,9 +4,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 export default function DashboardLayout() {
     const { userId, isLoaded } = useAuth();
-    const navigate = useNavigate();
 
-    console.log('test', userId);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (isLoaded && !userId) {
