@@ -1,12 +1,14 @@
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth, useUser } from '@clerk/clerk-react';
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 export default function DashboardLayout() {
     const { userId, isLoaded } = useAuth();
+    const { user } = useUser();
     const navigate = useNavigate();
 
-    console.log('test', userId);
+    console.log('id', userId);
+    console.log('User', user?.externalId);
 
     useEffect(() => {
         if (isLoaded && !userId) {
