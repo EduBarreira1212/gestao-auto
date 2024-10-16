@@ -8,22 +8,25 @@ import AddButton from '../components/AddButton';
 import List from '../components/List';
 import { createPortal } from 'react-dom';
 import AddVehicleModal from '../components/AddVehicleModal';
+import { useUser } from '@clerk/clerk-react';
 
 const Vehicles = () => {
     const [cars, setCars] = useState([]);
     const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
 
+    const { user } = useUser();
+
     useEffect(() => {
+        if (!user || !user.externalId) return;
+
         const getCars = async () => {
-            const carList = await getCarsByUserId(
-                '25ce759d-bf3e-4f25-86ff-814839576bf7'
-            );
+            const carList = await getCarsByUserId(user.externalId ?? '');
 
             setCars(carList);
         };
 
         getCars();
-    }, []);
+    }, [user]);
 
     return (
         <div className="flex h-screen w-full">
