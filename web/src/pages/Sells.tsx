@@ -5,15 +5,17 @@ import Sell from '../components/Sell';
 import getSellsByUserId from '../services/sell/getSellsByUserId';
 import ContentSection from '../components/ContentSection';
 import List from '../components/List';
+import { useUser } from '@clerk/clerk-react';
 
 const Sells = () => {
     const [sells, setSells] = useState([]);
+    const { user } = useUser();
 
     useEffect(() => {
+        if (!user || !user.externalId) return;
+
         const getSellList = async () => {
-            const sellList = await getSellsByUserId(
-                '25ce759d-bf3e-4f25-86ff-814839576bf7'
-            );
+            const sellList = await getSellsByUserId(user.externalId || '');
 
             setSells(sellList);
         };
