@@ -1,6 +1,8 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useSignIn } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
 
 import logo from '../assets/logo.png';
 import { CreateUser } from '../types';
@@ -30,6 +32,10 @@ const schema = z.object({
 });
 
 const SignUp = () => {
+    const { signIn, setActive } = useSignIn();
+
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
@@ -38,10 +44,26 @@ const SignUp = () => {
         resolver: zodResolver(schema),
     });
 
-    const onSubmit: SubmitHandler<CreateUser> = async (data) => {
-        const response = await createUser(data);
+    const onSubmit: SubmitHandler<CreateUser> = async (createUserParams) => {
+        const response = await createUser(createUserParams);
 
-        console.log(response);
+        if (response?.status === 201 && response.data) {
+            await signIn?.create({
+                identifier: response.data.email,
+                strategy: 'password',
+                password: createUserParams.password,
+            });
+
+            if (signIn?.createdSessionId) {
+                await setActive({
+                    session: signIn.createdSessionId,
+                });
+            }
+
+            if (signIn?.status === 'complete') {
+                navigate('/dashboard');
+            }
+        }
     };
 
     return (
