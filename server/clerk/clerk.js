@@ -1,4 +1,4 @@
-import { createClerkClient } from '@clerk/clerk-sdk-node';
+import { createClerkClient } from '@clerk/express';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });
