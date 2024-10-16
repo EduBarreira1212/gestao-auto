@@ -8,7 +8,7 @@ const createUser = async (createUserParams: CreateUser) => {
             createUserParams
         );
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
