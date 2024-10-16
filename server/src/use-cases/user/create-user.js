@@ -28,6 +28,7 @@ export class CreateUserUseCase {
         );
 
         const userCreatedAtClerk = await this.clerkClientAdapter.createUser({
+            externalId: userId,
             firstName: createUserParams.name,
             emailAddress: [createUserParams.email],
             passwordDigest: encryptedPassword,
