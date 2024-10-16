@@ -2,7 +2,6 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useSignIn } from '@clerk/clerk-react';
-import { useNavigate } from 'react-router-dom';
 
 import logo from '../assets/logo.png';
 import { CreateUser } from '../types';
@@ -34,8 +33,6 @@ const schema = z.object({
 const SignUp = () => {
     const { signIn, setActive } = useSignIn();
 
-    const navigate = useNavigate();
-
     const {
         register,
         handleSubmit,
@@ -58,10 +55,6 @@ const SignUp = () => {
                 await setActive({
                     session: signIn.createdSessionId,
                 });
-            }
-
-            if (signIn?.status === 'complete') {
-                navigate('/dashboard');
             }
         }
     };
