@@ -5,6 +5,7 @@ import { userFixture } from '../../tests/fixtures/user.js';
 describe('CreateUserUseCase', () => {
     const user = {
         ...userFixture,
+        external_id: undefined,
         id: undefined,
     };
     class PostgresGetUserByEmailRepositorieStub {
@@ -31,6 +32,12 @@ describe('CreateUserUseCase', () => {
         }
     }
 
+    class ClerkClientAdapterStub {
+        createUser(user) {
+            return { ...user, external_id: userFixture.external_id };
+        }
+    }
+
     const makeSut = () => {
         const postgresGetUserByEmailRepositorieStub =
             new PostgresGetUserByEmailRepositorieStub();
@@ -38,12 +45,14 @@ describe('CreateUserUseCase', () => {
             new PostgresCreateUserRepositorieStub();
         const passwordHasherAdapterStub = new PasswordHasherAdapterStub();
         const idGeneratorAdapterStub = new IdGeneratorAdapterStub();
+        const clerkClientAdapterStub = new ClerkClientAdapterStub();
 
         const sut = new CreateUserUseCase(
             postgresGetUserByEmailRepositorieStub,
             postgresCreateUserRepositorieStub,
             passwordHasherAdapterStub,
-            idGeneratorAdapterStub
+            idGeneratorAdapterStub,
+            clerkClientAdapterStub
         );
 
         return sut;

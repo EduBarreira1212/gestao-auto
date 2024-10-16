@@ -31,6 +31,7 @@ describe('Cars Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
@@ -53,6 +54,7 @@ describe('Cars Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
@@ -85,6 +87,7 @@ describe('Cars Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
@@ -117,6 +120,7 @@ describe('Cars Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 

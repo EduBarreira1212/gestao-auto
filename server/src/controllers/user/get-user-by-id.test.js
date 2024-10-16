@@ -5,9 +5,10 @@ describe('GetUserByIdController', () => {
         async execute(userId) {
             const user = {
                 id: userId,
+                external_id: 'valid_id',
                 name: 'Eduardo',
                 email: 'edu@gmail.com',
-                password: '12345',
+                password: '123456789',
             };
             return user;
         }

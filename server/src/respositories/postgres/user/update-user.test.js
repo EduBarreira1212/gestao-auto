@@ -15,6 +15,7 @@ describe('PostgresUpdateUserRepository', () => {
 
         expect(result).toStrictEqual({
             id: user.id,
+            external_id: user.external_id,
             name: user.name,
             email: user.email,
             password: user.password,

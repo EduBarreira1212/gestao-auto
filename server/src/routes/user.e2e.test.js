@@ -22,6 +22,7 @@ describe('User Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
@@ -36,6 +37,7 @@ describe('User Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
@@ -44,7 +46,7 @@ describe('User Routes E2E Tests', () => {
             .send({
                 name: faker.person.firstName(),
                 email: faker.internet.email(),
-                password: faker.internet.password({ length: 5 }),
+                password: faker.internet.password({ length: 9 }),
             });
 
         expect(response.status).toBe(200);
@@ -56,6 +58,7 @@ describe('User Routes E2E Tests', () => {
             .post('/api/users')
             .send({
                 ...userFixture,
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 id: undefined,
             });
 
