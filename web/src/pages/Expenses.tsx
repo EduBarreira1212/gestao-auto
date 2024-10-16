@@ -5,13 +5,16 @@ import ContentSection from '../components/ContentSection';
 import { useEffect, useState } from 'react';
 import List from '../components/List';
 import getExpensesByCarId from '../services/expense/getExpensesByCarId';
+import { useUser } from '@clerk/clerk-react';
 
 const Expenses = () => {
     const [expenses, setExpenses] = useState([]);
+    const { user } = useUser();
 
     useEffect(() => {
+        if (!user || !user.externalId) return;
         const getExpenses = async () => {
-            const expenseList = await getExpensesByCarId('');
+            const expenseList = await getExpensesByCarId(user.externalId || '');
 
             setExpenses(expenseList);
         };
