@@ -10,7 +10,7 @@ export type UpdateUser = {
     password?: string;
 };
 
-export type CreateCar = {
+export type CreateVehicle = {
     user_id: string;
     name: string;
     brand: string;
@@ -19,7 +19,7 @@ export type CreateCar = {
     entry_price: number;
 };
 
-export type UpdateCar = {
+export type UpdateVehicle = {
     name?: string;
     brand?: string;
     year?: number;
