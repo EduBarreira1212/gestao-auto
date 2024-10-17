@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { UpdateCar } from '../../types';
+import { UpdateVehicle } from '../../types';
 
-const updateCar = async (carId: string, updateCarParams: UpdateCar) => {
+const updateCar = async (carId: string, updateCarParams: UpdateVehicle) => {
     try {
         const response = await axios.patch(
             `http://localhost:3000/api/cars/${carId}`,
