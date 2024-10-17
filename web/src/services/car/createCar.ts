@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { CreateCar } from '../../types';
+import { CreateVehicle } from '../../types';
 
-const createCar = async (createCarParams: CreateCar) => {
+const createCar = async (createCarParams: CreateVehicle) => {
     try {
         const response = await axios.post(
             `http://localhost:3000/api/cars`,
             createCarParams
         );
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
