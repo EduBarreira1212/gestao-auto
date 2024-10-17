@@ -18,8 +18,8 @@ export const createCarSchema = z.object({
     plate: z
         .string({ required_error: 'License plate is required.' })
         .trim()
-        .min(7, { message: 'License plate must be exactly 7 characters.' })
-        .max(7, { message: 'License plate must be exactly 7 characters.' }),
+        .min(7, { message: 'License plate must have more than 7 characters.' })
+        .max(8, { message: 'License plate must have less than 8 characters.' }),
     entry_price: z
         .number({ required_error: 'Entry price is required.' })
         .positive({ message: 'Entry price must be a positive number.' }),
