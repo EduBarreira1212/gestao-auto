@@ -2,33 +2,21 @@ import { useState } from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Vehicle from '../components/Vehicle';
-import getCarsByUserId from '../services/car/getCarsByUserId';
 import ContentSection from '../components/ContentSection';
 import AddButton from '../components/AddButton';
 import List from '../components/List';
 import { createPortal } from 'react-dom';
 import AddVehicleModal from '../components/AddVehicleModal';
 import { useUser } from '@clerk/clerk-react';
-import { useQuery } from '@tanstack/react-query';
 import { VehicleType } from '../types';
+import { useGetVehicles } from '../hooks/data/getVehicles';
 
 const Vehicles = () => {
     const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
 
     const { user } = useUser();
 
-    const { data, isLoading } = useQuery({
-        queryKey: ['vehicles'],
-        queryFn: async () => {
-            const response = await getCarsByUserId(user?.externalId ?? '');
-
-            if (response?.status !== 200) {
-                throw new Error();
-            }
-
-            return response?.data;
-        },
-    });
+    const { data, isLoading } = useGetVehicles(user?.externalId ?? '');
 
     if (isLoading) return <div>Loadin...</div>;
 
