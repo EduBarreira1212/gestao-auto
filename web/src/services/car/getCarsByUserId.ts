@@ -6,7 +6,7 @@ const getCarsByUserId = async (userId: string) => {
             `http://localhost:3000/api/cars/?userId=${userId}`
         );
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
