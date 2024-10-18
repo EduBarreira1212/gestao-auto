@@ -1,55 +1,33 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { CreateVehicle } from '../types';
-import createCar from '../services/car/createCar';
 import { useUser } from '@clerk/clerk-react';
-
-const schema = z.object({
-    name: z.string().trim().min(1, 'O modelo é obrigatório.'),
-    brand: z.string().trim().min(1, 'A marca é obrigatória.'),
-    year: z
-        .number({ invalid_type_error: 'Ano deve ser um número.' })
-        .min(1900, 'Ano deve ser maior que 1900.')
-        .max(
-            new Date().getFullYear() + 1,
-            `Ano deve ser até ${new Date().getFullYear() + 1}.`
-        ),
-    plate: z
-        .string()
-        .regex(
-            /^([A-Z]{3}-\d{4}|[A-Z]{3}\d[A-Z]\d{2})$/,
-            'Placa deve estar no formato ABC-1234 ou ABC1D23.'
-        ),
-    entry_price: z
-        .number({ invalid_type_error: 'Preço de entrada deve ser um número.' })
-        .positive('O preço de entrada deve ser positivo.'),
-});
+import { addVehicleschema } from '../schemas/zodSchemas';
+import { useAddVehicle } from '../hooks/data/addVehicle';
 
 const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
     const { user } = useUser();
+
+    const { mutate, isPending } = useAddVehicle();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<CreateVehicle>({
-        resolver: zodResolver(schema),
+        resolver: zodResolver(addVehicleschema),
     });
 
     const onSubmit: SubmitHandler<CreateVehicle> = async (createVehicleParams) => {
         if (!user || !user.externalId) return;
 
-        const response = await createCar({
-            ...createVehicleParams,
-            user_id: user.externalId,
+        const newVehicle = { ...createVehicleParams, user_id: user?.externalId };
+
+        mutate(newVehicle, {
+            onSuccess: () => {
+                onClose();
+            },
         });
-
-        console.log(response);
-
-        if (response?.status === 201) {
-            onClose();
-        }
     };
 
     return (
@@ -99,6 +77,7 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
                         type="submit"
                         value="Adicionar"
                         className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-primary hover:text-brand-accent"
+                        disabled={isPending}
                     />
                 </form>
             </div>
