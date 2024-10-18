@@ -49,3 +49,15 @@ export type UpdateSell = {
     amount?: number;
     profit?: number;
 };
+
+export type VehicleType = {
+    id: string;
+    user_id: string;
+    name: string;
+    brand: string;
+    year: number;
+    plate: string;
+    entry_price: number;
+    expenses: [];
+    createdAt: string;
+};
