@@ -10,25 +10,14 @@ import { createPortal } from 'react-dom';
 import AddVehicleModal from '../components/AddVehicleModal';
 import { useUser } from '@clerk/clerk-react';
 import { useQuery } from '@tanstack/react-query';
-
-export type Vehicle = {
-    id: string;
-    user_id: string;
-    name: string;
-    brand: string;
-    year: number;
-    plate: string;
-    entry_price: number;
-    expenses: [];
-    createdAt: string;
-};
+import { VehicleType } from '../types';
 
 const Vehicles = () => {
     const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
 
     const { user } = useUser();
 
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['vehicles'],
         queryFn: async () => {
             const response = await getCarsByUserId(user?.externalId ?? '');
@@ -41,6 +30,8 @@ const Vehicles = () => {
         },
     });
 
+    if (isLoading) return <div>Loadin...</div>;
+
     return (
         <div className="flex h-screen w-full">
             <Navbar />
@@ -52,7 +43,7 @@ const Vehicles = () => {
                     </AddButton>
                     {data?.length > 0 ? (
                         <List>
-                            {data.map((vehicle: Vehicle) => (
+                            {data.map((vehicle: VehicleType) => (
                                 <li key={vehicle.id}>
                                     <Vehicle car={vehicle} />
                                 </li>
