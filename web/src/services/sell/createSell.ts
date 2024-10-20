@@ -8,7 +8,7 @@ const createSell = async (createSellParams: CreateSell) => {
             createSellParams
         );
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
