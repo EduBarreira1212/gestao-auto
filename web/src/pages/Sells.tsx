@@ -1,27 +1,18 @@
-import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Sell from '../components/Sell';
-import getSellsByUserId from '../services/sell/getSellsByUserId';
 import ContentSection from '../components/ContentSection';
 import List from '../components/List';
 import { useUser } from '@clerk/clerk-react';
+import { SellType } from '../types';
+import { useGetSells } from '../hooks/data/getSells';
 
 const Sells = () => {
-    const [sells, setSells] = useState([]);
     const { user } = useUser();
 
-    useEffect(() => {
-        if (!user || !user.externalId) return;
+    const { data, isLoading } = useGetSells(user?.externalId ?? '');
 
-        const getSellList = async () => {
-            const sellList = await getSellsByUserId(user.externalId || '');
-
-            setSells(sellList);
-        };
-
-        getSellList();
-    }, []);
+    if (isLoading) return <div>Loading...</div>;
 
     return (
         <div className="flex flex-row">
@@ -29,10 +20,10 @@ const Sells = () => {
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
                 <ContentSection>
-                    {sells.length > 0 ? (
+                    {data?.length > 0 ? (
                         <List>
-                            {sells.map((sell, index) => (
-                                <li key={index}>
+                            {data.map((sell: SellType) => (
+                                <li key={sell.id}>
                                     <Sell sell={sell}></Sell>
                                 </li>
                             ))}
