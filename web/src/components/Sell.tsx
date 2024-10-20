@@ -1,18 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
+import { SellType } from '../types';
 
-type ISell = {
-    sell: {
-        id: string;
-        user_id: string;
-        car_id: string;
-        amount: number;
-        profit: number;
-        createdAt: string;
-    };
-};
-
-const Sell = ({ sell }: ISell) => {
+const Sell = ({ sell }: { sell: SellType }) => {
     const navigate = useNavigate();
 
     return (
