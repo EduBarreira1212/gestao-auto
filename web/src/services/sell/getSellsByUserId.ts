@@ -6,7 +6,7 @@ const getSellsByUserId = async (userId: string) => {
             `http://localhost:3000/api/sells/?userId=${userId}`
         );
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
