@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import CreateSellModal from './CreateSellModal';
 
 type ICar = {
     car: {
@@ -16,6 +19,7 @@ type ICar = {
 };
 
 const Vehicle = ({ car }: ICar) => {
+    const [showCreateSellModal, setShowCreateSellModal] = useState(false);
     const navigate = useNavigate();
 
     return (
@@ -29,8 +33,16 @@ const Vehicle = ({ car }: ICar) => {
             <span>{car.createdAt}</span>
             <div className="flex flex-row justify-between">
                 <Button onClick={() => navigate('/')}>Ver detalhes</Button>
-                <Button onClick={() => navigate('/')}>Vender</Button>
+                <Button onClick={() => setShowCreateSellModal(true)}>Vender</Button>
             </div>
+            {showCreateSellModal &&
+                createPortal(
+                    <CreateSellModal
+                        carId={car.id}
+                        onClose={() => setShowCreateSellModal(false)}
+                    />,
+                    document.body
+                )}
         </div>
     );
 };
