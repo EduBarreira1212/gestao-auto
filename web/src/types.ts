@@ -61,3 +61,12 @@ export type VehicleType = {
     expenses: [];
     createdAt: string;
 };
+
+export type SellType = {
+    id: string;
+    user_id: string;
+    car_id: string;
+    amount: number;
+    profit: number;
+    createdAt: string;
+};
