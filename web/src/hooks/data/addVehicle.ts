@@ -1,9 +1,9 @@
-import { QueryClient, useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CreateVehicle, VehicleType } from '../../types';
 import createCar from '../../services/car/createCar';
 
 export const useAddVehicle = () => {
-    const queryClient = new QueryClient();
+    const queryClient = useQueryClient();
 
     return useMutation({
         mutationKey: ['addVehicle'],
@@ -20,7 +20,7 @@ export const useAddVehicle = () => {
         },
         onSuccess: (newVehicle) => {
             queryClient.setQueryData(['vehicles'], (oldData: VehicleType[]) => {
-                return { ...oldData, newVehicle };
+                return [...oldData, newVehicle];
             });
         },
     });
