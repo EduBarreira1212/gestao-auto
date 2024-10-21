@@ -18,7 +18,7 @@ export const useCreateSell = (carId: string) => {
         },
         onSuccess: (newSell) => {
             queryClient.setQueryData(['sells'], (oldData: SellType[]) => {
-                return { ...oldData, newSell };
+                return [...oldData, newSell];
             });
         },
     });
