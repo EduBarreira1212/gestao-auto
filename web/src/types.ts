@@ -68,5 +68,5 @@ export type SellType = {
     car_id: string;
     amount: number;
     profit: number;
-    createdAt: string;
+    createdAt: Date;
 };
