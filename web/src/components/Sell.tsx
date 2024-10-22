@@ -4,9 +4,11 @@ import { useGetVehicleById } from '../hooks/data/getVehicleById';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import SellDetailsModal from './SellDetailsModal';
+import DeleteSellModal from './DeleteSellModal';
 
 const Sell = ({ sell }: { sell: SellType }) => {
     const [showSellDetailsModal, setShowSelldetailsModal] = useState(false);
+    const [showDeleteSellModal, setShowDeleteSellModal] = useState(false);
 
     const { data: vehicle } = useGetVehicleById(sell.car_id);
 
@@ -25,13 +27,29 @@ const Sell = ({ sell }: { sell: SellType }) => {
             <span>
                 Data da venda: {new Date(sell.createdAt).toLocaleDateString('pt-BR')}
             </span>
-            <Button onClick={() => setShowSelldetailsModal(true)}>
-                Ver detalhes
-            </Button>
+            <div className="flex flex-row justify-evenly">
+                <Button onClick={() => setShowSelldetailsModal(true)}>
+                    Ver detalhes
+                </Button>
+                <button
+                    className="my-3 self-center rounded-sm border-2 border-solid bg-red-600 p-2 text-brand-neutral"
+                    onClick={() => setShowDeleteSellModal(true)}
+                >
+                    Excluir
+                </button>
+            </div>
             {showSellDetailsModal &&
                 createPortal(
                     <SellDetailsModal
                         onClose={() => setShowSelldetailsModal(false)}
+                        sellId={sell.id}
+                    />,
+                    document.body
+                )}
+            {showDeleteSellModal &&
+                createPortal(
+                    <DeleteSellModal
+                        onClose={() => setShowDeleteSellModal(false)}
                         sellId={sell.id}
                     />,
                     document.body
