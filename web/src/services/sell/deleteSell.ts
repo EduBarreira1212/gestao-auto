@@ -6,7 +6,7 @@ const deleteSell = async (SellId: string) => {
             `http://localhost:3000/api/sells/${SellId}`
         );
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
