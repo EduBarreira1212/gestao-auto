@@ -1,12 +1,9 @@
-import axios from 'axios';
+import { api } from '../../lib/axios';
 import { CreateSell } from '../../types';
 
 const createSell = async (createSellParams: CreateSell) => {
     try {
-        const response = await axios.post(
-            `http://localhost:3000/api/sells`,
-            createSellParams
-        );
+        const response = await api.post(`/sells`, createSellParams);
 
         return response;
     } catch (error) {

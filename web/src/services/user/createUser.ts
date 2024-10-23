@@ -1,12 +1,9 @@
-import axios from 'axios';
+import { api } from '../../lib/axios';
 import { CreateUser } from '../../types';
 
 const createUser = async (createUserParams: CreateUser) => {
     try {
-        const response = await axios.post(
-            `http://localhost:3000/api/users`,
-            createUserParams
-        );
+        const response = await api.post(`/users`, createUserParams);
 
         return response;
     } catch (error) {

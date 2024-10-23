@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { api } from '../../lib/axios';
 import { UpdateExpense } from '../../types';
 
 const updateExpense = async (
@@ -6,8 +6,8 @@ const updateExpense = async (
     updateExpenseParams: UpdateExpense
 ) => {
     try {
-        const response = await axios.patch(
-            `http://localhost:3000/api/expenses/${expenseId}`,
+        const response = await api.patch(
+            `/expenses/${expenseId}`,
             updateExpenseParams
         );
 

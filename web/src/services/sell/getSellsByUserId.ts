@@ -1,10 +1,8 @@
-import axios from 'axios';
+import { api } from '../../lib/axios';
 
 const getSellsByUserId = async (userId: string) => {
     try {
-        const response = await axios.get(
-            `http://localhost:3000/api/sells/?userId=${userId}`
-        );
+        const response = await api.get(`/sells/?userId=${userId}`);
 
         return response;
     } catch (error) {

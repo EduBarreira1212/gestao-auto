@@ -1,12 +1,9 @@
-import axios from 'axios';
 import { CreateVehicle } from '../../types';
+import { api } from '../../lib/axios';
 
 const createCar = async (createCarParams: CreateVehicle) => {
     try {
-        const response = await axios.post(
-            `http://localhost:3000/api/cars`,
-            createCarParams
-        );
+        const response = await api.post(`/cars`, createCarParams);
 
         return response;
     } catch (error) {

@@ -1,12 +1,9 @@
-import axios from 'axios';
+import { api } from '../../lib/axios';
 import { CreateExpense } from '../../types';
 
 const createExpense = async (createExpenseParams: CreateExpense) => {
     try {
-        const response = await axios.post(
-            `http://localhost:3000/api/expenses`,
-            createExpenseParams
-        );
+        const response = await api.post(`/expenses`, createExpenseParams);
 
         return response.data;
     } catch (error) {

@@ -1,10 +1,8 @@
-import axios from 'axios';
+import { api } from '../../lib/axios';
 
 const deleteSell = async (SellId: string) => {
     try {
-        const response = await axios.delete(
-            `http://localhost:3000/api/sells/${SellId}`
-        );
+        const response = await api.delete(`/sells/${SellId}`);
 
         return response;
     } catch (error) {
