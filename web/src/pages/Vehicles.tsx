@@ -9,7 +9,7 @@ import { createPortal } from 'react-dom';
 import AddVehicleModal from '../components/AddVehicleModal';
 import { useUser } from '@clerk/clerk-react';
 import { VehicleType } from '../types';
-import { useGetVehicles } from '../hooks/data/getVehicles';
+import { useGetVehicles } from '../hooks/data/useGetVehicles';
 
 const Vehicles = () => {
     const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);

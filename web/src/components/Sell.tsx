@@ -1,6 +1,6 @@
 import Button from './Button';
 import { SellType } from '../types';
-import { useGetVehicleById } from '../hooks/data/getVehicleById';
+import { useGetVehicleById } from '../hooks/data/useGetVehicleById';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import SellDetailsModal from './SellDetailsModal';

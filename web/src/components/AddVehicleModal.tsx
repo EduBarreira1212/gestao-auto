@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateVehicle } from '../types';
 import { useUser } from '@clerk/clerk-react';
 import { addVehicleschema } from '../schemas/zodSchemas';
-import { useAddVehicle } from '../hooks/data/addVehicle';
+import { useAddVehicle } from '../hooks/data/useAddVehicle';
 import ModalContainer from './ModalContainer';
 
 const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {

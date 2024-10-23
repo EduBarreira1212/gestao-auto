@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CreateSell } from '../types';
 import { createSellSchema } from '../schemas/zodSchemas';
-import { useCreateSell } from '../hooks/data/createSell';
+import { useCreateSell } from '../hooks/data/useCreateSell';
 import ModalContainer from './ModalContainer';
 
 type CreateSellModalprops = {

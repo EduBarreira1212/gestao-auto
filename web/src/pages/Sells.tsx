@@ -5,7 +5,7 @@ import ContentSection from '../components/ContentSection';
 import List from '../components/List';
 import { useUser } from '@clerk/clerk-react';
 import { SellType } from '../types';
-import { useGetSells } from '../hooks/data/getSells';
+import { useGetSells } from '../hooks/data/useGetSells';
 
 const Sells = () => {
     const { user } = useUser();

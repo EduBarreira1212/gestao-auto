@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
-import { useGetSells } from '../hooks/data/getSells';
+import { useGetSells } from '../hooks/data/useGetSells';
 import { useUser } from '@clerk/clerk-react';
-import { useGetVehicles } from '../hooks/data/getVehicles';
+import { useGetVehicles } from '../hooks/data/useGetVehicles';
 import { useEffect, useState } from 'react';
 import { SellType } from '../types';
 

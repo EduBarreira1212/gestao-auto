@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UpdateSell } from '../types';
 import { updateSellSchema } from '../schemas/zodSchemas';
-import { useUpdateSell } from '../hooks/data/updateSell';
+import { useUpdateSell } from '../hooks/data/useUpdateSell';
 import ModalContainer from './ModalContainer';
 
 type SellDetailsModalProps = {

@@ -1,4 +1,4 @@
-import { useDeleteSell } from '../hooks/data/deleteSell';
+import { useDeleteSell } from '../hooks/data/useDeleteSell';
 import ModalContainer from './ModalContainer';
 
 type DeleteSellModalProps = {
