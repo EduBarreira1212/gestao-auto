@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import getCarsByUserId from '../../services/car/getCarsByUserId';
+import { vehicleQueriesKeys } from '../../keys/queries';
 
 export const useGetVehicles = (userExternalId: string) => {
     return useQuery({
-        queryKey: ['vehicles'],
+        queryKey: vehicleQueriesKeys.getVehicles(),
         queryFn: async () => {
             const response = await getCarsByUserId(userExternalId);
 
