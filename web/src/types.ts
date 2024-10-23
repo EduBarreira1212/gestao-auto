@@ -59,7 +59,7 @@ export type VehicleType = {
     plate: string;
     entry_price: number;
     expenses: [];
-    createdAt: string;
+    createdAt: Date;
 };
 
 export type SellType = {
