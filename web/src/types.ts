@@ -58,7 +58,7 @@ export type VehicleType = {
     year: number;
     plate: string;
     entry_price: number;
-    expenses: [];
+    expenses: ExpenseType[];
     createdAt: Date;
 };
 
@@ -68,5 +68,13 @@ export type SellType = {
     car_id: string;
     amount: number;
     profit: number;
+    createdAt: Date;
+};
+
+export type ExpenseType = {
+    id: string;
+    car_id: string;
+    amount: number;
+    description: string;
     createdAt: Date;
 };
