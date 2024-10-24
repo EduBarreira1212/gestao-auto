@@ -7,7 +7,11 @@ import { useEffect, useState } from 'react';
 import { SellType } from '../types';
 
 const Overview = () => {
-    const [sellsInThisMonth, setSellsInThisMonth] = useState<number>();
+    const [sellsInThisMonth, setSellsInThisMonth] = useState<number>(0);
+    const [profitInThisMonth, setProfitInThisMonth] = useState<number>(0);
+    const [profitAverage, setProfitAverage] = useState<number>(0);
+    const [totalAmountInThisMonth, setTotalAmounInThisMonth] = useState<number>(0);
+
     const navigate = useNavigate();
 
     const { user } = useUser();
@@ -20,9 +24,38 @@ const Overview = () => {
         });
 
         setSellsInThisMonth(sellsThisMonth?.length);
+
+        const profitThisMonth = sellsThisMonth?.reduce(
+            (acc: number, sell: SellType) => {
+                return (acc += sell.profit);
+            },
+            0
+        );
+
+        setProfitInThisMonth(profitThisMonth);
+
+        const totalprofit = sells?.reduce((acc: number, sell: SellType) => {
+            return (acc += sell.profit);
+        }, 0);
+
+        setProfitAverage(totalprofit / sells?.length);
+
+        const totalAmountThisMonth = sellsThisMonth?.reduce(
+            (acc: number, sell: SellType) => {
+                return (acc += sell.amount);
+            },
+            0
+        );
+
+        setTotalAmounInThisMonth(totalAmountThisMonth);
     }, [sells]);
 
     const { data: vehicles } = useGetVehicles(user?.externalId ?? '');
+
+    const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+    });
 
     return (
         <div className="flex w-full gap-5 p-5">
@@ -33,9 +66,14 @@ const Overview = () => {
                 </div>
                 <div className="flex flex-col justify-around gap-5 border-b-2 border-solid p-3">
                     <span>Vendas totais: {sells?.length}</span>
-                    <span>Lucro mês atual: 0</span>
-                    <span>Lucro médio: 0</span>
-                    <span>Faturamento mês atual: 0</span>
+                    <span>
+                        Lucro mês atual: {formatter.format(profitInThisMonth)}
+                    </span>
+                    <span>Lucro médio: {formatter.format(profitAverage)}</span>
+                    <span>
+                        Faturamento mês atual:{' '}
+                        {formatter.format(totalAmountInThisMonth)}
+                    </span>
                 </div>
                 <Button onClick={() => navigate('/vendas')}>Ver vendas</Button>
             </div>
