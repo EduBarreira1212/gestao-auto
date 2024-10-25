@@ -4,13 +4,15 @@ import { useGetSells } from '../hooks/data/useGetSells';
 import { useUser } from '@clerk/clerk-react';
 import { useGetVehicles } from '../hooks/data/useGetVehicles';
 import { useEffect, useState } from 'react';
-import { SellType } from '../types';
+import { SellType, VehicleType } from '../types';
 
 const Overview = () => {
     const [sellsInThisMonth, setSellsInThisMonth] = useState<number>(0);
     const [profitInThisMonth, setProfitInThisMonth] = useState<number>(0);
     const [profitAverage, setProfitAverage] = useState<number>(0);
     const [totalAmountInThisMonth, setTotalAmounInThisMonth] = useState<number>(0);
+
+    const [averagePrice, setAveragePrice] = useState<number>(0);
 
     const navigate = useNavigate();
 
@@ -52,6 +54,17 @@ const Overview = () => {
 
     const { data: vehicles } = useGetVehicles(user?.externalId ?? '');
 
+    useEffect(() => {
+        const averageVehiclesPrice = vehicles?.reduce(
+            (acc: number, vehicle: VehicleType) => {
+                return (acc += vehicle.entry_price);
+            },
+            0
+        );
+
+        setAveragePrice(averageVehiclesPrice / vehicles?.length);
+    }, [vehicles]);
+
     const formatter = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
@@ -83,8 +96,8 @@ const Overview = () => {
                     <span>{vehicles?.length}</span>
                 </div>
                 <div className="flex flex-col gap-5 border-b-2 border-solid p-3">
-                    <span>Preço médio: 0</span>
-                    <span>Margem de lucro média: 0</span>
+                    <span>Preço médio: {formatter.format(averagePrice)}</span>
+                    <span>Decidir oq colocar: 0</span>
                     <span>Despesas esse mês: 0</span>
                     <span>Tempo em estoque(Média): 0 dias</span>
                 </div>
