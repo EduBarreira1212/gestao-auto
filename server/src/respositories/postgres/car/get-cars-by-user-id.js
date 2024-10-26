@@ -6,6 +6,9 @@ export class PostgresGetCarsByUserIdRepository {
             where: {
                 user_id: userId,
             },
+            include: {
+                expenses: true,
+            },
         });
 
         return cars;
