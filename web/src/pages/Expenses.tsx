@@ -2,25 +2,19 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Expense from '../components/Expense';
 import ContentSection from '../components/ContentSection';
-import { useEffect, useState } from 'react';
 import List from '../components/List';
-import getExpensesByCarId from '../services/expense/getExpensesByCarId';
 import { useUser } from '@clerk/clerk-react';
+import { useGetVehicles } from '../hooks/data/useGetVehicles';
+import { ExpenseType, VehicleType } from '../types';
 
 const Expenses = () => {
-    const [expenses, setExpenses] = useState([]);
     const { user } = useUser();
 
-    useEffect(() => {
-        if (!user || !user.externalId) return;
-        const getExpenses = async () => {
-            const expenseList = await getExpensesByCarId(user.externalId || '');
+    const { data: vehicles } = useGetVehicles(user?.externalId ?? '');
 
-            setExpenses(expenseList);
-        };
+    const expenses = vehicles?.flatMap((vehicle: VehicleType) => vehicle.expenses);
 
-        getExpenses();
-    }, []);
+    console.log(expenses);
 
     return (
         <div className="flex h-screen w-full flex-row">
@@ -28,10 +22,10 @@ const Expenses = () => {
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
                 <ContentSection>
-                    {expenses.length > 0 ? (
+                    {expenses?.length > 0 ? (
                         <List>
-                            {expenses.map((expense, index) => (
-                                <li key={index}>
+                            {expenses.map((expense: ExpenseType) => (
+                                <li key={expense.id}>
                                     <Expense expense={expense} />
                                 </li>
                             ))}
