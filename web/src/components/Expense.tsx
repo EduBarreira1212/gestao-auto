@@ -7,7 +7,7 @@ type ExpenseProps = {
         car_id: string;
         amount: number;
         description: string;
-        createdAt: string;
+        createdAt: Date;
     };
 };
 
@@ -19,7 +19,7 @@ const Expense = ({ expense }: ExpenseProps) => {
             <span>{expense.car_id}</span>
             <span>{expense.amount}</span>
             <span>{expense.description}</span>
-            <span>Data da despesa: {expense.createdAt}</span>
+            <span>Data da despesa: 0</span>
             <Button onClick={() => navigate('/')}>Ver detalhes</Button>
         </div>
     );
