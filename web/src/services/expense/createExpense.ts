@@ -5,7 +5,7 @@ const createExpense = async (createExpenseParams: CreateExpense) => {
     try {
         const response = await api.post(`/expenses`, createExpenseParams);
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
