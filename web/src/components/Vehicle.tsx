@@ -3,6 +3,8 @@ import Button from './Button';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import CreateSellModal from './CreateSellModal';
+import { ExpenseType } from '../types';
+import AddExpenseModal from './AddExpenseModal';
 
 type ICar = {
     car: {
@@ -13,13 +15,15 @@ type ICar = {
         year: number;
         plate: string;
         entry_price: number;
-        expenses: [];
+        expenses: ExpenseType[];
         createdAt: Date;
     };
 };
 
 const Vehicle = ({ car }: ICar) => {
     const [showCreateSellModal, setShowCreateSellModal] = useState(false);
+    const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
+
     const navigate = useNavigate();
 
     const formatter = new Intl.NumberFormat('pt-BR', {
@@ -34,7 +38,15 @@ const Vehicle = ({ car }: ICar) => {
             <span>{car.year}</span>
             <span>{car.plate}</span>
             <span>Preço de entrada: {formatter.format(car.entry_price)}</span>
-            <span>Despesas: {car.expenses}</span>
+            <div className="flex flex-row justify-between gap-2">
+                <span>Despesas: {car.expenses.length}</span>
+                <button
+                    className="rounded-sm border-2 bg-brand-neutral shadow-sm"
+                    onClick={() => setShowAddExpenseModal(true)}
+                >
+                    Adicionar
+                </button>
+            </div>
             <span>
                 Data de entrada:{' '}
                 {new Date(car.createdAt).toLocaleDateString('pt-BR')}
@@ -43,6 +55,14 @@ const Vehicle = ({ car }: ICar) => {
                 <Button onClick={() => navigate('/')}>Ver detalhes</Button>
                 <Button onClick={() => setShowCreateSellModal(true)}>Vender</Button>
             </div>
+            {showAddExpenseModal &&
+                createPortal(
+                    <AddExpenseModal
+                        carId={car.id}
+                        onClose={() => setShowAddExpenseModal(false)}
+                    />,
+                    document.body
+                )}
             {showCreateSellModal &&
                 createPortal(
                     <CreateSellModal
