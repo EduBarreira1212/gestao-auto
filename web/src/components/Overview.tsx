@@ -4,7 +4,7 @@ import { useGetSells } from '../hooks/data/useGetSells';
 import { useUser } from '@clerk/clerk-react';
 import { useGetVehicles } from '../hooks/data/useGetVehicles';
 import { useEffect, useState } from 'react';
-import { SellType, VehicleType } from '../types';
+import { ExpenseType, SellType, VehicleType } from '../types';
 
 const Overview = () => {
     const [sellsInThisMonth, setSellsInThisMonth] = useState<number>(0);
@@ -13,6 +13,7 @@ const Overview = () => {
     const [totalAmountInThisMonth, setTotalAmounInThisMonth] = useState<number>(0);
 
     const [averagePrice, setAveragePrice] = useState<number>(0);
+    const [expensesInThisMonth, setExpensesInThisMonth] = useState<number>(0);
 
     const navigate = useNavigate();
 
@@ -63,6 +64,16 @@ const Overview = () => {
         );
 
         setAveragePrice(averageVehiclesPrice / vehicles?.length);
+
+        const expenses = vehicles?.flatMap(
+            (vehicle: VehicleType) => vehicle.expenses
+        );
+
+        const expensesThisMonth = expenses?.filter((expense: ExpenseType) => {
+            return new Date(expense.createdAt).getMonth() === new Date().getMonth();
+        });
+
+        setExpensesInThisMonth(expensesThisMonth?.length);
     }, [vehicles]);
 
     const formatter = new Intl.NumberFormat('pt-BR', {
@@ -80,13 +91,13 @@ const Overview = () => {
                 <div className="flex flex-col justify-around gap-5 border-b-2 border-solid p-3">
                     <span>Vendas totais: {sells?.length}</span>
                     <span>
-                        Lucro mês atual: {formatter.format(profitInThisMonth)}
-                    </span>
-                    <span>Lucro médio: {formatter.format(profitAverage)}</span>
-                    <span>
                         Faturamento mês atual:{' '}
                         {formatter.format(totalAmountInThisMonth)}
                     </span>
+                    <span>
+                        Lucro mês atual: {formatter.format(profitInThisMonth)}
+                    </span>
+                    <span>Lucro médio: {formatter.format(profitAverage)}</span>
                 </div>
                 <Button onClick={() => navigate('/vendas')}>Ver vendas</Button>
             </div>
@@ -97,8 +108,8 @@ const Overview = () => {
                 </div>
                 <div className="flex flex-col gap-5 border-b-2 border-solid p-3">
                     <span>Preço médio: {formatter.format(averagePrice)}</span>
-                    <span>Decidir oq colocar: 0</span>
-                    <span>Despesas esse mês: 0</span>
+                    <span>Despesas esse mês: {expensesInThisMonth}</span>
+                    <span>Valor total das despesas: 0</span>
                     <span>Tempo em estoque(Média): 0 dias</span>
                 </div>
                 <Button onClick={() => navigate('/veiculos')}>Ver veículos</Button>
