@@ -14,6 +14,8 @@ const Overview = () => {
 
     const [averagePrice, setAveragePrice] = useState<number>(0);
     const [expensesInThisMonth, setExpensesInThisMonth] = useState<number>(0);
+    const [amountExpensesInThisMonth, setAmountExpensesInThisMonth] =
+        useState<number>(0);
 
     const navigate = useNavigate();
 
@@ -74,6 +76,15 @@ const Overview = () => {
         });
 
         setExpensesInThisMonth(expensesThisMonth?.length);
+
+        const totalAmountExpensesThisMonth = expensesThisMonth?.reduce(
+            (acc: number, expense: ExpenseType) => {
+                return (acc += expense.amount);
+            },
+            0
+        );
+
+        setAmountExpensesInThisMonth(totalAmountExpensesThisMonth);
     }, [vehicles]);
 
     const formatter = new Intl.NumberFormat('pt-BR', {
@@ -109,7 +120,10 @@ const Overview = () => {
                 <div className="flex flex-col gap-5 border-b-2 border-solid p-3">
                     <span>Preço médio: {formatter.format(averagePrice)}</span>
                     <span>Despesas esse mês: {expensesInThisMonth}</span>
-                    <span>Valor total das despesas: 0</span>
+                    <span>
+                        Valor total das despesas:{' '}
+                        {formatter.format(amountExpensesInThisMonth)}
+                    </span>
                     <span>Tempo em estoque(Média): 0 dias</span>
                 </div>
                 <Button onClick={() => navigate('/veiculos')}>Ver veículos</Button>
