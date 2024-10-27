@@ -60,3 +60,10 @@ export const updateSellSchema = z.object({
         .number({ invalid_type_error: 'O lucro deve ser um número.' })
         .optional(),
 });
+
+export const createExpenseSchema = z.object({
+    amount: z
+        .number({ invalid_type_error: 'O valor deve ser um número.' })
+        .positive('O valor deve ser positivo.'),
+    description: z.string().trim().min(1, 'A descrição é obrigatória.'),
+});
