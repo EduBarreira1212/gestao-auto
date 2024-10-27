@@ -14,8 +14,6 @@ const Expenses = () => {
 
     const expenses = vehicles?.flatMap((vehicle: VehicleType) => vehicle.expenses);
 
-    console.log(expenses);
-
     return (
         <div className="flex h-screen w-full flex-row">
             <Navbar />
