@@ -16,6 +16,7 @@ const Overview = () => {
     const [expensesInThisMonth, setExpensesInThisMonth] = useState<number>(0);
     const [amountExpensesInThisMonth, setAmountExpensesInThisMonth] =
         useState<number>(0);
+    const [averageDaysInHouse, setAverageDaysInHouse] = useState<number>(0);
 
     const navigate = useNavigate();
 
@@ -85,6 +86,21 @@ const Overview = () => {
         );
 
         setAmountExpensesInThisMonth(totalAmountExpensesThisMonth);
+
+        const totalDaysInHouseInMs = vehicles?.reduce(
+            (acc: number, vehicle: VehicleType) => {
+                return (acc += Math.abs(
+                    new Date(vehicle.createdAt).getTime() - new Date().getTime()
+                ));
+            },
+            0
+        );
+
+        const totalDaysInHouseInDays = Math.ceil(
+            totalDaysInHouseInMs / (1000 * 60 * 60 * 24)
+        );
+
+        setAverageDaysInHouse(totalDaysInHouseInDays / vehicles?.length);
     }, [vehicles]);
 
     const formatter = new Intl.NumberFormat('pt-BR', {
@@ -124,7 +140,7 @@ const Overview = () => {
                         Valor total das despesas:{' '}
                         {formatter.format(amountExpensesInThisMonth)}
                     </span>
-                    <span>Tempo em estoque(Média): 0 dias</span>
+                    <span>Tempo em estoque(Média): {averageDaysInHouse} dias</span>
                 </div>
                 <Button onClick={() => navigate('/veiculos')}>Ver veículos</Button>
             </div>
