@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import CreateSellModal from './CreateSellModal';
 import { ExpenseType } from '../types';
 import AddExpenseModal from './AddExpenseModal';
+import VehicleDetailsModal from './VehicleDetailsModal';
 
 type ICar = {
     car: {
@@ -23,8 +23,7 @@ type ICar = {
 const Vehicle = ({ car }: ICar) => {
     const [showCreateSellModal, setShowCreateSellModal] = useState(false);
     const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
-
-    const navigate = useNavigate();
+    const [showVehicleDetailsModal, setShowVehicleDetailsModal] = useState(false);
 
     const formatter = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
@@ -52,7 +51,9 @@ const Vehicle = ({ car }: ICar) => {
                 {new Date(car.createdAt).toLocaleDateString('pt-BR')}
             </span>
             <div className="flex flex-row justify-between">
-                <Button onClick={() => navigate('/')}>Ver detalhes</Button>
+                <Button onClick={() => setShowVehicleDetailsModal(true)}>
+                    Ver detalhes
+                </Button>
                 <Button onClick={() => setShowCreateSellModal(true)}>Vender</Button>
             </div>
             {showAddExpenseModal &&
@@ -60,6 +61,14 @@ const Vehicle = ({ car }: ICar) => {
                     <AddExpenseModal
                         carId={car.id}
                         onClose={() => setShowAddExpenseModal(false)}
+                    />,
+                    document.body
+                )}
+            {showVehicleDetailsModal &&
+                createPortal(
+                    <VehicleDetailsModal
+                        vehicleId={car.id}
+                        onClose={() => setShowVehicleDetailsModal(false)}
                     />,
                     document.body
                 )}
