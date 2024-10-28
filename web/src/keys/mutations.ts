@@ -6,4 +6,5 @@ export const sellMutationsKeys = {
 
 export const vehicleMutationsKeys = {
     addVehicle: () => ['addVehicle'],
+    updateVehicle: (vehicleId: string) => ['updateVehicle', vehicleId],
 };
