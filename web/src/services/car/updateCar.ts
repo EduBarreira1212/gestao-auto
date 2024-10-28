@@ -5,7 +5,7 @@ const updateCar = async (carId: string, updateCarParams: UpdateVehicle) => {
     try {
         const response = await api.patch(`/cars/${carId}`, updateCarParams);
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
