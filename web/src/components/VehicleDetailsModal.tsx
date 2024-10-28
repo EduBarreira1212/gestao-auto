@@ -1,26 +1,39 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ModalContainer from './ModalContainer';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { UpdateVehicle } from '../types';
+import { UpdateVehicle, VehicleType } from '../types';
 import { updateVehicleSchema } from '../schemas/zodSchemas';
+import { useUpdateVehicle } from '../hooks/data/useUpdateVehicle';
 
 type VehicleDetailsModalprops = {
-    vehicleId: string;
+    vehicle: VehicleType;
     onClose: () => void;
 };
 
-const VehicleDetailsModal = ({ vehicleId, onClose }: VehicleDetailsModalprops) => {
+const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => {
+    const { mutate } = useUpdateVehicle(vehicle.id);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<UpdateVehicle>({
         resolver: zodResolver(updateVehicleSchema),
+        defaultValues: {
+            name: vehicle.name,
+            brand: vehicle.brand,
+            year: vehicle.year,
+            plate: vehicle.plate,
+            entry_price: vehicle.entry_price,
+        },
     });
 
     const onSubmit: SubmitHandler<UpdateVehicle> = async (updateVehicleParams) => {
-        console.log(updateVehicleParams);
-        console.log(vehicleId);
+        mutate(updateVehicleParams, {
+            onSuccess: () => {
+                onClose();
+            },
+        });
     };
 
     return (
