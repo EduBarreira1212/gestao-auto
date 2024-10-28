@@ -44,6 +44,33 @@ export const addVehicleschema = z.object({
         .positive('O preço de entrada deve ser positivo.'),
 });
 
+export const updateVehicleSchema = z.object({
+    name: z.string().trim().optional(),
+    brand: z.string().trim().optional(),
+    year: z
+        .number({ invalid_type_error: 'Ano deve ser um número.' })
+        .min(1900, 'Ano deve ser maior que 1900.')
+        .max(
+            new Date().getFullYear() + 1,
+            `Ano deve ser até ${new Date().getFullYear() + 1}.`
+        )
+        .nullable()
+        .optional(),
+    plate: z
+        .string()
+        .regex(
+            /^([A-Z]{3}-\d{4}|[A-Z]{3}\d[A-Z]\d{2})$/,
+            'Placa deve estar no formato ABC-1234 ou ABC1D23.'
+        )
+        .nullable()
+        .optional(),
+    entry_price: z
+        .number({ invalid_type_error: 'Preço de entrada deve ser um número.' })
+        .positive('O preço de entrada deve ser positivo.')
+        .nullable()
+        .optional(),
+});
+
 export const createSellSchema = z.object({
     amount: z
         .number({ invalid_type_error: 'O valor deve ser um número.' })
