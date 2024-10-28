@@ -67,7 +67,7 @@ const Vehicle = ({ car }: ICar) => {
             {showVehicleDetailsModal &&
                 createPortal(
                     <VehicleDetailsModal
-                        vehicleId={car.id}
+                        vehicle={car}
                         onClose={() => setShowVehicleDetailsModal(false)}
                     />,
                     document.body
