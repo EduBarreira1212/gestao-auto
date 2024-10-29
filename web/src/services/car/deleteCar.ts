@@ -4,7 +4,7 @@ const deleteCar = async (carId: string) => {
     try {
         const response = await api.delete(`/cars/${carId}`);
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
