@@ -5,6 +5,7 @@ import CreateSellModal from './CreateSellModal';
 import { ExpenseType } from '../types';
 import AddExpenseModal from './AddExpenseModal';
 import VehicleDetailsModal from './VehicleDetailsModal';
+import DeleteVehicleModal from './DeleteVehicleModal';
 
 type ICar = {
     car: {
@@ -24,6 +25,7 @@ const Vehicle = ({ car }: ICar) => {
     const [showCreateSellModal, setShowCreateSellModal] = useState(false);
     const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
     const [showVehicleDetailsModal, setShowVehicleDetailsModal] = useState(false);
+    const [showDeleteVehicleModal, setShowDeleteVehicleModal] = useState(false);
 
     const formatter = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
@@ -31,7 +33,13 @@ const Vehicle = ({ car }: ICar) => {
     });
 
     return (
-        <div className="flex w-fit flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 p-5 text-center text-brand-secondary shadow-md shadow-brand-primary">
+        <div className="relative flex w-fit flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 p-5 text-center text-brand-secondary shadow-md shadow-brand-primary">
+            <button
+                className="absolute right-1 top-1 rounded-md bg-red-600 p-1"
+                onClick={() => setShowDeleteVehicleModal(true)}
+            >
+                X
+            </button>
             <span>{car.name}</span>
             <span>{car.brand}</span>
             <span>{car.year}</span>
@@ -56,6 +64,14 @@ const Vehicle = ({ car }: ICar) => {
                 </Button>
                 <Button onClick={() => setShowCreateSellModal(true)}>Vender</Button>
             </div>
+            {showDeleteVehicleModal &&
+                createPortal(
+                    <DeleteVehicleModal
+                        vehicleId={car.id}
+                        onClose={() => setShowDeleteVehicleModal(false)}
+                    />,
+                    document.body
+                )}
             {showAddExpenseModal &&
                 createPortal(
                     <AddExpenseModal
