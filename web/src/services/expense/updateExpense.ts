@@ -11,7 +11,7 @@ const updateExpense = async (
             updateExpenseParams
         );
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
