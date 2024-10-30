@@ -1,6 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import { useGetVehicleById } from '../hooks/data/useGetVehicleById';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import ExpenseDetailsModal from './ExpenseDetailsModal';
 
 type ExpenseProps = {
     expense: {
@@ -13,7 +15,8 @@ type ExpenseProps = {
 };
 
 const Expense = ({ expense }: ExpenseProps) => {
-    const navigate = useNavigate();
+    const [showExpenseDetailsModal, setShowExpenseDetailsModal] = useState(false);
+    const [showDeleteExpenseModal, setShowDeleteExpenseModal] = useState(false);
 
     const { data: vehicle } = useGetVehicleById(expense.car_id ?? '');
 
@@ -33,7 +36,25 @@ const Expense = ({ expense }: ExpenseProps) => {
                 Data da despesa:{' '}
                 {new Date(expense.createdAt).toLocaleDateString('pt-BR')}
             </span>
-            <Button onClick={() => navigate('/')}>Ver detalhes</Button>
+            <div className="flex flex-row justify-evenly">
+                <Button onClick={() => setShowExpenseDetailsModal(true)}>
+                    Ver detalhes
+                </Button>
+                <button
+                    className="my-3 self-center rounded-sm border-2 border-solid bg-red-600 p-2 text-brand-neutral"
+                    onClick={() => setShowDeleteExpenseModal(true)}
+                >
+                    Excluir
+                </button>
+            </div>
+            {showExpenseDetailsModal &&
+                createPortal(
+                    <ExpenseDetailsModal
+                        expense={expense}
+                        onClose={() => setShowExpenseDetailsModal(false)}
+                    />,
+                    document.body
+                )}
         </div>
     );
 };
