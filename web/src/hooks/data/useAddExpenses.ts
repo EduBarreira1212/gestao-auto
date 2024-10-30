@@ -2,12 +2,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import createExpense from '../../services/expense/createExpense';
 import { CreateExpense, VehicleType } from '../../types';
 import { vehicleQueriesKeys } from '../../keys/queries';
+import { expenseMutationsKeys } from '../../keys/mutations';
 
 export const useAddExpenses = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationKey: ['addExpense'],
+        mutationKey: expenseMutationsKeys.addExpense(),
         mutationFn: async (createExpenseParams: CreateExpense) => {
             const response = await createExpense(createExpenseParams);
 
