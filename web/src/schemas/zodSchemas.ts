@@ -94,3 +94,11 @@ export const createExpenseSchema = z.object({
         .positive('O valor deve ser positivo.'),
     description: z.string().trim().min(1, 'A descrição é obrigatória.'),
 });
+
+export const updateExpenseSchema = z.object({
+    amount: z
+        .number({ invalid_type_error: 'O valor deve ser um número.' })
+        .positive('O valor deve ser positivo.')
+        .optional(),
+    description: z.string().trim().min(1, 'A descrição é obrigatória.').optional(),
+});
