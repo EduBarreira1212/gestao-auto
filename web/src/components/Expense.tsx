@@ -3,6 +3,7 @@ import { useGetVehicleById } from '../hooks/data/useGetVehicleById';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import ExpenseDetailsModal from './ExpenseDetailsModal';
+import DeleteExpenseModal from './DeleteExpenseModal';
 
 type ExpenseProps = {
     expense: {
@@ -52,6 +53,14 @@ const Expense = ({ expense }: ExpenseProps) => {
                     <ExpenseDetailsModal
                         expense={expense}
                         onClose={() => setShowExpenseDetailsModal(false)}
+                    />,
+                    document.body
+                )}
+            {showDeleteExpenseModal &&
+                createPortal(
+                    <DeleteExpenseModal
+                        expenseId={expense.id}
+                        onClose={() => setShowDeleteExpenseModal(false)}
                     />,
                     document.body
                 )}
