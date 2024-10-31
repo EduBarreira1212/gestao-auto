@@ -5,7 +5,7 @@ const Header = () => {
     const { user } = useUser();
 
     return (
-        <header className="flex flex-row justify-between bg-brand-secondary px-8 py-3 text-brand-primary shadow-sm shadow-black">
+        <header className="flex w-full flex-row justify-between bg-brand-secondary px-8 py-3 text-brand-primary shadow-sm shadow-black">
             <h2>Dashboard</h2>
             <div className="flex gap-4">
                 <Link className="hover:text-brand-accent" to="/vendas">
