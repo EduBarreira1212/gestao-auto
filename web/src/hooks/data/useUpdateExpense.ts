@@ -22,25 +22,23 @@ export const useUpdateExpense = (expenseId: string) => {
             queryClient.setQueryData(
                 vehicleQueriesKeys.getVehicles(),
                 (oldData: VehicleType[]) => {
-                    const indexOfVehicle = oldData.findIndex((vehicle) => {
-                        return vehicle.id === updatedExpense.car_id;
+                    return oldData.map((vehicle) => {
+                        if (vehicle.id === updatedExpense.car_id) {
+                            const expenseList = vehicle.expenses.filter(
+                                (expense) => {
+                                    return expense.id !== updatedExpense.id;
+                                }
+                            );
+
+                            const vehicleWithUpdatedExpense = {
+                                ...vehicle,
+                                expenses: [...expenseList, updatedExpense],
+                            };
+
+                            return vehicleWithUpdatedExpense;
+                        }
+                        return vehicle;
                     });
-
-                    if (indexOfVehicle === -1) return oldData;
-
-                    const updatedVehicle = {
-                        ...oldData[indexOfVehicle],
-                        expenses: [
-                            ...oldData[indexOfVehicle].expenses,
-                            updatedExpense,
-                        ],
-                    };
-
-                    return [
-                        ...oldData.slice(0, indexOfVehicle),
-                        updatedVehicle,
-                        ...oldData.slice(indexOfVehicle + 1),
-                    ];
                 }
             );
         },
