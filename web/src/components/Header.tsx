@@ -7,7 +7,7 @@ const Header = () => {
     return (
         <header className="flex w-full flex-row justify-between bg-brand-secondary px-8 py-3 text-brand-primary shadow-sm shadow-black">
             <h2>Dashboard</h2>
-            <div className="flex gap-4">
+            <div className="hidden gap-4 md:flex">
                 <Link className="hover:text-brand-accent" to="/vendas">
                     Vendas
                 </Link>
