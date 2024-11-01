@@ -6,6 +6,7 @@ import List from '../components/List';
 import { useUser } from '@clerk/clerk-react';
 import { useGetVehicles } from '../hooks/data/useGetVehicles';
 import { ExpenseType, VehicleType } from '../types';
+import Screen from '../components/Screen';
 
 const Expenses = () => {
     const { user } = useUser();
@@ -15,7 +16,7 @@ const Expenses = () => {
     const expenses = vehicles?.flatMap((vehicle: VehicleType) => vehicle.expenses);
 
     return (
-        <div className="flex h-screen w-full flex-row">
+        <Screen>
             <Navbar />
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
@@ -33,7 +34,7 @@ const Expenses = () => {
                     )}
                 </ContentSection>
             </div>
-        </div>
+        </Screen>
     );
 };
 
