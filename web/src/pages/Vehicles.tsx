@@ -10,6 +10,7 @@ import AddVehicleModal from '../components/AddVehicleModal';
 import { useUser } from '@clerk/clerk-react';
 import { VehicleType } from '../types';
 import { useGetVehicles } from '../hooks/data/useGetVehicles';
+import Screen from '../components/Screen';
 
 const Vehicles = () => {
     const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
@@ -21,7 +22,7 @@ const Vehicles = () => {
     if (isLoading) return <div>Loadin...</div>;
 
     return (
-        <div className="flex h-screen w-full">
+        <Screen>
             <Navbar />
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
@@ -49,7 +50,7 @@ const Vehicles = () => {
                     />,
                     document.body
                 )}
-        </div>
+        </Screen>
     );
 };
 
