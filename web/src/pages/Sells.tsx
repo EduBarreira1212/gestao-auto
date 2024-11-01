@@ -6,6 +6,7 @@ import List from '../components/List';
 import { useUser } from '@clerk/clerk-react';
 import { SellType } from '../types';
 import { useGetSells } from '../hooks/data/useGetSells';
+import Screen from '../components/Screen';
 
 const Sells = () => {
     const { user } = useUser();
@@ -15,7 +16,7 @@ const Sells = () => {
     if (isLoading) return <div>Loading...</div>;
 
     return (
-        <div className="flex flex-row">
+        <Screen>
             <Navbar />
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
@@ -33,7 +34,7 @@ const Sells = () => {
                     )}
                 </ContentSection>
             </div>
-        </div>
+        </Screen>
     );
 };
 
