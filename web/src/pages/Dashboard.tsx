@@ -1,10 +1,11 @@
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Overview from '../components/Overview';
+import Screen from '../components/Screen';
 
 const Dashboard = () => {
     return (
-        <div className="flex h-screen w-full flex-row">
+        <Screen>
             <Navbar />
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
@@ -12,7 +13,7 @@ const Dashboard = () => {
                     <Overview />
                 </div>
             </div>
-        </div>
+        </Screen>
     );
 };
 
