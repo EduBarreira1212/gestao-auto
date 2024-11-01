@@ -109,7 +109,7 @@ const Overview = () => {
     });
 
     return (
-        <div className="flex w-full gap-5 p-5">
+        <div className="flex w-full flex-col gap-5 p-5 md:flex-row">
             <div className="flex flex-1 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 text-brand-secondary shadow-md shadow-brand-primary">
                 <div className="flex justify-between gap-5 border-b-2 border-solid p-3">
                     <span>Vendas mês atual:</span>
