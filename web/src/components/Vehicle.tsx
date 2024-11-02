@@ -1,11 +1,11 @@
 import Button from './Button';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import CreateSellModal from './CreateSellModal';
+import CreateSellModal from '../modals/CreateSellModal';
 import { ExpenseType } from '../types';
-import AddExpenseModal from './AddExpenseModal';
-import VehicleDetailsModal from './VehicleDetailsModal';
-import DeleteVehicleModal from './DeleteVehicleModal';
+import AddExpenseModal from '../modals/AddExpenseModal';
+import VehicleDetailsModal from '../modals/VehicleDetailsModal';
+import DeleteVehicleModal from '../modals/DeleteVehicleModal';
 
 type ICar = {
     car: {

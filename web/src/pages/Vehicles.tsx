@@ -6,7 +6,7 @@ import ContentSection from '../components/ContentSection';
 import AddButton from '../components/AddButton';
 import List from '../components/List';
 import { createPortal } from 'react-dom';
-import AddVehicleModal from '../components/AddVehicleModal';
+import AddVehicleModal from '../modals/AddVehicleModal';
 import { useUser } from '@clerk/clerk-react';
 import { VehicleType } from '../types';
 import { useGetVehicles } from '../hooks/data/useGetVehicles';

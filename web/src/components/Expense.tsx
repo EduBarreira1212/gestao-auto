@@ -2,8 +2,8 @@ import Button from './Button';
 import { useGetVehicleById } from '../hooks/data/useGetVehicleById';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import ExpenseDetailsModal from './ExpenseDetailsModal';
-import DeleteExpenseModal from './DeleteExpenseModal';
+import ExpenseDetailsModal from '../modals/ExpenseDetailsModal';
+import DeleteExpenseModal from '../modals/DeleteExpenseModal';
 
 type ExpenseProps = {
     expense: {

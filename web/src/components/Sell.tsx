@@ -3,8 +3,8 @@ import { SellType } from '../types';
 import { useGetVehicleById } from '../hooks/data/useGetVehicleById';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import SellDetailsModal from './SellDetailsModal';
-import DeleteSellModal from './DeleteSellModal';
+import SellDetailsModal from '../modals/SellDetailsModal';
+import DeleteSellModal from '../modals/DeleteSellModal';
 
 const Sell = ({ sell }: { sell: SellType }) => {
     const [showSellDetailsModal, setShowSelldetailsModal] = useState(false);
