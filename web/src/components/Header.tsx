@@ -1,13 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { UserButton, useUser } from '@clerk/clerk-react';
 
 const Header = () => {
     const { user } = useUser();
 
+    const location = useLocation();
+
     return (
-        <header className="flex w-full flex-row justify-between bg-brand-secondary px-8 py-3 text-brand-primary shadow-sm shadow-black">
-            <h2>Dashboard</h2>
-            <div className="hidden gap-4 md:flex">
+        <header className="flex w-full flex-row items-center justify-between bg-brand-secondary px-8 py-3 text-brand-primary shadow-sm shadow-black">
+            <button className="rounded-lg border-2 border-black px-1 pb-0.5 text-2xl shadow-lg shadow-black md:hidden">
+                {'>'}
+            </button>
+            <h2 className="md:hidden">
+                {location.pathname.slice(1).charAt(0).toUpperCase() +
+                    location.pathname.slice(2)}
+            </h2>
+            <div className="mx-auto hidden gap-4 md:flex">
                 <Link className="hover:text-brand-accent" to="/vendas">
                     Vendas
                 </Link>
