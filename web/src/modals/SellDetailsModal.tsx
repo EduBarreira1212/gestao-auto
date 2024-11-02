@@ -1,39 +1,28 @@
-import { useUser } from '@clerk/clerk-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { CreateSell } from '../types';
-import { createSellSchema } from '../schemas/zodSchemas';
-import { useCreateSell } from '../hooks/data/useCreateSell';
-import ModalContainer from './ModalContainer';
+import { UpdateSell } from '../types';
+import { updateSellSchema } from '../schemas/zodSchemas';
+import { useUpdateSell } from '../hooks/data/useUpdateSell';
+import ModalContainer from '../components/ModalContainer';
 
-type CreateSellModalprops = {
-    carId: string;
+type SellDetailsModalProps = {
     onClose: () => void;
+    sellId: string;
 };
 
-const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
-    const { user } = useUser();
-
-    const { mutate, isPending } = useCreateSell(user?.externalId ?? '');
+const SellDetailsModal = ({ onClose, sellId }: SellDetailsModalProps) => {
+    const { mutate } = useUpdateSell(sellId);
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<CreateSell>({
-        resolver: zodResolver(createSellSchema),
+    } = useForm<UpdateSell>({
+        resolver: zodResolver(updateSellSchema),
     });
 
-    const onSubmit: SubmitHandler<CreateSell> = async (createSellParams) => {
-        if (!user || !user.externalId) return;
-
-        const newSell = {
-            ...createSellParams,
-            user_id: user?.externalId,
-            car_id: carId,
-        };
-
-        mutate(newSell, {
+    const onSubmit: SubmitHandler<UpdateSell> = async (updateSellParams) => {
+        mutate(updateSellParams, {
             onSuccess: () => {
                 onClose();
             },
@@ -64,12 +53,11 @@ const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
                 <input
                     className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-primary hover:text-brand-accent"
                     type="submit"
-                    value="Adicionar venda"
-                    disabled={isPending}
+                    value="Atualizar venda"
                 />
             </form>
         </ModalContainer>
     );
 };
 
-export default CreateSellModal;
+export default SellDetailsModal;

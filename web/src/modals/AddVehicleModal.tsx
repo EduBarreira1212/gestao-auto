@@ -1,35 +1,30 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import ModalContainer from './ModalContainer';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { UpdateVehicle, VehicleType } from '../types';
-import { updateVehicleSchema } from '../schemas/zodSchemas';
-import { useUpdateVehicle } from '../hooks/data/useUpdateVehicle';
+import { CreateVehicle } from '../types';
+import { useUser } from '@clerk/clerk-react';
+import { addVehicleschema } from '../schemas/zodSchemas';
+import { useAddVehicle } from '../hooks/data/useAddVehicle';
+import ModalContainer from '../components/ModalContainer';
 
-type VehicleDetailsModalprops = {
-    vehicle: VehicleType;
-    onClose: () => void;
-};
+const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
+    const { user } = useUser();
 
-const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => {
-    const { mutate } = useUpdateVehicle(vehicle.id);
+    const { mutate, isPending } = useAddVehicle();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<UpdateVehicle>({
-        resolver: zodResolver(updateVehicleSchema),
-        defaultValues: {
-            name: vehicle.name,
-            brand: vehicle.brand,
-            year: vehicle.year,
-            plate: vehicle.plate,
-            entry_price: vehicle.entry_price,
-        },
+    } = useForm<CreateVehicle>({
+        resolver: zodResolver(addVehicleschema),
     });
 
-    const onSubmit: SubmitHandler<UpdateVehicle> = async (updateVehicleParams) => {
-        mutate(updateVehicleParams, {
+    const onSubmit: SubmitHandler<CreateVehicle> = async (createVehicleParams) => {
+        if (!user || !user.externalId) return;
+
+        const newVehicle = { ...createVehicleParams, user_id: user?.externalId };
+
+        mutate(newVehicle, {
             onSuccess: () => {
                 onClose();
             },
@@ -72,12 +67,13 @@ const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => 
                 {errors.entry_price && <p>{errors.entry_price.message}</p>}
                 <input
                     type="submit"
-                    value="Atualizar"
+                    value="Adicionar"
                     className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-primary hover:text-brand-accent"
+                    disabled={isPending}
                 />
             </form>
         </ModalContainer>
     );
 };
 
-export default VehicleDetailsModal;
+export default AddVehicleModal;

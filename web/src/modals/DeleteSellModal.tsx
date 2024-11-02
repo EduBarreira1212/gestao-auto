@@ -1,19 +1,19 @@
-import { useDeleteVehicle } from '../hooks/data/useDeleteVehicle';
-import ModalContainer from './ModalContainer';
+import { useDeleteSell } from '../hooks/data/useDeleteSell';
+import ModalContainer from '../components/ModalContainer';
 
-type DeleteVehicleModalProps = {
-    vehicleId: string;
+type DeleteSellModalProps = {
+    sellId: string;
     onClose: () => void;
 };
 
-const DeleteVehicleModal = ({ vehicleId, onClose }: DeleteVehicleModalProps) => {
-    const { mutate } = useDeleteVehicle(vehicleId);
+const DeleteSellModal = ({ sellId, onClose }: DeleteSellModalProps) => {
+    const { mutate } = useDeleteSell(sellId);
 
     return (
         <ModalContainer>
             <button onClick={onClose}>X</button>
             <div className="flex flex-col gap-3">
-                <h2>Tem certeza que deseja excluir esse veículo?</h2>
+                <h2>Tem certeza que deseja excluir essa venda?</h2>
                 <div className="flex flex-row justify-evenly">
                     <button
                         className="my-3 self-center rounded-sm border-2 border-solid bg-slate-300 p-2 text-black"
@@ -39,4 +39,4 @@ const DeleteVehicleModal = ({ vehicleId, onClose }: DeleteVehicleModalProps) => 
     );
 };
 
-export default DeleteVehicleModal;
+export default DeleteSellModal;

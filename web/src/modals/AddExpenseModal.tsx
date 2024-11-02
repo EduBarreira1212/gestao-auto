@@ -1,32 +1,33 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ExpenseType, UpdateExpense } from '../types';
-import { updateExpenseSchema } from '../schemas/zodSchemas';
-import ModalContainer from './ModalContainer';
-import { useUpdateExpense } from '../hooks/data/useUpdateExpense';
+import ModalContainer from '../components/ModalContainer';
+import { CreateExpense } from '../types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { createExpenseSchema } from '../schemas/zodSchemas';
+import { useAddExpenses } from '../hooks/data/useAddExpenses';
 
-type ExpenseDetailsModalProps = {
+type ExpenseModalProps = {
+    carId: string;
     onClose: () => void;
-    expense: ExpenseType;
 };
 
-const ExpenseDetailsModal = ({ onClose, expense }: ExpenseDetailsModalProps) => {
-    const { mutate } = useUpdateExpense(expense.id);
+const AddExpenseModal = ({ carId, onClose }: ExpenseModalProps) => {
+    const { mutate } = useAddExpenses();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<UpdateExpense>({
-        resolver: zodResolver(updateExpenseSchema),
-        defaultValues: {
-            amount: expense.amount,
-            description: expense.description,
-        },
+    } = useForm<CreateExpense>({
+        resolver: zodResolver(createExpenseSchema),
     });
 
-    const onSubmit: SubmitHandler<UpdateExpense> = async (updateExpenseParams) => {
-        mutate(updateExpenseParams, {
+    const onSubmit: SubmitHandler<CreateExpense> = async (createSellParams) => {
+        const newExpense = {
+            ...createSellParams,
+            car_id: carId,
+        };
+
+        mutate(newExpense, {
             onSuccess: () => {
                 onClose();
             },
@@ -57,11 +58,11 @@ const ExpenseDetailsModal = ({ onClose, expense }: ExpenseDetailsModalProps) => 
                 <input
                     className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-primary hover:text-brand-accent"
                     type="submit"
-                    value="Atualizar despesa"
+                    value="Adicionar despesa"
                 />
             </form>
         </ModalContainer>
     );
 };
 
-export default ExpenseDetailsModal;
+export default AddExpenseModal;

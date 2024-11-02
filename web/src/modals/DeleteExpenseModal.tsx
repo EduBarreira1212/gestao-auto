@@ -1,19 +1,19 @@
-import { useDeleteSell } from '../hooks/data/useDeleteSell';
-import ModalContainer from './ModalContainer';
+import { useDeleteExpense } from '../hooks/data/useDeleteExpense';
+import ModalContainer from '../components/ModalContainer';
 
-type DeleteSellModalProps = {
-    sellId: string;
+type DeleteExpenseModalProps = {
+    expenseId: string;
     onClose: () => void;
 };
 
-const DeleteSellModal = ({ sellId, onClose }: DeleteSellModalProps) => {
-    const { mutate } = useDeleteSell(sellId);
+const DeleteExpenseModal = ({ expenseId, onClose }: DeleteExpenseModalProps) => {
+    const { mutate } = useDeleteExpense(expenseId);
 
     return (
         <ModalContainer>
             <button onClick={onClose}>X</button>
             <div className="flex flex-col gap-3">
-                <h2>Tem certeza que deseja excluir essa venda?</h2>
+                <h2>Tem certeza que deseja excluir essa despesa?</h2>
                 <div className="flex flex-row justify-evenly">
                     <button
                         className="my-3 self-center rounded-sm border-2 border-solid bg-slate-300 p-2 text-black"
@@ -39,4 +39,4 @@ const DeleteSellModal = ({ sellId, onClose }: DeleteSellModalProps) => {
     );
 };
 
-export default DeleteSellModal;
+export default DeleteExpenseModal;

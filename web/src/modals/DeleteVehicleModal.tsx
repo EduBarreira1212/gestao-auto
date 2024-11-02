@@ -1,19 +1,19 @@
-import { useDeleteExpense } from '../hooks/data/useDeleteExpense';
-import ModalContainer from './ModalContainer';
+import { useDeleteVehicle } from '../hooks/data/useDeleteVehicle';
+import ModalContainer from '../components/ModalContainer';
 
-type DeleteExpenseModalProps = {
-    expenseId: string;
+type DeleteVehicleModalProps = {
+    vehicleId: string;
     onClose: () => void;
 };
 
-const DeleteExpenseModal = ({ expenseId, onClose }: DeleteExpenseModalProps) => {
-    const { mutate } = useDeleteExpense(expenseId);
+const DeleteVehicleModal = ({ vehicleId, onClose }: DeleteVehicleModalProps) => {
+    const { mutate } = useDeleteVehicle(vehicleId);
 
     return (
         <ModalContainer>
             <button onClick={onClose}>X</button>
             <div className="flex flex-col gap-3">
-                <h2>Tem certeza que deseja excluir essa despesa?</h2>
+                <h2>Tem certeza que deseja excluir esse veículo?</h2>
                 <div className="flex flex-row justify-evenly">
                     <button
                         className="my-3 self-center rounded-sm border-2 border-solid bg-slate-300 p-2 text-black"
@@ -39,4 +39,4 @@ const DeleteExpenseModal = ({ expenseId, onClose }: DeleteExpenseModalProps) => 
     );
 };
 
-export default DeleteExpenseModal;
+export default DeleteVehicleModal;
