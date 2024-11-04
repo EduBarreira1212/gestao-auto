@@ -3,14 +3,22 @@ import { vehicleMutationsKeys } from '../../keys/mutations';
 import updateCar from '../../services/car/updateCar';
 import { UpdateVehicle, VehicleType } from '../../types';
 import { vehicleQueriesKeys } from '../../keys/queries';
+import { useAuth } from '@clerk/clerk-react';
 
 export const useUpdateVehicle = (vehicleId: string) => {
+    const { getToken } = useAuth();
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationKey: vehicleMutationsKeys.updateVehicle(vehicleId),
         mutationFn: async (updateVehicleParams: UpdateVehicle) => {
-            const response = await updateCar(vehicleId, updateVehicleParams);
+            const token = await getToken();
+
+            if (!token) {
+                return null;
+            }
+
+            const response = await updateCar(vehicleId, updateVehicleParams, token);
 
             if (response?.status !== 200) {
                 throw new Error();

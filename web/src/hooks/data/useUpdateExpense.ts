@@ -3,14 +3,26 @@ import { expenseMutationsKeys } from '../../keys/mutations';
 import updateExpense from '../../services/expense/updateExpense';
 import { UpdateExpense, VehicleType } from '../../types';
 import { vehicleQueriesKeys } from '../../keys/queries';
+import { useAuth } from '@clerk/clerk-react';
 
 export const useUpdateExpense = (expenseId: string) => {
+    const { getToken } = useAuth();
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationKey: expenseMutationsKeys.updateExpense(expenseId),
         mutationFn: async (updateExpenseParams: UpdateExpense) => {
-            const response = await updateExpense(expenseId, updateExpenseParams);
+            const token = await getToken();
+
+            if (!token) {
+                return null;
+            }
+
+            const response = await updateExpense(
+                expenseId,
+                updateExpenseParams,
+                token
+            );
 
             if (response?.status !== 200) {
                 throw new Error();

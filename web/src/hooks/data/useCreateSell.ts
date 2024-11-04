@@ -3,14 +3,22 @@ import { CreateSell, SellType } from '../../types';
 import createSell from '../../services/sell/createSell';
 import { sellMutationsKeys } from '../../keys/mutations';
 import { sellQueriesKeys } from '../../keys/queries';
+import { useAuth } from '@clerk/clerk-react';
 
 export const useCreateSell = (carId: string) => {
+    const { getToken } = useAuth();
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationKey: sellMutationsKeys.addSell(carId),
         mutationFn: async (createSellParams: CreateSell) => {
-            const response = await createSell(createSellParams);
+            const token = await getToken();
+
+            if (!token) {
+                return null;
+            }
+
+            const response = await createSell(createSellParams, token);
 
             if (response?.status !== 201) {
                 throw new Error();

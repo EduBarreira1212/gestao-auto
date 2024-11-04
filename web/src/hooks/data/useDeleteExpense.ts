@@ -3,14 +3,22 @@ import { expenseMutationsKeys } from '../../keys/mutations';
 import deleteExpense from '../../services/expense/deleteExpense';
 import { vehicleQueriesKeys } from '../../keys/queries';
 import { VehicleType } from '../../types';
+import { useAuth } from '@clerk/clerk-react';
 
 export const useDeleteExpense = (expenseId: string) => {
+    const { getToken } = useAuth();
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationKey: expenseMutationsKeys.deleteExpense(expenseId),
         mutationFn: async () => {
-            const response = await deleteExpense(expenseId);
+            const token = await getToken();
+
+            if (!token) {
+                return null;
+            }
+
+            const response = await deleteExpense(expenseId, token);
 
             if (response?.status !== 200) {
                 throw new Error();

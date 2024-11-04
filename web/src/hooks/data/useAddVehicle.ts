@@ -3,14 +3,22 @@ import { CreateVehicle, VehicleType } from '../../types';
 import createCar from '../../services/car/createCar';
 import { vehicleMutationsKeys } from '../../keys/mutations';
 import { vehicleQueriesKeys } from '../../keys/queries';
+import { useAuth } from '@clerk/clerk-react';
 
 export const useAddVehicle = () => {
+    const { getToken } = useAuth();
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationKey: vehicleMutationsKeys.addVehicle(),
         mutationFn: async (vehicleData: CreateVehicle) => {
-            const response = await createCar(vehicleData);
+            const token = await getToken();
+
+            if (!token) {
+                return null;
+            }
+
+            const response = await createCar(vehicleData, token);
 
             if (response?.status !== 201) {
                 throw new Error();
@@ -24,7 +32,12 @@ export const useAddVehicle = () => {
             queryClient.setQueryData(
                 vehicleQueriesKeys.getVehicles(),
                 (oldData: VehicleType[]) => {
-                    return [...oldData, newVehicle];
+                    const newVehicleWithExpense = {
+                        ...newVehicle,
+                        expenses: [],
+                    };
+
+                    return [...oldData, newVehicleWithExpense];
                 }
             );
         },
