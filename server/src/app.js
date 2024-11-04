@@ -9,6 +9,7 @@ import { usersRouter } from './routes/user.js';
 import { carsRouter } from './routes/car.js';
 import { expensesRouter } from './routes/expense.js';
 import { sellsRouter } from './routes/sell.js';
+import { requireAuth } from '@clerk/express';
 
 export const app = express();
 
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/users', usersRouter);
+
+app.use(requireAuth());
 app.use('/api/cars', carsRouter);
 app.use('/api/expenses', expensesRouter);
 app.use('/api/sells', sellsRouter);
