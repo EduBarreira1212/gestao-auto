@@ -1,8 +1,10 @@
 import { api } from '../../lib/axios';
 
-const getSellsByUserId = async (userId: string) => {
+const getSellsByUserId = async (userId: string, token: string) => {
     try {
-        const response = await api.get(`/sells/?userId=${userId}`);
+        const response = await api.get(`/sells/?userId=${userId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
 
         return response;
     } catch (error) {

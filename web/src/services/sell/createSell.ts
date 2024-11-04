@@ -1,9 +1,11 @@
 import { api } from '../../lib/axios';
 import { CreateSell } from '../../types';
 
-const createSell = async (createSellParams: CreateSell) => {
+const createSell = async (createSellParams: CreateSell, token: string) => {
     try {
-        const response = await api.post(`/sells`, createSellParams);
+        const response = await api.post(`/sells`, createSellParams, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
 
         return response;
     } catch (error) {

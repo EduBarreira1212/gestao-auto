@@ -1,9 +1,15 @@
 import { api } from '../../lib/axios';
 import { UpdateSell } from '../../types';
 
-const updateSell = async (sellId: string, updateSellParams: UpdateSell) => {
+const updateSell = async (
+    sellId: string,
+    updateSellParams: UpdateSell,
+    token: string
+) => {
     try {
-        const response = await api.patch(`/sells/${sellId}`, updateSellParams);
+        const response = await api.patch(`/sells/${sellId}`, updateSellParams, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
 
         return response;
     } catch (error) {

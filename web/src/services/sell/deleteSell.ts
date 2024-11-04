@@ -1,8 +1,10 @@
 import { api } from '../../lib/axios';
 
-const deleteSell = async (SellId: string) => {
+const deleteSell = async (SellId: string, token: string) => {
     try {
-        const response = await api.delete(`/sells/${SellId}`);
+        const response = await api.delete(`/sells/${SellId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
 
         return response;
     } catch (error) {

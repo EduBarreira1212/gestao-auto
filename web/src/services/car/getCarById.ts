@@ -1,8 +1,10 @@
 import { api } from '../../lib/axios';
 
-const getCarById = async (carId: string) => {
+const getCarById = async (carId: string, token: string) => {
     try {
-        const response = await api.get(`/cars/${carId}`);
+        const response = await api.get(`/cars/${carId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
 
         return response;
     } catch (error) {

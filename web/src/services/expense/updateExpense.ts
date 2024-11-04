@@ -3,12 +3,16 @@ import { UpdateExpense } from '../../types';
 
 const updateExpense = async (
     expenseId: string,
-    updateExpenseParams: UpdateExpense
+    updateExpenseParams: UpdateExpense,
+    token: string
 ) => {
     try {
         const response = await api.patch(
             `/expenses/${expenseId}`,
-            updateExpenseParams
+            updateExpenseParams,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            }
         );
 
         return response;
