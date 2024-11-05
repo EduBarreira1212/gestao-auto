@@ -30,6 +30,7 @@ describe('PostgresGetCarsByUserIdRepository', () => {
                 plate: car.plate,
                 entry_price: car.entry_price,
                 createdAt: result[0].createdAt,
+                expenses: [],
             },
         ]);
     });
