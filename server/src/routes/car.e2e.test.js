@@ -79,7 +79,10 @@ describe('Cars Routes E2E Tests', () => {
         );
 
         expect(response.status).toBe(200);
-        expect(response.body).toStrictEqual([carCreated1, carCreated2]);
+        expect(response.body).toStrictEqual([
+            { ...carCreated1, expenses: [] },
+            { ...carCreated2, expenses: [] },
+        ]);
     });
 
     test('PATCH /api/users/:userId', async () => {
