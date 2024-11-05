@@ -4,6 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 
 import { usersRouter } from './routes/user.js';
 import { carsRouter } from './routes/car.js';
@@ -13,12 +14,17 @@ import { requireAuth } from '@clerk/express';
 
 export const app = express();
 
+dotenv.config({ path: '.env' });
+
 app.use(express.json());
 app.use(cors());
 
 app.use('/api/users', usersRouter);
 
-app.use(requireAuth());
+const clerkAuthMiddleware =
+    process.env.NODE_ENV === 'test' ? (req, res, next) => next() : requireAuth();
+
+app.use(clerkAuthMiddleware);
 app.use('/api/cars', carsRouter);
 app.use('/api/expenses', expensesRouter);
 app.use('/api/sells', sellsRouter);
