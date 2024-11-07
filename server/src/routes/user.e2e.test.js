@@ -45,7 +45,7 @@ describe('User Routes E2E Tests', () => {
             .patch(`/api/users/${userCreated.id}`)
             .send({
                 name: faker.person.firstName(),
-                email: faker.internet.email(),
+                email: `${faker.person.firstName()}+clerk_test@gmail.com`,
                 password: faker.internet.password({ length: 9 }),
             });
 
