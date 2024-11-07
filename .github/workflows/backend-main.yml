@@ -60,8 +60,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Create .env.test file
-        run: echo "DATABASE_URL=${{ secrets.PRODUCTION_DB_URL }}" >> server/.env.test
+      - name: Create .env file
+        run: echo "DATABASE_URL=${{ secrets.PRODUCTION_DB_URL }}" >> server/.env
 
       - name: Install dependencies
         run: npm ci --include=dev
@@ -77,9 +77,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Create .env.test file
-        run: echo "DATABASE_URL=${{ secrets.PRODUCTION_DB_URL }}" >> server/.env.test
 
       - name: Deploy to production
         run: |
