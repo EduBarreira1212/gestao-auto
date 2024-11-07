@@ -70,3 +70,17 @@ jobs:
       - name: Run migrations
         run: npx prisma migrate deploy
         working-directory: server
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: migrate
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create .env.test file
+        run: echo "DATABASE_URL=${{ secrets.PRODUCTION_DB_URL }}" >> server/.env.test
+
+      - name: Deploy to production
+        run: |
+          curl "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
