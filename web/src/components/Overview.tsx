@@ -61,40 +61,32 @@ const Overview = () => {
 
     const { data: vehicles } = useGetVehicles(user?.externalId ?? '');
 
-    useEffect(() => {
-        if (!vehicles?.length) return;
+    const expenses = vehicles?.flatMap((vehicle: VehicleType) => vehicle.expenses);
 
-        const currentMonth = new Date().getMonth();
-
-        const averageVehiclesPrice = vehicles.reduce(
+    const averageVehiclesPrice = useMemo(() => {
+        const totalVehiclesPrice = vehicles?.reduce(
             (acc: number, vehicle: VehicleType) => {
                 return (acc += vehicle.entry_price);
             },
             0
         );
+        return totalVehiclesPrice / vehicles?.length || 0;
+    }, [vehicles]);
 
-        setAveragePrice(averageVehiclesPrice / vehicles.length || 0);
-
-        const expenses = vehicles.flatMap(
-            (vehicle: VehicleType) => vehicle.expenses
-        );
-
-        const expensesThisMonth = expenses?.filter((expense: ExpenseType) => {
+    const expensesThisMonth = useMemo(() => {
+        return expenses?.filter((expense: ExpenseType) => {
             return new Date(expense.createdAt).getMonth() === currentMonth;
         });
+    }, [expenses]);
 
-        setExpensesInThisMonth(expensesThisMonth?.length);
+    const totalAmountExpensesThisMonth = useMemo(() => {
+        return expensesThisMonth?.reduce((acc: number, expense: ExpenseType) => {
+            return (acc += expense.amount);
+        }, 0);
+    }, [expensesThisMonth]);
 
-        const totalAmountExpensesThisMonth = expensesThisMonth?.reduce(
-            (acc: number, expense: ExpenseType) => {
-                return (acc += expense.amount);
-            },
-            0
-        );
-
-        setAmountExpensesInThisMonth(totalAmountExpensesThisMonth);
-
-        const totalDaysInHouseInMs = vehicles?.reduce(
+    const averageTotalDaysInHouse = useMemo(() => {
+        const totalDaysInMs = vehicles?.reduce(
             (acc: number, vehicle: VehicleType) => {
                 return (acc +=
                     new Date().getTime() - new Date(vehicle.createdAt).getTime());
@@ -102,11 +94,16 @@ const Overview = () => {
             0
         );
 
-        const totalDaysInHouseInDays = Math.ceil(
-            totalDaysInHouseInMs / (1000 * 60 * 60 * 24)
-        );
+        const totalDaysInDays = Math.ceil(totalDaysInMs / (1000 * 60 * 60 * 24));
 
-        setAverageDaysInHouse(totalDaysInHouseInDays / vehicles.length || 0);
+        return totalDaysInDays / vehicles?.length || 0;
+    }, [vehicles]);
+
+    useEffect(() => {
+        setAveragePrice(averageVehiclesPrice);
+        setExpensesInThisMonth(expensesThisMonth?.length);
+        setAmountExpensesInThisMonth(totalAmountExpensesThisMonth);
+        setAverageDaysInHouse(averageTotalDaysInHouse);
     }, [vehicles]);
 
     const formatter = new Intl.NumberFormat('pt-BR', {
