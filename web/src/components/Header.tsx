@@ -33,7 +33,7 @@ const Header = () => {
                 <Link className="hover:text-brand-accent" to="/despesas">
                     Despesas
                 </Link>
-                <Link className="hover:text-brand-accent" to="#">
+                <Link className="hover:text-brand-accent" to="/leads">
                     Leads
                 </Link>
             </div>

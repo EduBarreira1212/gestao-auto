@@ -25,7 +25,7 @@ const Navbar = () => {
                 <ANavbar to="/despesas" iconURL={moneyIcon}>
                     Despesas
                 </ANavbar>
-                <ANavbar to="#" iconURL={leadsIcon}>
+                <ANavbar to="/leads" iconURL={leadsIcon}>
                     Leads
                 </ANavbar>
             </div>
