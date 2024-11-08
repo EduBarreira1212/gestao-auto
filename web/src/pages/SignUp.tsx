@@ -43,7 +43,7 @@ const SignUp = () => {
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex w-80 flex-col gap-1 rounded-md border-2 p-5 shadow-md"
             >
-                <label htmlFor="">Name:</label>
+                <label htmlFor="">Nome:</label>
                 <input className="border-2 p-2" type="text" {...register('name')} />
                 {errors.name && <p>{errors.name.message}</p>}
                 <label htmlFor="">E-mail:</label>
@@ -53,7 +53,7 @@ const SignUp = () => {
                     {...register('email')}
                 />
                 {errors.email && <p>{errors.email.message}</p>}
-                <label htmlFor="">Password:</label>
+                <label htmlFor="">Senha:</label>
                 <input
                     className="border-2 p-2"
                     type="password"
