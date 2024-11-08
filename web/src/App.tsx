@@ -8,6 +8,7 @@ import Expenses from './pages/Expenses';
 import RootLayout from './layouts/RootLayout';
 import DashboardLayout from './layouts/DashboardLayout';
 import SignUp from './pages/SignUp';
+import Leads from './pages/Leads';
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                     <Route path="/vendas" element={<Sells />} />
                     <Route path="/veiculos" element={<Vehicles />} />
                     <Route path="/despesas" element={<Expenses />} />
+                    <Route path="/leads" element={<Leads />} />
                     <Route
                         path="/sign-in"
                         element={<SignIn signUpUrl="/cadastro" />}
