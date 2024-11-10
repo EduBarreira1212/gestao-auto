@@ -32,7 +32,7 @@ const Sell = ({ sell }: { sell: SellType }) => {
                     Ver detalhes
                 </Button>
                 <button
-                    className="my-3 self-center rounded-sm border-2 border-solid bg-red-600 p-2 text-brand-neutral"
+                    className="my-3 self-center rounded-sm border-2 border-solid bg-red-600 p-2 text-brand-neutral transition-colors duration-200 hover:bg-red-700"
                     onClick={() => setShowDeleteSellModal(true)}
                 >
                     Excluir
