@@ -8,7 +8,10 @@ type ANavbarprops = {
 
 const ANavbar = ({ to, iconURL, children }: ANavbarprops) => {
     return (
-        <Link to={to} className="flex items-center gap-1 hover:text-brand-accent">
+        <Link
+            to={to}
+            className="flex items-center gap-1 text-brand-secondary transition-all duration-200 hover:scale-110 hover:text-brand-accent"
+        >
             <img src={iconURL} className="h-4" />
             {children}
         </Link>

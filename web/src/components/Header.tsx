@@ -24,16 +24,28 @@ const Header = () => {
                     location.pathname.slice(2)}
             </h2>
             <div className="mx-auto hidden gap-4 md:flex">
-                <Link className="hover:text-brand-accent" to="/vendas">
+                <Link
+                    className="transition-all duration-200 hover:scale-110 hover:text-brand-accent"
+                    to="/vendas"
+                >
                     Vendas
                 </Link>
-                <Link className="hover:text-brand-accent" to="/veiculos">
+                <Link
+                    className="transition-all duration-200 hover:scale-110 hover:text-brand-accent"
+                    to="/veiculos"
+                >
                     Veículos
                 </Link>
-                <Link className="hover:text-brand-accent" to="/despesas">
+                <Link
+                    className="transition-all duration-200 hover:scale-110 hover:text-brand-accent"
+                    to="/despesas"
+                >
                     Despesas
                 </Link>
-                <Link className="hover:text-brand-accent" to="/leads">
+                <Link
+                    className="transition-all duration-200 hover:scale-110 hover:text-brand-accent"
+                    to="/leads"
+                >
                     Leads
                 </Link>
             </div>
