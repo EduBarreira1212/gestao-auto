@@ -12,7 +12,7 @@ const Header = () => {
     const location = useLocation();
 
     return (
-        <header className="flex w-full flex-row items-center justify-between bg-brand-secondary px-8 py-3 text-brand-primary shadow-sm shadow-black">
+        <header className="flex w-full flex-row items-center justify-between bg-brand-secondary px-5 py-3 text-brand-primary shadow-sm shadow-black">
             <button
                 className="rounded-lg border-2 border-black px-1 pb-0.5 text-2xl shadow-lg shadow-black md:hidden"
                 onClick={() => setShowNavbarModal(true)}
