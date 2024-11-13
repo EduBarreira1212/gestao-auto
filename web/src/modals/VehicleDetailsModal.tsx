@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { UpdateVehicle, VehicleType } from '../types';
 import { updateVehicleSchema } from '../schemas/zodSchemas';
 import { useUpdateVehicle } from '../hooks/data/useUpdateVehicle';
+import SubmitBtn from '../components/SubmitBtn';
 
 type VehicleDetailsModalprops = {
     vehicle: VehicleType;
@@ -11,7 +12,7 @@ type VehicleDetailsModalprops = {
 };
 
 const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => {
-    const { mutate } = useUpdateVehicle(vehicle.id);
+    const { mutate, isPending } = useUpdateVehicle(vehicle.id);
 
     const {
         register,
@@ -70,11 +71,7 @@ const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => 
                     {...register('entry_price', { valueAsNumber: true })}
                 />
                 {errors.entry_price && <p>{errors.entry_price.message}</p>}
-                <input
-                    type="submit"
-                    value="Atualizar"
-                    className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
-                />
+                <SubmitBtn value="Atualizar" disabled={isPending} />
             </form>
         </ModalContainer>
     );

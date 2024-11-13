@@ -4,6 +4,7 @@ import { CreateExpense } from '../types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createExpenseSchema } from '../schemas/zodSchemas';
 import { useAddExpenses } from '../hooks/data/useAddExpenses';
+import SubmitBtn from '../components/SubmitBtn';
 
 type ExpenseModalProps = {
     carId: string;
@@ -11,7 +12,7 @@ type ExpenseModalProps = {
 };
 
 const AddExpenseModal = ({ carId, onClose }: ExpenseModalProps) => {
-    const { mutate } = useAddExpenses();
+    const { mutate, isPending } = useAddExpenses();
 
     const {
         register,
@@ -55,11 +56,7 @@ const AddExpenseModal = ({ carId, onClose }: ExpenseModalProps) => {
                     {...register('description')}
                 />
                 {errors.description && <p>{errors.description.message}</p>}
-                <input
-                    className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
-                    type="submit"
-                    value="Adicionar despesa"
-                />
+                <SubmitBtn value="Adicionar despesa" disabled={isPending} />
             </form>
         </ModalContainer>
     );

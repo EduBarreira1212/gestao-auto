@@ -4,6 +4,7 @@ import { UpdateSell } from '../types';
 import { updateSellSchema } from '../schemas/zodSchemas';
 import { useUpdateSell } from '../hooks/data/useUpdateSell';
 import ModalContainer from '../components/ModalContainer';
+import SubmitBtn from '../components/SubmitBtn';
 
 type SellDetailsModalProps = {
     onClose: () => void;
@@ -11,7 +12,7 @@ type SellDetailsModalProps = {
 };
 
 const SellDetailsModal = ({ onClose, sellId }: SellDetailsModalProps) => {
-    const { mutate } = useUpdateSell(sellId);
+    const { mutate, isPending } = useUpdateSell(sellId);
 
     const {
         register,
@@ -50,11 +51,7 @@ const SellDetailsModal = ({ onClose, sellId }: SellDetailsModalProps) => {
                     {...register('profit', { valueAsNumber: true })}
                 />
                 {errors.profit && <p>{errors.profit.message}</p>}
-                <input
-                    className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
-                    type="submit"
-                    value="Atualizar venda"
-                />
+                <SubmitBtn value="Atualizar venda" disabled={isPending} />
             </form>
         </ModalContainer>
     );

@@ -5,6 +5,7 @@ import { CreateSell } from '../types';
 import { createSellSchema } from '../schemas/zodSchemas';
 import { useCreateSell } from '../hooks/data/useCreateSell';
 import ModalContainer from '../components/ModalContainer';
+import SubmitBtn from '../components/SubmitBtn';
 
 type CreateSellModalprops = {
     carId: string;
@@ -61,12 +62,7 @@ const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
                     {...register('profit', { valueAsNumber: true })}
                 />
                 {errors.profit && <p>{errors.profit.message}</p>}
-                <input
-                    className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
-                    type="submit"
-                    value="Adicionar venda"
-                    disabled={isPending}
-                />
+                <SubmitBtn value="Adicionar venda" disabled={isPending} />
             </form>
         </ModalContainer>
     );

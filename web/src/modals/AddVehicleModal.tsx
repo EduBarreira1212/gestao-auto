@@ -5,6 +5,7 @@ import { useUser } from '@clerk/clerk-react';
 import { addVehicleschema } from '../schemas/zodSchemas';
 import { useAddVehicle } from '../hooks/data/useAddVehicle';
 import ModalContainer from '../components/ModalContainer';
+import SubmitBtn from '../components/SubmitBtn';
 
 const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
     const { user } = useUser();
@@ -65,12 +66,7 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
                     {...register('entry_price', { valueAsNumber: true })}
                 />
                 {errors.entry_price && <p>{errors.entry_price.message}</p>}
-                <input
-                    type="submit"
-                    value="Adicionar"
-                    className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
-                    disabled={isPending}
-                />
+                <SubmitBtn value="Adicionar veículo" disabled={isPending} />
             </form>
         </ModalContainer>
     );

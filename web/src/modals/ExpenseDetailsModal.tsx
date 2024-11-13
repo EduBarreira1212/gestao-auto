@@ -4,6 +4,7 @@ import { ExpenseType, UpdateExpense } from '../types';
 import { updateExpenseSchema } from '../schemas/zodSchemas';
 import ModalContainer from '../components/ModalContainer';
 import { useUpdateExpense } from '../hooks/data/useUpdateExpense';
+import SubmitBtn from '../components/SubmitBtn';
 
 type ExpenseDetailsModalProps = {
     onClose: () => void;
@@ -11,7 +12,7 @@ type ExpenseDetailsModalProps = {
 };
 
 const ExpenseDetailsModal = ({ onClose, expense }: ExpenseDetailsModalProps) => {
-    const { mutate } = useUpdateExpense(expense.id);
+    const { mutate, isPending } = useUpdateExpense(expense.id);
 
     const {
         register,
@@ -54,11 +55,7 @@ const ExpenseDetailsModal = ({ onClose, expense }: ExpenseDetailsModalProps) => 
                     {...register('description')}
                 />
                 {errors.description && <p>{errors.description.message}</p>}
-                <input
-                    className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
-                    type="submit"
-                    value="Atualizar despesa"
-                />
+                <SubmitBtn value="Atualizar" disabled={isPending} />
             </form>
         </ModalContainer>
     );
