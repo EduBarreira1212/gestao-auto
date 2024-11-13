@@ -1,3 +1,5 @@
+import { EmailAlreadyInUse } from '../../errors/user.js';
+
 export class UpdateUserUseCase {
     constructor(
         postgresGetUserByEmailRepositorie,
@@ -18,7 +20,7 @@ export class UpdateUserUseCase {
                 );
 
             if (userWithProvidedEmail && userWithProvidedEmail.id !== userId) {
-                throw new Error('Email already in use');
+                throw new EmailAlreadyInUse(updateUserParams.email);
             }
         }
 

@@ -1,6 +1,7 @@
 import { validate } from 'uuid';
 import { ZodError } from 'zod';
 import { updateUserSchema } from '../../schemas/user.js';
+import { EmailAlreadyInUse } from '../../errors/user.js';
 
 export class UpdateUserController {
     constructor(updateUserUseCase) {
@@ -29,6 +30,12 @@ export class UpdateUserController {
                 return {
                     statusCode: 400,
                     body: { message: error.errors[0].message },
+                };
+            }
+            if (error instanceof EmailAlreadyInUse) {
+                return {
+                    statusCode: 400,
+                    body: { message: error.message },
                 };
             }
             return { statusCode: 500, body: error };
