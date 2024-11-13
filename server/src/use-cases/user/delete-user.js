@@ -1,3 +1,5 @@
+import { UserNotFound } from '../../errors/user.js';
+
 export class DeleteUserUseCase {
     constructor(postgresDeleteUserRepository, clerkClientAdapter) {
         this.postgresDeleteUserRepository = postgresDeleteUserRepository;
@@ -7,7 +9,7 @@ export class DeleteUserUseCase {
         const deletedUser = await this.postgresDeleteUserRepository.execute(userId);
 
         if (!deletedUser) {
-            throw new Error('User do not exists');
+            throw new UserNotFound(userId);
         }
 
         await this.clerkClientAdapter.deleteUser(deletedUser.external_id);

@@ -1,4 +1,5 @@
 import { validate } from 'uuid';
+import { UserNotFound } from '../../errors/user.js';
 
 export class DeleteUserController {
     constructor(deleteUserUseCase) {
@@ -19,6 +20,12 @@ export class DeleteUserController {
             return { statusCode: 200, body: deletedUser };
         } catch (error) {
             console.log(error);
+            if (error instanceof UserNotFound) {
+                return {
+                    statusCode: 404,
+                    body: { message: error.message },
+                };
+            }
             return { statusCode: 500, body: error };
         }
     }
