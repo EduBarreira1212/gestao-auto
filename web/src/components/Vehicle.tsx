@@ -27,6 +27,10 @@ const Vehicle = ({ car }: ICar) => {
     const [showVehicleDetailsModal, setShowVehicleDetailsModal] = useState(false);
     const [showDeleteVehicleModal, setShowDeleteVehicleModal] = useState(false);
 
+    const expensesAmount = car.expenses.reduce((acc, expense) => {
+        return (acc += expense.amount);
+    }, 0);
+
     const formatter = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
@@ -46,7 +50,7 @@ const Vehicle = ({ car }: ICar) => {
             <span>{car.plate}</span>
             <span>Preço de entrada: {formatter.format(car.entry_price)}</span>
             <div className="flex flex-row justify-between gap-2">
-                <span>Despesas: {car.expenses.length}</span>
+                <span>Despesas: {formatter.format(expensesAmount)}</span>
                 <button
                     className="rounded-sm border-2 bg-brand-neutral shadow-sm"
                     onClick={() => setShowAddExpenseModal(true)}
