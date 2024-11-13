@@ -1,5 +1,6 @@
 import { ZodError } from 'zod';
 import { createUserSchema } from '../../schemas/user.js';
+import { EmailAlreadyInUse } from '../../errors/user.js';
 
 export class CreateUserController {
     constructor(createUserUseCase) {
@@ -20,6 +21,12 @@ export class CreateUserController {
                 return {
                     statusCode: 400,
                     body: { message: error.errors[0].message },
+                };
+            }
+            if (error instanceof EmailAlreadyInUse) {
+                return {
+                    statusCode: 400,
+                    body: { message: error.message },
                 };
             }
             return { statusCode: 404, body: error };

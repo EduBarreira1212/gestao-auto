@@ -1,3 +1,5 @@
+import { EmailAlreadyInUse } from '../../errors/user.js';
+
 export class CreateUserUseCase {
     constructor(
         postgresGetUserByEmailRepositorie,
@@ -18,7 +20,7 @@ export class CreateUserUseCase {
         );
 
         if (emailExists) {
-            throw new Error('Email already exists');
+            throw new EmailAlreadyInUse(createUserParams.email);
         }
 
         const userId = this.idGeneratorAdapter.execute();
