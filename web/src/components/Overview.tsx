@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import loading from '../assets/loading.png';
 import Button from './Button';
 import { useGetSells } from '../hooks/data/useGetSells';
 import { useUser } from '@clerk/clerk-react';
@@ -24,7 +25,9 @@ const Overview = () => {
 
     const currentMonth = new Date().getMonth();
 
-    const { data: sells } = useGetSells(user?.externalId ?? '');
+    const { data: sells, isLoading: isLoadingSells } = useGetSells(
+        user?.externalId ?? ''
+    );
 
     const sellsThisMonth = useMemo(() => {
         return sells?.filter((sell: SellType) => {
@@ -59,7 +62,9 @@ const Overview = () => {
         setTotalAmounInThisMonth(totalAmountThisMonth);
     }, [sells]);
 
-    const { data: vehicles } = useGetVehicles(user?.externalId ?? '');
+    const { data: vehicles, isLoading: isLoadingVehicles } = useGetVehicles(
+        user?.externalId ?? ''
+    );
 
     const expenses = vehicles?.flatMap((vehicle: VehicleType) => vehicle.expenses);
 
@@ -113,40 +118,63 @@ const Overview = () => {
 
     return (
         <div className="flex w-full flex-col gap-5 p-5 md:flex-row">
-            <div className="flex flex-1 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 text-brand-secondary shadow-md shadow-brand-primary">
-                <div className="flex justify-between gap-5 border-b-2 border-solid p-3">
-                    <span>Vendas mês atual:</span>
-                    <span>{sellsInThisMonth}</span>
+            {isLoadingSells || isLoadingVehicles ? (
+                <div className="flex h-full w-full items-center justify-center">
+                    <img
+                        src={loading}
+                        alt="loading"
+                        className="size-12 animate-spin md:size-14"
+                    />
                 </div>
-                <div className="flex flex-col justify-around gap-5 border-b-2 border-solid p-3">
-                    <span>Vendas totais: {sells?.length}</span>
-                    <span>
-                        Faturamento mês atual:{' '}
-                        {formatter.format(totalAmountInThisMonth)}
-                    </span>
-                    <span>
-                        Lucro mês atual: {formatter.format(profitInThisMonth)}
-                    </span>
-                    <span>Lucro médio: {formatter.format(profitAverage)}</span>
-                </div>
-                <Button onClick={() => navigate('/vendas')}>Ver vendas</Button>
-            </div>
-            <div className="flex flex-1 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 text-brand-secondary shadow-md shadow-brand-primary">
-                <div className="flex justify-between border-b-2 border-solid p-3">
-                    <span>Veículos em estoque:</span>
-                    <span>{vehicles?.length}</span>
-                </div>
-                <div className="flex flex-col gap-5 border-b-2 border-solid p-3">
-                    <span>Preço médio: {formatter.format(averagePrice)}</span>
-                    <span>Despesas esse mês: {expensesInThisMonth}</span>
-                    <span>
-                        Valor total das despesas:{' '}
-                        {formatter.format(amountExpensesInThisMonth)}
-                    </span>
-                    <span>Tempo em estoque(Média): {averageDaysInHouse} dias</span>
-                </div>
-                <Button onClick={() => navigate('/veiculos')}>Ver veículos</Button>
-            </div>
+            ) : (
+                <>
+                    <div className="flex flex-1 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 text-brand-secondary shadow-md shadow-brand-primary">
+                        <div className="flex justify-between gap-5 border-b-2 border-solid p-3">
+                            <span>Vendas mês atual:</span>
+                            <span>{sellsInThisMonth}</span>
+                        </div>
+                        <div className="flex flex-col justify-around gap-5 border-b-2 border-solid p-3">
+                            <span>Vendas totais: {sells?.length}</span>
+                            <span>
+                                Faturamento mês atual:{' '}
+                                {formatter.format(totalAmountInThisMonth)}
+                            </span>
+                            <span>
+                                Lucro mês atual:{' '}
+                                {formatter.format(profitInThisMonth)}
+                            </span>
+                            <span>
+                                Lucro médio: {formatter.format(profitAverage)}
+                            </span>
+                        </div>
+                        <Button onClick={() => navigate('/vendas')}>
+                            Ver vendas
+                        </Button>
+                    </div>
+                    <div className="flex flex-1 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 text-brand-secondary shadow-md shadow-brand-primary">
+                        <div className="flex justify-between border-b-2 border-solid p-3">
+                            <span>Veículos em estoque:</span>
+                            <span>{vehicles?.length}</span>
+                        </div>
+                        <div className="flex flex-col gap-5 border-b-2 border-solid p-3">
+                            <span>
+                                Preço médio: {formatter.format(averagePrice)}
+                            </span>
+                            <span>Despesas esse mês: {expensesInThisMonth}</span>
+                            <span>
+                                Valor total das despesas:{' '}
+                                {formatter.format(amountExpensesInThisMonth)}
+                            </span>
+                            <span>
+                                Tempo em estoque(Média): {averageDaysInHouse} dias
+                            </span>
+                        </div>
+                        <Button onClick={() => navigate('/veiculos')}>
+                            Ver veículos
+                        </Button>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
