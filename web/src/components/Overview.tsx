@@ -4,21 +4,10 @@ import Button from './Button';
 import { useGetSells } from '../hooks/data/useGetSells';
 import { useUser } from '@clerk/clerk-react';
 import { useGetVehicles } from '../hooks/data/useGetVehicles';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { ExpenseType, SellType, VehicleType } from '../types';
 
 const Overview = () => {
-    const [sellsInThisMonth, setSellsInThisMonth] = useState<number>(0);
-    const [profitInThisMonth, setProfitInThisMonth] = useState<number>(0);
-    const [profitAverage, setProfitAverage] = useState<number>(0);
-    const [totalAmountInThisMonth, setTotalAmounInThisMonth] = useState<number>(0);
-
-    const [averagePrice, setAveragePrice] = useState<number>(0);
-    const [expensesInThisMonth, setExpensesInThisMonth] = useState<number>(0);
-    const [amountExpensesInThisMonth, setAmountExpensesInThisMonth] =
-        useState<number>(0);
-    const [averageDaysInHouse, setAverageDaysInHouse] = useState<number>(0);
-
     const navigate = useNavigate();
 
     const { user } = useUser();
@@ -54,13 +43,6 @@ const Overview = () => {
             return (acc += sell.amount);
         }, 0);
     }, [sellsThisMonth]);
-
-    useEffect(() => {
-        setSellsInThisMonth(sellsThisMonth?.length);
-        setProfitInThisMonth(profitThisMonth);
-        setProfitAverage(totalProfitAverage);
-        setTotalAmounInThisMonth(totalAmountThisMonth);
-    }, [sells]);
 
     const { data: vehicles, isLoading: isLoadingVehicles } = useGetVehicles(
         user?.externalId ?? ''
@@ -104,13 +86,6 @@ const Overview = () => {
         return totalDaysInDays / vehicles?.length || 0;
     }, [vehicles]);
 
-    useEffect(() => {
-        setAveragePrice(averageVehiclesPrice);
-        setExpensesInThisMonth(expensesThisMonth?.length);
-        setAmountExpensesInThisMonth(totalAmountExpensesThisMonth);
-        setAverageDaysInHouse(averageTotalDaysInHouse);
-    }, [vehicles]);
-
     const formatter = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
@@ -131,20 +106,19 @@ const Overview = () => {
                     <div className="flex flex-1 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 text-brand-secondary shadow-md shadow-brand-primary">
                         <div className="flex justify-between gap-5 border-b-2 border-solid p-3">
                             <span>Vendas mês atual:</span>
-                            <span>{sellsInThisMonth}</span>
+                            <span>{sellsThisMonth.length}</span>
                         </div>
                         <div className="flex flex-col justify-around gap-5 border-b-2 border-solid p-3">
                             <span>Vendas totais: {sells?.length}</span>
                             <span>
                                 Faturamento mês atual:{' '}
-                                {formatter.format(totalAmountInThisMonth)}
+                                {formatter.format(totalAmountThisMonth)}
                             </span>
                             <span>
-                                Lucro mês atual:{' '}
-                                {formatter.format(profitInThisMonth)}
+                                Lucro mês atual: {formatter.format(profitThisMonth)}
                             </span>
                             <span>
-                                Lucro médio: {formatter.format(profitAverage)}
+                                Lucro médio: {formatter.format(totalProfitAverage)}
                             </span>
                         </div>
                         <Button onClick={() => navigate('/vendas')}>
@@ -158,15 +132,18 @@ const Overview = () => {
                         </div>
                         <div className="flex flex-col gap-5 border-b-2 border-solid p-3">
                             <span>
-                                Preço médio: {formatter.format(averagePrice)}
+                                Preço médio: {formatter.format(averageVehiclesPrice)}
                             </span>
-                            <span>Despesas esse mês: {expensesInThisMonth}</span>
+                            <span>
+                                Despesas esse mês: {expensesThisMonth.length}
+                            </span>
                             <span>
                                 Valor total das despesas:{' '}
-                                {formatter.format(amountExpensesInThisMonth)}
+                                {formatter.format(totalAmountExpensesThisMonth)}
                             </span>
                             <span>
-                                Tempo em estoque(Média): {averageDaysInHouse} dias
+                                Tempo em estoque(Média): {averageTotalDaysInHouse}{' '}
+                                dias
                             </span>
                         </div>
                         <Button onClick={() => navigate('/veiculos')}>
