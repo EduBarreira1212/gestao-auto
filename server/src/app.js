@@ -5,12 +5,13 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+import { requireAuth } from '@clerk/express';
 
 import { usersRouter } from './routes/user.js';
 import { carsRouter } from './routes/car.js';
 import { expensesRouter } from './routes/expense.js';
 import { sellsRouter } from './routes/sell.js';
-import { requireAuth } from '@clerk/express';
+import { webhooksRouter } from './routes/webhooks.js';
 
 export const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/users', usersRouter);
+app.use('/api/webhooks', webhooksRouter);
 
 const clerkAuthMiddleware =
     process.env.NODE_ENV === 'test' ? (req, res, next) => next() : requireAuth();
