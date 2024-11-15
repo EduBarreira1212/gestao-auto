@@ -17,11 +17,12 @@ export const app = express();
 
 dotenv.config({ path: '.env' });
 
+app.use('/api/webhooks', webhooksRouter);
+
 app.use(express.json());
 app.use(cors());
 
 app.use('/api/users', usersRouter);
-app.use('/api/webhooks', webhooksRouter);
 
 const clerkAuthMiddleware =
     process.env.NODE_ENV === 'test' ? (req, res, next) => next() : requireAuth();
