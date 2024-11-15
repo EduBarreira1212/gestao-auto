@@ -1,6 +1,7 @@
 import { CreateUserUseCase } from './create-user.js';
 
 import { userFixture } from '../../tests/fixtures/user.js';
+import { EmailAlreadyInUse } from '../../errors/user.js';
 
 describe('CreateUserUseCase', () => {
     const user = {
@@ -65,7 +66,7 @@ describe('CreateUserUseCase', () => {
         expect(result).toBeTruthy();
     });
 
-    test('should throw a email already exists error', async () => {
+    test('should throw a email already in use error', async () => {
         const sut = makeSut();
 
         import.meta.jest
@@ -76,7 +77,7 @@ describe('CreateUserUseCase', () => {
 
         const promise = sut.execute(user);
 
-        await expect(promise).rejects.toThrow(new Error('Email already exists'));
+        await expect(promise).rejects.toThrow(new EmailAlreadyInUse(user.email));
     });
 
     test('should ensure idGeneratorAdapter is called', async () => {

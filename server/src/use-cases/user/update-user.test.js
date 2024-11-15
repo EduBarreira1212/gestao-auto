@@ -1,6 +1,7 @@
 import { UpdateUserUseCase } from './update-user.js';
 
 import { userFixture } from '../../tests/fixtures/user.js';
+import { EmailAlreadyInUse } from '../../errors/user.js';
 
 describe('UpdateUserUseCase', () => {
     const userId = 'valid_id';
@@ -72,7 +73,7 @@ describe('UpdateUserUseCase', () => {
         expect(result).toBeTruthy();
     });
 
-    test('should throw a email already exists error', async () => {
+    test('should throw a email already in use error', async () => {
         const sut = makeSut();
 
         import.meta.jest
@@ -83,7 +84,7 @@ describe('UpdateUserUseCase', () => {
 
         const promise = sut.execute(userId, user);
 
-        await expect(promise).rejects.toThrow(new Error('Email already in use'));
+        await expect(promise).rejects.toThrow(new EmailAlreadyInUse(user.email));
     });
 
     test('should ensure passwordHasherAdapter is called', async () => {
