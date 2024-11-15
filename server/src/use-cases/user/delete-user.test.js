@@ -1,6 +1,7 @@
 import { DeleteUserUseCase } from './delete-user.js';
 
 import { userFixture as user } from '../../tests/fixtures/user.js';
+import { UserNotFound } from '../../errors/user.js';
 
 describe('DeleteUserUseCase', () => {
     class PostgresDeleteUSerRepositorieStub {
@@ -44,7 +45,7 @@ describe('DeleteUserUseCase', () => {
         expect(result).toStrictEqual(user);
     });
 
-    test('should throw a user do not exists error', async () => {
+    test('should throw a user not found error', async () => {
         const sut = makeSut();
 
         import.meta.jest
@@ -53,9 +54,9 @@ describe('DeleteUserUseCase', () => {
                 return null;
             });
 
-        const promise = sut.execute(user);
+        const promise = sut.execute(user.id);
 
-        await expect(promise).rejects.toThrow(new Error('User do not exists'));
+        await expect(promise).rejects.toThrow(new UserNotFound(user.id));
     });
 
     test('should ensure PostgresDeleteUserRepository is called', async () => {
