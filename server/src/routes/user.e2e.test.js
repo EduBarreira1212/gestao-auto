@@ -3,6 +3,7 @@ import { app } from '../app.js';
 
 import { userFixture } from '../tests/fixtures/user.js';
 import { faker } from '@faker-js/faker';
+import clerkClient from '../../clerk/clerk.js';
 
 describe('User Routes E2E Tests', () => {
     test('POST /api/users', async () => {
@@ -15,6 +16,8 @@ describe('User Routes E2E Tests', () => {
 
         expect(response.status).toBe(201);
         expect(response.body.id).toBeTruthy();
+
+        await clerkClient.users.deleteUser(response.body.external_id);
     });
 
     test('GET /api/users/:userId', async () => {
@@ -30,6 +33,8 @@ describe('User Routes E2E Tests', () => {
 
         expect(response.status).toBe(200);
         expect(response.body).toStrictEqual(userCreated);
+
+        await clerkClient.users.deleteUser(response.body.external_id);
     });
 
     test('PATCH /api/users/:userId', async () => {
@@ -51,6 +56,8 @@ describe('User Routes E2E Tests', () => {
 
         expect(response.status).toBe(200);
         expect(response.body).not.toStrictEqual(userCreated);
+
+        await clerkClient.users.deleteUser(response.body.external_id);
     });
 
     test('DELETE /api/users/:userId', async () => {

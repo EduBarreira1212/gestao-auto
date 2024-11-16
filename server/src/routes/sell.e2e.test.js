@@ -5,6 +5,7 @@ import { carFixture } from '../tests/fixtures/car.js';
 import { userFixture } from '../tests/fixtures/user.js';
 import { sellFixture } from '../tests/fixtures/sell.js';
 import { faker } from '@faker-js/faker';
+import clerkClient from '../../clerk/clerk.js';
 
 describe('Sell Routes E2E Tests', () => {
     test('POST /api/sells', async () => {
@@ -35,6 +36,8 @@ describe('Sell Routes E2E Tests', () => {
 
         expect(response.status).toBe(201);
         expect(response.body.id).toBeTruthy();
+
+        await clerkClient.users.deleteUser(userCreated.external_id);
     });
 
     test('GET /api/sells/:sellId', async () => {
@@ -67,6 +70,8 @@ describe('Sell Routes E2E Tests', () => {
 
         expect(response.status).toBe(200);
         expect(response.body).toStrictEqual(sellCreated);
+
+        await clerkClient.users.deleteUser(userCreated.external_id);
     });
 
     test('GET /api/sells/', async () => {
@@ -101,6 +106,8 @@ describe('Sell Routes E2E Tests', () => {
 
         expect(response.status).toBe(200);
         expect(response.body).toStrictEqual([sellCreated1]);
+
+        await clerkClient.users.deleteUser(userCreated.external_id);
     });
 
     test('PATCH /api/sells/:sellId', async () => {
@@ -138,6 +145,8 @@ describe('Sell Routes E2E Tests', () => {
 
         expect(response.status).toBe(200);
         expect(response.body).not.toStrictEqual(sellCreated);
+
+        await clerkClient.users.deleteUser(userCreated.external_id);
     });
 
     test('DELETE /api/sells/:sellId', async () => {
@@ -170,5 +179,7 @@ describe('Sell Routes E2E Tests', () => {
 
         expect(response.status).toBe(200);
         expect(response.body).toStrictEqual(sellCreated);
+
+        await clerkClient.users.deleteUser(userCreated.external_id);
     });
 });
