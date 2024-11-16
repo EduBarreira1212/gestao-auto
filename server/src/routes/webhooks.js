@@ -55,7 +55,7 @@ webhooksRouter.post(
         if (eventType === 'user.updated') {
             const updateUserObject = {
                 params: { userId: evt.data.external_id },
-                email: evt.data.email_addresses[0].email.address,
+                email: evt.data.email_addresses[0].email_address,
                 name: evt.data.first_name,
             };
 
