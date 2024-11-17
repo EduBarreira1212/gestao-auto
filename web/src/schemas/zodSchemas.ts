@@ -1,27 +1,38 @@
 import { z } from 'zod';
 
-export const signUpSchema = z.object({
-    name: z
-        .string()
-        .trim()
-        .min(2, 'O nome deve ter no mínimo 2 caracteres')
-        .max(50, 'O nome não pode exceder 50 caracteres'),
+export const signUpSchema = z
+    .object({
+        name: z
+            .string()
+            .trim()
+            .min(2, 'O nome deve ter no mínimo 2 caracteres')
+            .max(50, 'O nome não pode exceder 50 caracteres'),
 
-    email: z.string().trim().email('Formato de e-mail inválido'),
+        email: z.string().trim().email('Formato de e-mail inválido'),
 
-    password: z
-        .string()
-        .trim()
-        .min(8, 'A senha deve ter no mínimo 8 caracteres')
-        .regex(/[A-Z]/, 'A senha deve conter pelo menos uma letra maiúscula')
-        .regex(/[a-z]/, 'A senha deve conter pelo menos uma letra minúscula')
-        .regex(/[0-9]/, 'A senha deve conter pelo menos um número')
-        .regex(
-            /[@$!%*?&]/,
-            'A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &)'
-        )
-        .max(100, 'A senha não pode exceder 100 caracteres'),
-});
+        password: z
+            .string()
+            .trim()
+            .min(8, 'A senha deve ter no mínimo 8 caracteres')
+            .regex(/[A-Z]/, 'A senha deve conter pelo menos uma letra maiúscula')
+            .regex(/[a-z]/, 'A senha deve conter pelo menos uma letra minúscula')
+            .regex(/[0-9]/, 'A senha deve conter pelo menos um número')
+            .regex(
+                /[@$!%*?&]/,
+                'A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &)'
+            )
+            .max(100, 'A senha não pode exceder 100 caracteres'),
+        confirmPassword: z.string(),
+    })
+    .superRefine((data, ctx) => {
+        if (data.confirmPassword !== data.password) {
+            ctx.addIssue({
+                code: 'custom',
+                path: ['confirmPassword'],
+                message: 'As senhas não correspondem',
+            });
+        }
+    });
 
 export const addVehicleschema = z.object({
     name: z.string().trim().min(1, 'O modelo é obrigatório.'),
