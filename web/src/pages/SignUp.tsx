@@ -40,7 +40,7 @@ const SignUp = () => {
     };
 
     return (
-        <div className="flex h-screen w-screen flex-col items-center justify-center gap-1 bg-brand-neutral">
+        <div className="flex h-screen w-screen flex-col items-center justify-center gap-3 bg-brand-neutral">
             <img className="h-24" src={logo} alt="logo icon" />
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -71,7 +71,7 @@ const SignUp = () => {
                 />
                 {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
                 <input
-                    className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-primary hover:text-brand-accent"
+                    className="mt-3 cursor-pointer border-2 bg-brand-secondary p-2 text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
                     type="submit"
                     value="Criar conta"
                 />
