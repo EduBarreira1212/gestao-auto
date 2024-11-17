@@ -5,6 +5,7 @@ import { updateExpenseSchema } from '../schemas/zodSchemas';
 import ModalContainer from '../components/ModalContainer';
 import { useUpdateExpense } from '../hooks/data/useUpdateExpense';
 import SubmitBtn from '../components/SubmitBtn';
+import InputErrorMessage from '../components/InputErrorMessage';
 
 type ExpenseDetailsModalProps = {
     onClose: () => void;
@@ -47,14 +48,20 @@ const ExpenseDetailsModal = ({ onClose, expense }: ExpenseDetailsModalProps) => 
                     type="number"
                     {...register('amount', { valueAsNumber: true })}
                 />
-                {errors.amount && <p>{errors.amount.message}</p>}
+                {errors.amount && (
+                    <InputErrorMessage>{errors.amount.message}</InputErrorMessage>
+                )}
                 <label>Descrição:</label>
                 <input
                     className="border-2 p-2"
                     type="text"
                     {...register('description')}
                 />
-                {errors.description && <p>{errors.description.message}</p>}
+                {errors.description && (
+                    <InputErrorMessage>
+                        {errors.description.message}
+                    </InputErrorMessage>
+                )}
                 <SubmitBtn value="Atualizar" disabled={isPending} />
             </form>
         </ModalContainer>

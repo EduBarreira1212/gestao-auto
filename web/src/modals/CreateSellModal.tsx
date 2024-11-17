@@ -6,6 +6,7 @@ import { createSellSchema } from '../schemas/zodSchemas';
 import { useCreateSell } from '../hooks/data/useCreateSell';
 import ModalContainer from '../components/ModalContainer';
 import SubmitBtn from '../components/SubmitBtn';
+import InputErrorMessage from '../components/InputErrorMessage';
 
 type CreateSellModalprops = {
     carId: string;
@@ -54,14 +55,18 @@ const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
                     type="number"
                     {...register('amount', { valueAsNumber: true })}
                 />
-                {errors.amount && <p>{errors.amount.message}</p>}
+                {errors.amount && (
+                    <InputErrorMessage>{errors.amount.message}</InputErrorMessage>
+                )}
                 <label>Lucro:</label>
                 <input
                     className="border-2 p-2"
                     type="number"
                     {...register('profit', { valueAsNumber: true })}
                 />
-                {errors.profit && <p>{errors.profit.message}</p>}
+                {errors.profit && (
+                    <InputErrorMessage>{errors.profit.message}</InputErrorMessage>
+                )}
                 <SubmitBtn value="Adicionar venda" disabled={isPending} />
             </form>
         </ModalContainer>

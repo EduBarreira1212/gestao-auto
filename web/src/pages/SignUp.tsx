@@ -6,6 +6,7 @@ import { useSignIn } from '@clerk/clerk-react';
 import logo from '../assets/logo.png';
 import createUser from '../services/user/createUser';
 import { signUpSchema } from '../schemas/zodSchemas';
+import InputErrorMessage from '../components/InputErrorMessage';
 
 const SignUp = () => {
     const { signIn, setActive } = useSignIn();
@@ -48,28 +49,38 @@ const SignUp = () => {
             >
                 <label htmlFor="">Nome:</label>
                 <input className="border-2 p-2" type="text" {...register('name')} />
-                {errors.name && <p>{errors.name.message}</p>}
+                {errors.name && (
+                    <InputErrorMessage>{errors.name.message}</InputErrorMessage>
+                )}
                 <label htmlFor="">E-mail:</label>
                 <input
                     className="border-2 p-2"
                     type="email"
                     {...register('email')}
                 />
-                {errors.email && <p>{errors.email.message}</p>}
+                {errors.email && (
+                    <InputErrorMessage>{errors.email.message}</InputErrorMessage>
+                )}
                 <label htmlFor="">Senha:</label>
                 <input
                     className="border-2 p-2"
                     type="password"
                     {...register('password')}
                 />
-                {errors.password && <p>{errors.password.message}</p>}
+                {errors.password && (
+                    <InputErrorMessage>{errors.password.message}</InputErrorMessage>
+                )}
                 <label htmlFor="">Confirme sua senha:</label>
                 <input
                     className="border-2 p-2"
                     type="password"
                     {...register('confirmPassword')}
                 />
-                {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+                {errors.confirmPassword && (
+                    <InputErrorMessage>
+                        {errors.confirmPassword.message}
+                    </InputErrorMessage>
+                )}
                 <input
                     className="mt-3 cursor-pointer border-2 bg-brand-secondary p-2 text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
                     type="submit"

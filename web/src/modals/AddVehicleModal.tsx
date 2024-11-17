@@ -6,6 +6,7 @@ import { addVehicleschema } from '../schemas/zodSchemas';
 import { useAddVehicle } from '../hooks/data/useAddVehicle';
 import ModalContainer from '../components/ModalContainer';
 import SubmitBtn from '../components/SubmitBtn';
+import InputErrorMessage from '../components/InputErrorMessage';
 
 const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
     const { user } = useUser();
@@ -41,31 +42,43 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
             >
                 <label htmlFor="">Modelo:</label>
                 <input className="border-2 p-2" type="text" {...register('name')} />
-                {errors.name && <p>{errors.name.message}</p>}
+                {errors.name && (
+                    <InputErrorMessage>{errors.name.message}</InputErrorMessage>
+                )}
                 <label htmlFor="">Marca:</label>
                 <input className="border-2 p-2" type="text" {...register('brand')} />
-                {errors.brand && <p>{errors.brand.message}</p>}
+                {errors.brand && (
+                    <InputErrorMessage>{errors.brand.message}</InputErrorMessage>
+                )}
                 <label htmlFor="">Ano:</label>
                 <input
                     className="border-2 p-2"
                     type="number"
                     {...register('year', { valueAsNumber: true })}
                 />
-                {errors.year && <p>{errors.year.message}</p>}
+                {errors.year && (
+                    <InputErrorMessage>{errors.year.message}</InputErrorMessage>
+                )}
                 <label htmlFor="">Placa:</label>
                 <input
                     className="border-2 p-2"
                     type="string"
                     {...register('plate')}
                 />
-                {errors.plate && <p>{errors.plate.message}</p>}
+                {errors.plate && (
+                    <InputErrorMessage>{errors.plate.message}</InputErrorMessage>
+                )}
                 <label htmlFor="">Preço de entrada:</label>
                 <input
                     className="border-2 p-2"
                     type="number"
                     {...register('entry_price', { valueAsNumber: true })}
                 />
-                {errors.entry_price && <p>{errors.entry_price.message}</p>}
+                {errors.entry_price && (
+                    <InputErrorMessage>
+                        {errors.entry_price.message}
+                    </InputErrorMessage>
+                )}
                 <SubmitBtn value="Adicionar veículo" disabled={isPending} />
             </form>
         </ModalContainer>

@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createExpenseSchema } from '../schemas/zodSchemas';
 import { useAddExpenses } from '../hooks/data/useAddExpenses';
 import SubmitBtn from '../components/SubmitBtn';
+import InputErrorMessage from '../components/InputErrorMessage';
 
 type ExpenseModalProps = {
     carId: string;
@@ -48,14 +49,20 @@ const AddExpenseModal = ({ carId, onClose }: ExpenseModalProps) => {
                     type="number"
                     {...register('amount', { valueAsNumber: true })}
                 />
-                {errors.amount && <p>{errors.amount.message}</p>}
+                {errors.amount && (
+                    <InputErrorMessage>{errors.amount.message}</InputErrorMessage>
+                )}
                 <label>Descrição:</label>
                 <input
                     className="border-2 p-2"
                     type="text"
                     {...register('description')}
                 />
-                {errors.description && <p>{errors.description.message}</p>}
+                {errors.description && (
+                    <InputErrorMessage>
+                        {errors.description.message}
+                    </InputErrorMessage>
+                )}
                 <SubmitBtn value="Adicionar despesa" disabled={isPending} />
             </form>
         </ModalContainer>
