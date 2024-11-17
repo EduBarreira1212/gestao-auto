@@ -1,25 +1,28 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { useSignIn } from '@clerk/clerk-react';
 
 import logo from '../assets/logo.png';
-import { CreateUser } from '../types';
 import createUser from '../services/user/createUser';
 import { signUpSchema } from '../schemas/zodSchemas';
 
 const SignUp = () => {
     const { signIn, setActive } = useSignIn();
 
+    type CreateUserForm = z.infer<typeof signUpSchema>;
+
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<CreateUser>({
+    } = useForm<CreateUserForm>({
         resolver: zodResolver(signUpSchema),
     });
 
-    const onSubmit: SubmitHandler<CreateUser> = async (createUserParams) => {
-        const response = await createUser(createUserParams);
+    const onSubmit: SubmitHandler<CreateUserForm> = async (createUserParams) => {
+        const { email, name, password } = createUserParams;
+        const response = await createUser({ email, name, password });
 
         if (response?.status === 201 && response.data) {
             await signIn?.create({
@@ -60,6 +63,13 @@ const SignUp = () => {
                     {...register('password')}
                 />
                 {errors.password && <p>{errors.password.message}</p>}
+                <label htmlFor="">Confirme sua senha:</label>
+                <input
+                    className="border-2 p-2"
+                    type="password"
+                    {...register('confirmPassword')}
+                />
+                {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
                 <input
                     className="cursor-pointer border-2 bg-brand-secondary p-2 text-brand-primary hover:text-brand-accent"
                     type="submit"
