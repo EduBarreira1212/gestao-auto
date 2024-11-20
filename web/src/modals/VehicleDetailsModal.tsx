@@ -26,6 +26,7 @@ const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => 
             brand: vehicle.brand,
             year: vehicle.year,
             plate: vehicle.plate,
+            km: vehicle.km,
             entry_price: vehicle.entry_price,
         },
     });
@@ -72,6 +73,15 @@ const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => 
                 />
                 {errors.plate && (
                     <InputErrorMessage>{errors.plate.message}</InputErrorMessage>
+                )}
+                <label htmlFor="">Quilometragem:</label>
+                <input
+                    className="border-2 p-2"
+                    type="string"
+                    {...register('km', { valueAsNumber: true })}
+                />
+                {errors.km && (
+                    <InputErrorMessage>{errors.km.message}</InputErrorMessage>
                 )}
                 <label htmlFor="">Preço de entrada:</label>
                 <input

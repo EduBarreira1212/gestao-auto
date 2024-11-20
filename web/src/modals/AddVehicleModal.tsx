@@ -68,6 +68,15 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
                 {errors.plate && (
                     <InputErrorMessage>{errors.plate.message}</InputErrorMessage>
                 )}
+                <label htmlFor="">Quilometragem:</label>
+                <input
+                    className="border-2 p-2"
+                    type="string"
+                    {...register('km', { valueAsNumber: true })}
+                />
+                {errors.km && (
+                    <InputErrorMessage>{errors.km.message}</InputErrorMessage>
+                )}
                 <label htmlFor="">Preço de entrada:</label>
                 <input
                     className="border-2 p-2"
