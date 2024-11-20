@@ -25,6 +25,7 @@ model Car {
   name        String
   year        Int
   plate       String
+  km          Int
   entry_price Float
   expenses    Expense[] @relation("CarExpenses")
   createdAt   DateTime  @default(now())
