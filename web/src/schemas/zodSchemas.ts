@@ -50,6 +50,9 @@ export const addVehicleschema = z.object({
             /^([A-Z]{3}-\d{4}|[A-Z]{3}\d[A-Z]\d{2})$/,
             'Placa deve estar no formato ABC-1234 ou ABC1D23.'
         ),
+    km: z
+        .number({ invalid_type_error: 'KM deve ser um número.' })
+        .min(0, 'A KM não deve ser negativa.'),
     entry_price: z
         .number({ invalid_type_error: 'Preço de entrada deve ser um número.' })
         .positive('O preço de entrada deve ser positivo.'),
@@ -73,6 +76,11 @@ export const updateVehicleSchema = z.object({
             /^([A-Z]{3}-\d{4}|[A-Z]{3}\d[A-Z]\d{2})$/,
             'Placa deve estar no formato ABC-1234 ou ABC1D23.'
         )
+        .nullable()
+        .optional(),
+    km: z
+        .number({ invalid_type_error: 'KM deve ser um número.' })
+        .min(0, 'A KM não deve ser negativa.')
         .nullable()
         .optional(),
     entry_price: z
