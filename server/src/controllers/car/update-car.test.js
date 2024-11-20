@@ -29,6 +29,7 @@ describe('UpdateCarController', () => {
                 name: '488',
                 year: 2018,
                 plate: 'FFF0F00',
+                km: 20000,
                 entry_price: 2500000,
             },
         };
@@ -52,6 +53,7 @@ describe('UpdateCarController', () => {
                 name: '488',
                 year: 2018,
                 plate: 'FFF0F00',
+                km: 20000,
                 entry_price: 2500000,
             },
         };
@@ -74,6 +76,7 @@ describe('UpdateCarController', () => {
                 name: '488',
                 year: 2018,
                 plate: 'FFF0F00',
+                km: 20000,
                 entry_price: 2500000,
             },
         };
@@ -96,6 +99,7 @@ describe('UpdateCarController', () => {
                 name: '488',
                 year: 2018,
                 plate: 'FFF0F00',
+                km: 20000,
                 entry_price: 2500000,
                 inavlid_field: 'invalid_field',
             },
@@ -118,6 +122,7 @@ describe('UpdateCarController', () => {
                 name: '488',
                 year: 2018,
                 plate: 'FFF0F00',
+                km: 20000,
                 entry_price: 2500000,
             },
         };
@@ -145,6 +150,7 @@ describe('UpdateCarController', () => {
                 name: '488',
                 year: 2018,
                 plate: 'FFF0F00',
+                km: 20000,
                 entry_price: 2500000,
             },
         };

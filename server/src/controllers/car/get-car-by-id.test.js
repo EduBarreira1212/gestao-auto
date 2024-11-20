@@ -9,6 +9,7 @@ describe('GetUserByIdController', () => {
                 name: '488',
                 year: 2018,
                 plate: 'FFF0F00',
+                km: 20000,
                 entry_price: 2500000,
             };
             return car;
