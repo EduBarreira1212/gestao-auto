@@ -20,6 +20,9 @@ export const createCarSchema = z.object({
         .trim()
         .min(7, { message: 'License plate must have more than 7 characters.' })
         .max(8, { message: 'License plate must have less than 8 characters.' }),
+    km: z
+        .number({ required_error: 'KM is required.' })
+        .nonnegative({ message: 'KM must not be a negative number.' }),
     entry_price: z
         .number({ required_error: 'Entry price is required.' })
         .positive({ message: 'Entry price must be a positive number.' }),
