@@ -16,6 +16,7 @@ export type CreateVehicle = {
     brand: string;
     year: number;
     plate: string;
+    km: number;
     entry_price: number;
 };
 
@@ -24,6 +25,7 @@ export type UpdateVehicle = {
     brand?: string;
     year?: number;
     plate?: string;
+    km?: number;
     entry_price?: number;
 };
 
@@ -57,6 +59,7 @@ export type VehicleType = {
     brand: string;
     year: number;
     plate: string;
+    km: number;
     entry_price: number;
     expenses: ExpenseType[];
     createdAt: Date;
