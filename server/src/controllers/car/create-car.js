@@ -11,8 +11,6 @@ export class CreateCarController {
 
             await createCarSchema.parseAsync(params);
 
-            console.log(params);
-
             const createdCar = await this.createCarUseCase.execute(params);
 
             return { statusCode: 201, body: createdCar };
