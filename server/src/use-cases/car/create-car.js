@@ -11,7 +11,7 @@ export class CreateCarUseCase {
     async execute(createCarParams) {
         const userId = createCarParams.user_id;
 
-        const isIdValid = this.postgresGetUserByIdRepository.execute(userId);
+        const isIdValid = await this.postgresGetUserByIdRepository.execute(userId);
 
         if (!isIdValid) {
             throw new Error('User ID invalid');
@@ -24,9 +24,7 @@ export class CreateCarUseCase {
             id: carId,
         };
 
-        const carCreated = this.postgresCreateCarRepository.execute(car);
-
-        console.log(carCreated);
+        const carCreated = await this.postgresCreateCarRepository.execute(car);
 
         return carCreated;
     }
