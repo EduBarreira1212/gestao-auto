@@ -26,6 +26,8 @@ export class CreateCarUseCase {
 
         const carCreated = this.postgresCreateCarRepository.execute(car);
 
+        console.log(carCreated);
+
         return carCreated;
     }
 }
