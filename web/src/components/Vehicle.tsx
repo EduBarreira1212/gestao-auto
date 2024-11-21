@@ -49,7 +49,7 @@ const Vehicle = ({ car }: ICar) => {
             <span>{car.brand}</span>
             <span>{car.year}</span>
             <span>{car.plate}</span>
-            <span>{car.km}</span>
+            <span>KM: {car.km.toLocaleString()}</span>
             <span>Preço de entrada: {formatter.format(car.entry_price)}</span>
             <div className="flex flex-row justify-between gap-2">
                 <span>Despesas: {formatter.format(expensesAmount)}</span>
