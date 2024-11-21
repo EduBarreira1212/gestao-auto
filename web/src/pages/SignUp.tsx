@@ -17,6 +17,7 @@ const SignUp = () => {
         register,
         handleSubmit,
         formState: { errors },
+        setError,
     } = useForm<CreateUserForm>({
         resolver: zodResolver(signUpSchema),
     });
@@ -24,6 +25,13 @@ const SignUp = () => {
     const onSubmit: SubmitHandler<CreateUserForm> = async (createUserParams) => {
         const { email, name, password } = createUserParams;
         const response = await createUser({ email, name, password });
+
+        if (!response) {
+            setError('email', {
+                type: 'manual',
+                message: 'E-mail já está em uso.',
+            });
+        }
 
         if (response?.status === 201 && response.data) {
             await signIn?.create({
