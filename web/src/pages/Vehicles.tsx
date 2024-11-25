@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import loading from '../assets/loading.png';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Vehicle from '../components/Vehicle';
@@ -19,8 +20,6 @@ const Vehicles = () => {
 
     const { data, isLoading } = useGetVehicles(user?.externalId ?? '');
 
-    if (isLoading) return <div>Loadin...</div>;
-
     return (
         <Screen>
             <Navbar />
@@ -30,7 +29,15 @@ const Vehicles = () => {
                     <AddButton onClick={() => setShowAddVehicleModal(true)}>
                         Adicionar novo veículo
                     </AddButton>
-                    {data?.length > 0 ? (
+                    {isLoading ? (
+                        <div className="flex h-full w-full items-center justify-center">
+                            <img
+                                src={loading}
+                                alt="loading"
+                                className="size-12 animate-spin md:size-14"
+                            />
+                        </div>
+                    ) : Array.isArray(data) && data?.length > 0 ? (
                         <List>
                             {data.map((vehicle: VehicleType) => (
                                 <li key={vehicle.id}>
