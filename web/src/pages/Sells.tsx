@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import loading from '../assets/loading.png';
 import Navbar from '../components/Navbar';
 import Sell from '../components/Sell';
 import ContentSection from '../components/ContentSection';
@@ -13,15 +14,21 @@ const Sells = () => {
 
     const { data, isLoading } = useGetSells(user?.externalId ?? '');
 
-    if (isLoading) return <div>Loading...</div>;
-
     return (
         <Screen>
             <Navbar />
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
                 <ContentSection>
-                    {data?.length > 0 ? (
+                    {isLoading ? (
+                        <div className="flex h-full w-full items-center justify-center">
+                            <img
+                                src={loading}
+                                alt="loading"
+                                className="size-12 animate-spin md:size-14"
+                            />
+                        </div>
+                    ) : Array.isArray(data) && data?.length > 0 ? (
                         <List>
                             {data.map((sell: SellType) => (
                                 <li key={sell.id}>
