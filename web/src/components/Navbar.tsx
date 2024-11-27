@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import logo from '../assets/logo.png';
-import moneyIcon from '../assets/saco-de-dolar.png';
-import carIcon from '../assets/carro-alt.png';
-import graphicIcon from '../assets/graphicicon.png';
-import leadsIcon from '../assets/leads.png';
+import logo from '../assets/icons/logo.png';
+import moneyIcon from '../assets/icons/saco-de-dolar.png';
+import carIcon from '../assets/icons/carro-alt.png';
+import graphicIcon from '../assets/icons/graphicicon.png';
+import leadsIcon from '../assets/icons/leads.png';
 import ANavbar from './ANavbar';
 
 const Navbar = () => {

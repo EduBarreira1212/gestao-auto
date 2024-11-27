@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useSignIn } from '@clerk/clerk-react';
 
-import logo from '../assets/logo.png';
+import logo from '../assets/icons/logo.png';
 import createUser from '../services/user/createUser';
 import { signUpSchema } from '../schemas/zodSchemas';
 import InputErrorMessage from '../components/InputErrorMessage';

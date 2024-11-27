@@ -1,4 +1,4 @@
-import loading from '../assets/loading.png';
+import loading from '../assets/icons/loading.png';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Expense from '../components/Expense';

@@ -1,5 +1,5 @@
 import Header from '../components/Header';
-import loading from '../assets/loading.png';
+import loading from '../assets/icons/loading.png';
 import Navbar from '../components/Navbar';
 import Sell from '../components/Sell';
 import ContentSection from '../components/ContentSection';

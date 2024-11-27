@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import loading from '../assets/loading.png';
+import loading from '../assets/icons/loading.png';
 import Button from './Button';
 import { useGetSells } from '../hooks/data/useGetSells';
 import { useUser } from '@clerk/clerk-react';
