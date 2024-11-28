@@ -54,7 +54,7 @@ const Vehicle = ({ car }: ICar) => {
             <div className="flex flex-row justify-between gap-2">
                 <span>Despesas: {formatter.format(expensesAmount)}</span>
                 <button
-                    className="rounded-sm border-2 bg-brand-neutral shadow-sm"
+                    className="font-montserrat rounded-sm border-2 bg-brand-neutral shadow-sm"
                     onClick={() => setShowAddExpenseModal(true)}
                 >
                     Adicionar
