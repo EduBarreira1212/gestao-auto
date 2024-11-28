@@ -25,25 +25,25 @@ const Header = () => {
             </h2>
             <div className="mx-auto hidden gap-4 md:flex">
                 <Link
-                    className="transition-all duration-200 hover:scale-110 hover:text-brand-accent"
+                    className="font-poppins transition-all duration-200 hover:scale-110 hover:text-brand-accent"
                     to="/vendas"
                 >
                     Vendas
                 </Link>
                 <Link
-                    className="transition-all duration-200 hover:scale-110 hover:text-brand-accent"
+                    className="font-poppins transition-all duration-200 hover:scale-110 hover:text-brand-accent"
                     to="/veiculos"
                 >
                     Veículos
                 </Link>
                 <Link
-                    className="transition-all duration-200 hover:scale-110 hover:text-brand-accent"
+                    className="font-poppins transition-all duration-200 hover:scale-110 hover:text-brand-accent"
                     to="/despesas"
                 >
                     Despesas
                 </Link>
                 <Link
-                    className="transition-all duration-200 hover:scale-110 hover:text-brand-accent"
+                    className="font-poppins transition-all duration-200 hover:scale-110 hover:text-brand-accent"
                     to="/leads"
                 >
                     Leads
@@ -51,7 +51,7 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-2">
                 <UserButton />
-                <span>{user?.fullName}</span>
+                <span className="font-montserrat">{user?.fullName}</span>
             </div>
             {showNavbarModal &&
                 createPortal(
