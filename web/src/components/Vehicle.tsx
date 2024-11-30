@@ -45,8 +45,8 @@ const Vehicle = ({ car }: ICar) => {
             >
                 X
             </button>
-            <span>{car.name}</span>
-            <span>{car.brand}</span>
+            <span className="text-lg">{car.name}</span>
+            <span className="text-lg">{car.brand}</span>
             <span>{car.year}</span>
             <span>{car.plate}</span>
             <span>KM: {car.km.toLocaleString()}</span>
@@ -54,7 +54,7 @@ const Vehicle = ({ car }: ICar) => {
             <div className="flex flex-row justify-between gap-2">
                 <span>Despesas: {formatter.format(expensesAmount)}</span>
                 <button
-                    className="font-montserrat rounded-sm border-2 bg-brand-neutral shadow-sm"
+                    className="rounded-sm border-2 bg-brand-neutral font-montserrat shadow-sm"
                     onClick={() => setShowAddExpenseModal(true)}
                 >
                     Adicionar
