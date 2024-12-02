@@ -16,6 +16,7 @@ model User {
   createdAt   DateTime @default(now())
   Cars        Car[]    @relation("UserCars")
   Sells       Sell[]   @relation("UserSells")
+  Leads       Lead[]   @relation("UserLeads")
 }
 
 model Car {
@@ -48,9 +49,23 @@ model Sell {
   id        String   @id @default(uuid())
   user_id   String
   car_id    String   @unique
+  lead_id   String
   amount    Float
   profit    Float    @default(0.0)
   createdAt DateTime @default(now())
   user      User     @relation(fields: [user_id], references: [id], name: "UserSells", onDelete: Cascade)
   car       Car      @relation(fields: [car_id], references: [id], name: "CarSell", onDelete: Cascade)
+  lead      Lead     @relation(fields: [lead_id], references: [id], name: "LeadPurchases", onDelete: Cascade)
+}
+
+model Lead {
+  id        String   @id @default(uuid())
+  user_id   String
+  name      String
+  email     String   @unique
+  phone     String   @unique
+  birthday  DateTime
+  purchases Sell[]   @relation("LeadPurchases")
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [user_id], references: [id], name: "UserLeads", onDelete: Cascade)
 }
