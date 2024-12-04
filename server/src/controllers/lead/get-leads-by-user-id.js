@@ -22,7 +22,7 @@ export class GetLeadsByUserIdController {
                 return { statusCode: 400, body: { message: 'ID invalid' } };
             }
 
-            const leads = await this.getLeadsByUserIdUseCase(userId);
+            const leads = await this.getLeadsByUserIdUseCase.execute(userId);
 
             if (!leads) {
                 return { statusCode: 404, body: { message: 'Leads not found' } };

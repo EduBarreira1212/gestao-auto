@@ -15,7 +15,7 @@ export class GetLeadByIdController {
                 return { statusCode: 400, body: { message: 'ID invalid' } };
             }
 
-            const lead = await this.getLeadByIdUseCase(leadId);
+            const lead = await this.getLeadByIdUseCase.execute(leadId);
 
             if (!lead) {
                 return { statusCode: 404, body: { message: 'Lead not found' } };
