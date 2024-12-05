@@ -25,7 +25,7 @@ export class UpdateLeadController {
 
             await updateLeadSchema.parseAsync(params);
 
-            const updatedLead = await this.updateLeadUseCase.execute(params);
+            const updatedLead = await this.updateLeadUseCase.execute(leadId, params);
 
             return { statusCode: 200, body: updatedLead };
         } catch (error) {
