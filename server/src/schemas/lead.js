@@ -5,9 +5,9 @@ export const createLeadSchema = z.object({
         .string({ required_error: 'User ID is required.' })
         .uuid({ message: 'User ID must be a valid UUID.' }),
     name: z
-        .string({ required_error: 'Car name is required.' })
+        .string({ required_error: 'Lead name is required.' })
         .trim()
-        .min(1, { message: 'Car name cannot be empty or just spaces.' }),
+        .min(1, { message: 'Lead name cannot be empty or just spaces.' }),
     email: z
         .string({ required_error: 'Email is a required field.' })
         .email({ message: 'Please provide a valid email address.' }),
