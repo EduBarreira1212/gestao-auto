@@ -5,7 +5,7 @@ export class UpdateLeadUseCase {
     }
     async execute(leadId, updateLeadParams) {
         const leadWithProvidedIdExists =
-            await this.postgresGetLeadByIdRepository(leadId);
+            await this.postgresGetLeadByIdRepository.execute(leadId);
 
         if (!leadWithProvidedIdExists) {
             throw new Error('Lead not found');
