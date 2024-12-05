@@ -28,7 +28,7 @@ export class CreateLeadUseCase {
         const leadWithProvidedEmailExists =
             await this.postgresGetLeadByEmailRepository.execute(leadEmail);
 
-        if (!leadWithProvidedEmailExists) {
+        if (leadWithProvidedEmailExists) {
             throw new Error('E-mail already in use by other lead');
         }
 
@@ -37,7 +37,7 @@ export class CreateLeadUseCase {
         const leadWithProvidedPhoneExists =
             await this.postgresGetLeadByPhoneRepository.execute(leadPhone);
 
-        if (!leadWithProvidedPhoneExists) {
+        if (leadWithProvidedPhoneExists) {
             throw new Error('Phone number already in use by other lead');
         }
 
