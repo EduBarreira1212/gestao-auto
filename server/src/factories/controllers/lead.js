@@ -67,10 +67,14 @@ export const makeGetLeadsByUserIdController = () => {
 
 export const makeUpdateLeadController = () => {
     const postgresGetLeadByIdRepository = new PostgresGetLeadByIdRepository();
+    const postgresGetLeadByEmailRepository = new PostgresGetLeadByEmailRepository();
+    const postgresGetLeadByPhoneRepository = new PostgresGetLeadByPhoneRepository();
     const postgresUpdateLeadRepository = new PostgresUpdateLeadRepository();
 
     const updateLeadUseCase = new UpdateLeadUseCase(
         postgresGetLeadByIdRepository,
+        postgresGetLeadByEmailRepository,
+        postgresGetLeadByPhoneRepository,
         postgresUpdateLeadRepository
     );
 
