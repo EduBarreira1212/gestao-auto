@@ -52,6 +52,21 @@ export type UpdateSell = {
     profit?: number;
 };
 
+export type CreateLead = {
+    user_id: string;
+    name: string;
+    email: string;
+    phone: string;
+    birthday: Date;
+};
+
+export type UpdateLead = {
+    name?: string;
+    email?: string;
+    phone?: string;
+    birthday?: Date;
+};
+
 export type VehicleType = {
     id: string;
     user_id: string;
@@ -79,5 +94,16 @@ export type ExpenseType = {
     car_id: string;
     amount: number;
     description: string;
+    createdAt: Date;
+};
+
+export type LeadType = {
+    id: string;
+    user_id: string;
+    name: string;
+    email: string;
+    phone: string;
+    birthday: Date;
+    purchases: SellType[];
     createdAt: Date;
 };
