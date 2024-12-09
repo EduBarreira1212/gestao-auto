@@ -15,3 +15,9 @@ export const expenseMutationsKeys = {
     deleteExpense: (expenseId: string) => ['deleteExpense', expenseId],
     updateExpense: (expenseId: string) => ['updateExpense', expenseId],
 };
+
+export const leadMutationsKeys = {
+    addLead: () => ['addLead'],
+    deleteLead: (leadId: string) => ['deleteLead', leadId],
+    updateLead: (leadId: string) => ['updateLead', leadId],
+};
