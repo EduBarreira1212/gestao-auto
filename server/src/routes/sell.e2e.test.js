@@ -4,6 +4,7 @@ import { app } from '../app.js';
 import { carFixture } from '../tests/fixtures/car.js';
 import { userFixture } from '../tests/fixtures/user.js';
 import { sellFixture } from '../tests/fixtures/sell.js';
+import { leadFixture } from '../tests/fixtures/lead.js';
 import { faker } from '@faker-js/faker';
 import clerkClient from '../../clerk/clerk.js';
 
@@ -25,12 +26,21 @@ describe('Sell Routes E2E Tests', () => {
                 id: undefined,
             });
 
+        const { body: leadCreated } = await request(app)
+            .post('/api/leads')
+            .send({
+                ...leadFixture,
+                user_id: userCreated.id,
+                id: undefined,
+            });
+
         const response = await request(app)
             .post('/api/sells')
             .send({
                 ...sellFixture,
                 user_id: userCreated.id,
                 car_id: carCreated.id,
+                lead_id: leadCreated.id,
                 id: undefined,
             });
 
@@ -57,12 +67,21 @@ describe('Sell Routes E2E Tests', () => {
                 id: undefined,
             });
 
+        const { body: leadCreated } = await request(app)
+            .post('/api/leads')
+            .send({
+                ...leadFixture,
+                user_id: userCreated.id,
+                id: undefined,
+            });
+
         const { body: sellCreated } = await request(app)
             .post('/api/sells')
             .send({
                 ...sellFixture,
                 user_id: userCreated.id,
                 car_id: carCreated.id,
+                lead_id: leadCreated.id,
                 id: undefined,
             });
 
@@ -91,12 +110,21 @@ describe('Sell Routes E2E Tests', () => {
                 id: undefined,
             });
 
+        const { body: leadCreated } = await request(app)
+            .post('/api/leads')
+            .send({
+                ...leadFixture,
+                user_id: userCreated.id,
+                id: undefined,
+            });
+
         const { body: sellCreated1 } = await request(app)
             .post('/api/sells')
             .send({
                 ...sellFixture,
                 user_id: userCreated.id,
                 car_id: carCreated.id,
+                lead_id: leadCreated.id,
                 id: undefined,
             });
 
@@ -127,12 +155,21 @@ describe('Sell Routes E2E Tests', () => {
                 id: undefined,
             });
 
+        const { body: leadCreated } = await request(app)
+            .post('/api/leads')
+            .send({
+                ...leadFixture,
+                user_id: userCreated.id,
+                id: undefined,
+            });
+
         const { body: sellCreated } = await request(app)
             .post('/api/sells')
             .send({
                 ...sellFixture,
                 user_id: userCreated.id,
                 car_id: carCreated.id,
+                lead_id: leadCreated.id,
                 id: undefined,
             });
 
@@ -166,12 +203,21 @@ describe('Sell Routes E2E Tests', () => {
                 id: undefined,
             });
 
+        const { body: leadCreated } = await request(app)
+            .post('/api/leads')
+            .send({
+                ...leadFixture,
+                user_id: userCreated.id,
+                id: undefined,
+            });
+
         const { body: sellCreated } = await request(app)
             .post('/api/sells')
             .send({
                 ...sellFixture,
                 user_id: userCreated.id,
                 car_id: carCreated.id,
+                lead_id: leadCreated.id,
                 id: undefined,
             });
 
