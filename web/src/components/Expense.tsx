@@ -42,7 +42,7 @@ const Expense = ({ expense }: ExpenseProps) => {
                     Ver detalhes
                 </Button>
                 <button
-                    className="font-montserrat my-3 self-center rounded-sm border-2 border-solid bg-red-600 p-2 text-brand-neutral transition-colors duration-200 hover:bg-red-700"
+                    className="my-3 self-center rounded-sm border-2 border-solid bg-red-600 p-2 font-montserrat text-brand-neutral transition-colors duration-200 hover:bg-red-700"
                     onClick={() => setShowDeleteExpenseModal(true)}
                 >
                     Excluir
