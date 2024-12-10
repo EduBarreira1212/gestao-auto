@@ -43,6 +43,7 @@ export type UpdateExpense = {
 export type CreateSell = {
     user_id: string;
     car_id: string;
+    lead_id: string;
     amount: number;
     profit: number;
 };
@@ -84,6 +85,7 @@ export type SellType = {
     id: string;
     user_id: string;
     car_id: string;
+    lead_id: string;
     amount: number;
     profit: number;
     createdAt: Date;
