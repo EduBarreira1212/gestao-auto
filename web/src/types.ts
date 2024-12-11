@@ -58,14 +58,14 @@ export type CreateLead = {
     name: string;
     email: string;
     phone: string;
-    birthday: Date;
+    birthday: string;
 };
 
 export type UpdateLead = {
     name?: string;
     email?: string;
     phone?: string;
-    birthday?: Date;
+    birthday?: string;
 };
 
 export type VehicleType = {
