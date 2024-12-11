@@ -121,3 +121,39 @@ export const updateExpenseSchema = z.object({
         .optional(),
     description: z.string().trim().min(1, 'A descrição é obrigatória.').optional(),
 });
+
+export const addLeadSchema = z.object({
+    name: z
+        .string()
+        .trim()
+        .min(2, 'O nome deve ter no mínimo 2 caracteres')
+        .max(50, 'O nome não pode exceder 50 caracteres'),
+
+    email: z.string().trim().email('Formato de e-mail inválido'),
+    phone: z
+        .string()
+        .regex(
+            /^\(\d{2}\) \d{5}-\d{4}$/,
+            "Telefone deve seguir o formato: '(xx) xxxxx-xxxx'"
+        ),
+    birthday: z.string({ required_error: 'A data de nascimento é obrigatória' }),
+});
+
+export const updateLeadSchema = z.object({
+    name: z
+        .string()
+        .trim()
+        .min(2, 'O nome deve ter no mínimo 2 caracteres')
+        .max(50, 'O nome não pode exceder 50 caracteres')
+        .optional(),
+
+    email: z.string().trim().email('Formato de e-mail inválido').optional(),
+    phone: z
+        .string()
+        .regex(
+            /^\(\d{2}\) \d{5}-\d{4}$/,
+            "Telefone deve seguir o formato: '(xx) xxxxx-xxxx'"
+        )
+        .optional(),
+    birthday: z.string().optional(),
+});
