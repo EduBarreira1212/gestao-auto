@@ -9,8 +9,13 @@ import Screen from '../components/Screen';
 import { useGetLeads } from '../hooks/data/useGetLeads';
 import List from '../components/List';
 import { LeadType } from '../types';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import AddLeadModal from '../modals/AddLeadModal';
 
 const Leads = () => {
+    const [showAddLeadModal, setShowAddLeadModal] = useState(false);
+
     const { user } = useUser();
 
     const { data: leads, isLoading } = useGetLeads(user?.externalId ?? '');
@@ -21,7 +26,7 @@ const Leads = () => {
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
                 <ContentSection>
-                    <AddButton onClick={() => console.log('Lead')}>
+                    <AddButton onClick={() => setShowAddLeadModal(true)}>
                         Adicionar novo lead
                     </AddButton>
                     {isLoading ? (
@@ -45,6 +50,11 @@ const Leads = () => {
                     )}
                 </ContentSection>
             </div>
+            {showAddLeadModal &&
+                createPortal(
+                    <AddLeadModal onClose={() => setShowAddLeadModal(false)} />,
+                    document.body
+                )}
         </Screen>
     );
 };
