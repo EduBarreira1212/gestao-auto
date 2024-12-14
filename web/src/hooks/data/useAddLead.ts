@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CreateLead, LeadType } from '../../types';
-import { vehicleQueriesKeys } from '../../keys/queries';
+import { leadQueriesKeys } from '../../keys/queries';
 import { leadMutationsKeys } from '../../keys/mutations';
 import { useAuth } from '@clerk/clerk-react';
 import createLead from '../../services/lead/createLead';
@@ -28,7 +28,7 @@ export const useAddLead = () => {
         },
         onSuccess: (newLead) => {
             queryClient.setQueryData(
-                vehicleQueriesKeys.getVehicles(),
+                leadQueriesKeys.getLeads(),
                 (oldData: LeadType[]) => {
                     return [...oldData, newLead];
                 }
