@@ -8,6 +8,7 @@ import ModalContainer from '../components/ModalContainer';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
 import { useGetLeads } from '../hooks/data/useGetLeads';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 type CreateSellModalprops = {
     carId: string;
@@ -47,7 +48,7 @@ const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-1 p-5"

@@ -1,5 +1,6 @@
 import { useDeleteExpense } from '../hooks/data/useDeleteExpense';
 import ModalContainer from '../components/ModalContainer';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 type DeleteExpenseModalProps = {
     expenseId: string;
@@ -11,7 +12,7 @@ const DeleteExpenseModal = ({ expenseId, onClose }: DeleteExpenseModalProps) => 
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <div className="flex flex-col gap-3">
                 <h2>Tem certeza que deseja excluir essa despesa?</h2>
                 <div className="flex flex-row justify-evenly">

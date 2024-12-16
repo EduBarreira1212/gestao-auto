@@ -6,6 +6,7 @@ import { updateVehicleSchema } from '../schemas/zodSchemas';
 import { useUpdateVehicle } from '../hooks/data/useUpdateVehicle';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 type VehicleDetailsModalprops = {
     vehicle: VehicleType;
@@ -41,7 +42,7 @@ const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => 
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <form
                 className="flex flex-col gap-1 p-5"
                 onSubmit={handleSubmit(onSubmit)}

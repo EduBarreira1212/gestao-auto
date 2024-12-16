@@ -1,5 +1,6 @@
 import { useDeleteSell } from '../hooks/data/useDeleteSell';
 import ModalContainer from '../components/ModalContainer';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 type DeleteSellModalProps = {
     sellId: string;
@@ -11,7 +12,7 @@ const DeleteSellModal = ({ sellId, onClose }: DeleteSellModalProps) => {
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <div className="flex flex-col gap-3">
                 <h2>Tem certeza que deseja excluir essa venda?</h2>
                 <div className="flex flex-row justify-evenly">

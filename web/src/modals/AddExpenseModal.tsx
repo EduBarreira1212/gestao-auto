@@ -6,6 +6,7 @@ import { createExpenseSchema } from '../schemas/zodSchemas';
 import { useAddExpenses } from '../hooks/data/useAddExpenses';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 type ExpenseModalProps = {
     carId: string;
@@ -38,7 +39,7 @@ const AddExpenseModal = ({ carId, onClose }: ExpenseModalProps) => {
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-1 p-5"

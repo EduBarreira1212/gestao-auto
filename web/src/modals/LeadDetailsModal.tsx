@@ -6,6 +6,7 @@ import ModalContainer from '../components/ModalContainer';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
 import { useUpdateLead } from '../hooks/data/useUpdateLead';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 type LeadDetailsModalProps = {
     onClose: () => void;
@@ -39,7 +40,7 @@ const LeadDetailsModal = ({ onClose, lead }: LeadDetailsModalProps) => {
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-1 p-5"

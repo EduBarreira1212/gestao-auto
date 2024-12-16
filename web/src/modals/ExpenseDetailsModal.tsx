@@ -6,6 +6,7 @@ import ModalContainer from '../components/ModalContainer';
 import { useUpdateExpense } from '../hooks/data/useUpdateExpense';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 type ExpenseDetailsModalProps = {
     onClose: () => void;
@@ -37,7 +38,7 @@ const ExpenseDetailsModal = ({ onClose, expense }: ExpenseDetailsModalProps) => 
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-1 p-5"

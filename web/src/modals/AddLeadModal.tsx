@@ -7,6 +7,7 @@ import ModalContainer from '../components/ModalContainer';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
 import { useAddLead } from '../hooks/data/useAddLead';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 const AddLeadModal = ({ onClose }: { onClose: () => void }) => {
     const { user } = useUser();
@@ -35,7 +36,7 @@ const AddLeadModal = ({ onClose }: { onClose: () => void }) => {
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <form
                 className="flex flex-col gap-1 p-5"
                 onSubmit={handleSubmit(onSubmit)}

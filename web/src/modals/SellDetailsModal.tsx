@@ -6,6 +6,7 @@ import { useUpdateSell } from '../hooks/data/useUpdateSell';
 import ModalContainer from '../components/ModalContainer';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 type SellDetailsModalProps = {
     onClose: () => void;
@@ -33,7 +34,7 @@ const SellDetailsModal = ({ onClose, sellId }: SellDetailsModalProps) => {
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-1 p-5"

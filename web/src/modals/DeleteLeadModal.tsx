@@ -1,5 +1,6 @@
 import ModalContainer from '../components/ModalContainer';
 import { useDeleteLead } from '../hooks/data/useDeleteLead';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 type DeleteLeadModalProps = {
     leadId: string;
@@ -11,7 +12,7 @@ const DeleteLeadModal = ({ leadId, onClose }: DeleteLeadModalProps) => {
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <div className="flex flex-col gap-3">
                 <h2>Tem certeza que deseja excluir esse lead?</h2>
                 <div className="flex flex-row justify-evenly">

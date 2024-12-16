@@ -7,6 +7,7 @@ import { useAddVehicle } from '../hooks/data/useAddVehicle';
 import ModalContainer from '../components/ModalContainer';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
+import CloseModalBtn from '../components/CloseModalBtn';
 
 const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
     const { user } = useUser();
@@ -35,7 +36,7 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
 
     return (
         <ModalContainer>
-            <button onClick={onClose}>X</button>
+            <CloseModalBtn onClick={onClose} />
             <form
                 className="flex flex-col gap-1 p-5"
                 onSubmit={handleSubmit(onSubmit)}
