@@ -95,6 +95,12 @@ export const createSellSchema = z.object({
         .number({ invalid_type_error: 'O valor deve ser um número.' })
         .positive('O valor deve ser positivo.'),
     profit: z.number({ invalid_type_error: 'O lucro deve ser um número.' }),
+    lead_id: z
+        .string()
+        .min(1, 'Por favor, selecione um lead válido.')
+        .refine((val) => val !== '', {
+            message: 'A seleção de um lead é obrigatória.',
+        }),
 });
 
 export const updateSellSchema = z.object({
