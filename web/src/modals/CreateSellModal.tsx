@@ -1,12 +1,13 @@
 import { useUser } from '@clerk/clerk-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { CreateSell } from '../types';
+import { CreateSell, LeadType } from '../types';
 import { createSellSchema } from '../schemas/zodSchemas';
 import { useCreateSell } from '../hooks/data/useCreateSell';
 import ModalContainer from '../components/ModalContainer';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
+import { useGetLeads } from '../hooks/data/useGetLeads';
 
 type CreateSellModalprops = {
     carId: string;
@@ -17,6 +18,8 @@ const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
     const { user } = useUser();
 
     const { mutate, isPending } = useCreateSell(user?.externalId ?? '');
+
+    const { data: leads } = useGetLeads(user?.externalId ?? '');
 
     const {
         register,
@@ -66,6 +69,22 @@ const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
                 />
                 {errors.profit && (
                     <InputErrorMessage>{errors.profit.message}</InputErrorMessage>
+                )}
+                <label>Lead:</label>
+                <select className="border-2 p-2" {...register('lead_id')}>
+                    <option value="" disabled>
+                        Selecione um lead
+                    </option>
+                    {leads?.map((lead: LeadType) => {
+                        return (
+                            <option key={lead.id} value={lead.id}>
+                                Nome: {lead.name} E-mail: {lead.email}
+                            </option>
+                        );
+                    })}
+                </select>
+                {errors.lead_id && (
+                    <InputErrorMessage>{errors.lead_id.message}</InputErrorMessage>
                 )}
                 <SubmitBtn value="Adicionar venda" disabled={isPending} />
             </form>
