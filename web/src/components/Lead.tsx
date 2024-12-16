@@ -28,6 +28,7 @@ const Lead = ({ lead }: LeadType) => {
             <span>{lead.email}</span>
             <span>{lead.phone}</span>
             <span>
+                Data de nascimento:{' '}
                 {new Date(lead.birthday).toLocaleDateString('pt-BR', {
                     timeZone: 'UTC',
                 })}
