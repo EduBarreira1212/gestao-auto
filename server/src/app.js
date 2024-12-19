@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/users', usersRouter);
+app.use('/api/stripe', stripeRouter);
 
 const clerkAuthMiddleware =
     process.env.NODE_ENV === 'test' ? (req, res, next) => next() : requireAuth();
@@ -34,7 +35,6 @@ app.use('/api/cars', carsRouter);
 app.use('/api/expenses', expensesRouter);
 app.use('/api/sells', sellsRouter);
 app.use('/api/leads', leadsRouter);
-app.use('/api/stripe', stripeRouter);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
