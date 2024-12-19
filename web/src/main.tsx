@@ -10,7 +10,7 @@ import './index.css';
 
 const queryClient = new QueryClient();
 
-const stripePromise = loadStripe(process.env.VITE_STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
