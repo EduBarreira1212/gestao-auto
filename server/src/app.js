@@ -12,6 +12,7 @@ import { carsRouter } from './routes/car.js';
 import { expensesRouter } from './routes/expense.js';
 import { sellsRouter } from './routes/sell.js';
 import { leadsRouter } from './routes/lead.js';
+import { stripeRouter } from './routes/stripe.js';
 import { webhooksRouter } from './routes/webhooks.js';
 
 export const app = express();
@@ -33,6 +34,7 @@ app.use('/api/cars', carsRouter);
 app.use('/api/expenses', expensesRouter);
 app.use('/api/sells', sellsRouter);
 app.use('/api/leads', leadsRouter);
+app.use('/api/stripe', stripeRouter);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
