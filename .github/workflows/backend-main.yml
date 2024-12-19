@@ -30,6 +30,7 @@ jobs:
           echo "DATABASE_URL=postgresql://root:password@localhost:5433/car-manager-test" >> server/.env.test
           echo "CLERK_PUBLISHABLE_KEY=${{ secrets.TEST_CLERK_PUBLISHABLE_KEY }}" >> server/.env.test
           echo "CLERK_SECRET_KEY=${{ secrets.TEST_CLERK_SECRET_KEY }}" >> server/.env.test
+          echo "STRIPE_SECRET_KEY=${{ secrets.TEST_STRIPE_SECRET_KEY }}" >> server/.env.test
           echo "NODE_ENV=test" >> server/.env.test
 
       - name: Install dependencies
