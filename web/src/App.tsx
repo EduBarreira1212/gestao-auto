@@ -8,6 +8,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import SignUp from './pages/SignUp';
 import Leads from './pages/Leads';
 import SignInPage from './pages/SignIn';
+import PricingTable from './pages/PricingTable';
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
                 <Route path="/" element={<Navigate to="/dashboard" />} />
                 <Route path="/sign-in" element={<SignInPage />} />
                 <Route path="/cadastro" element={<SignUp />} />
+                <Route path="/planos" element={<PricingTable />} />
                 <Route element={<DashboardLayout />}>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/vendas" element={<Sells />} />
