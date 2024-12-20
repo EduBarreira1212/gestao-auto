@@ -20,7 +20,7 @@ stripeRouter.post('/create-checkout-session', async (req, res) => {
             ],
             mode: 'subscription',
             success_url: `${process.env.FRONTEND_URL}/sign-in`,
-            cancel_url: `${process.env.FRONTEND_URL}/cadastro`,
+            cancel_url: `${process.env.FRONTEND_URL}/planos`,
         });
 
         res.json({ url: session.url });
