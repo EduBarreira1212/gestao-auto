@@ -1,17 +1,17 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useSignIn } from '@clerk/clerk-react';
 
 import logo from '../assets/icons/logo.png';
 import createUser from '../services/user/createUser';
 import { signUpSchema } from '../schemas/zodSchemas';
 import InputErrorMessage from '../components/InputErrorMessage';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-    const { signIn, setActive } = useSignIn();
-
     type CreateUserForm = z.infer<typeof signUpSchema>;
+
+    const navigate = useNavigate();
 
     const {
         register,
@@ -34,17 +34,7 @@ const SignUp = () => {
         }
 
         if (response?.status === 201 && response.data) {
-            await signIn?.create({
-                identifier: response.data.email,
-                strategy: 'password',
-                password: createUserParams.password,
-            });
-
-            if (signIn?.createdSessionId) {
-                await setActive({
-                    session: signIn.createdSessionId,
-                });
-            }
+            navigate('/planos');
         }
     };
 
