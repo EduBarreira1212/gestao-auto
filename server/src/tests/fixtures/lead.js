@@ -5,6 +5,6 @@ export const leadFixture = {
     user_id: faker.string.uuid(),
     name: faker.person.firstName(),
     email: faker.internet.email(),
-    phone: fakerPT_BR.phone.number(),
+    phone: fakerPT_BR.phone.number({ style: 'national' }),
     birthday: faker.date.birthdate(),
 };
