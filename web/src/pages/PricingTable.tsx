@@ -36,7 +36,7 @@ const PricingTable = () => {
                 <h2 className="text-3xl font-bold">Nossos planos</h2>
                 <div className="mt-4">
                     <button
-                        className={`rounded-l-lg px-4 py-2 ${
+                        className={`rounded-l-lg px-4 py-2 font-montserrat ${
                             isAnnual ? 'bg-brand-primary text-white' : 'bg-gray-200'
                         }`}
                         onClick={() => setIsAnnual(true)}
@@ -44,7 +44,7 @@ const PricingTable = () => {
                         Anual
                     </button>
                     <button
-                        className={`rounded-r-lg px-4 py-2 ${
+                        className={`rounded-r-lg px-4 py-2 font-montserrat ${
                             !isAnnual ? 'bg-brand-primary text-white' : 'bg-gray-200'
                         }`}
                         onClick={() => setIsAnnual(false)}
@@ -61,15 +61,15 @@ const PricingTable = () => {
                         className="w-80 rounded-lg bg-white p-6 text-center shadow-md"
                     >
                         <h3 className="mb-4 text-2xl font-semibold">{plan.name}</h3>
-                        <p className="mb-4 text-4xl font-bold text-brand-primary">
+                        <p className="mb-4 font-poppins text-4xl font-semibold text-brand-primary">
                             R$ {isAnnual ? plan.annualPrice : plan.monthlyPrice}
-                            <span className="text-lg text-brand-secondary">
+                            <span className="font-poppins text-lg text-brand-secondary">
                                 /{isAnnual ? 'anual' : 'mensal'}
                             </span>
                         </p>
                         <ul className="mb-6 text-gray-700">
                             {plan.features.map((feature, i) => (
-                                <li key={i} className="mb-2">
+                                <li key={i} className="mb-2 font-poppins">
                                     ✅ {feature}
                                 </li>
                             ))}
