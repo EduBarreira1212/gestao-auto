@@ -19,6 +19,7 @@ describe('PostgresUpdateUserRepository', () => {
             name: user.name,
             email: user.email,
             password: user.password,
+            paid: false,
             createdAt: result.createdAt,
         });
     });
