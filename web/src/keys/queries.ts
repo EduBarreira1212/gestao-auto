@@ -1,3 +1,7 @@
+export const userQueriesKeys = {
+    getUserById: (userId: string) => ['user', userId],
+};
+
 export const sellQueriesKeys = {
     getSells: () => ['sells'],
 };
