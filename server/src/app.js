@@ -14,6 +14,7 @@ import { sellsRouter } from './routes/sell.js';
 import { leadsRouter } from './routes/lead.js';
 import { stripeRouter } from './routes/stripe.js';
 import { webhooksRouter } from './routes/webhooks.js';
+import { subscriptionMiddleware } from './middlewares/subscription.js';
 
 export const app = express();
 
@@ -30,7 +31,13 @@ app.use('/api/stripe', stripeRouter);
 const clerkAuthMiddleware =
     process.env.NODE_ENV === 'test' ? (req, res, next) => next() : requireAuth();
 
+const subMiddleware =
+    process.env.NODE_ENV === 'test'
+        ? (req, res, next) => next()
+        : subscriptionMiddleware;
+
 app.use(clerkAuthMiddleware);
+app.use(subMiddleware);
 app.use('/api/cars', carsRouter);
 app.use('/api/expenses', expensesRouter);
 app.use('/api/sells', sellsRouter);
