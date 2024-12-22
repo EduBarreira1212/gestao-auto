@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp';
 import Leads from './pages/Leads';
 import SignInPage from './pages/SignIn';
 import PricingTable from './pages/PricingTable';
+import ProtectedLayout from './layouts/ProtectedLayout';
 
 const App = () => {
     return (
@@ -20,10 +21,12 @@ const App = () => {
                 <Route path="/planos" element={<PricingTable />} />
                 <Route element={<DashboardLayout />}>
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/vendas" element={<Sells />} />
-                    <Route path="/veiculos" element={<Vehicles />} />
-                    <Route path="/despesas" element={<Expenses />} />
-                    <Route path="/leads" element={<Leads />} />
+                    <Route element={<ProtectedLayout />}>
+                        <Route path="/vendas" element={<Sells />} />
+                        <Route path="/veiculos" element={<Vehicles />} />
+                        <Route path="/despesas" element={<Expenses />} />
+                        <Route path="/leads" element={<Leads />} />
+                    </Route>
                 </Route>
             </Route>
         </Routes>
