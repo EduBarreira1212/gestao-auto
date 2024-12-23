@@ -106,7 +106,7 @@ const Overview = () => {
                     <div className="flex flex-1 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 text-brand-secondary shadow-md shadow-brand-primary">
                         <div className="flex justify-between gap-5 border-b-2 border-solid p-3">
                             <span>Vendas mês atual:</span>
-                            <span>{sellsThisMonth.length}</span>
+                            <span>{sellsThisMonth?.length}</span>
                         </div>
                         <div className="flex flex-col justify-around gap-5 border-b-2 border-solid p-3">
                             <span>Vendas totais: {sells?.length}</span>
@@ -135,7 +135,7 @@ const Overview = () => {
                                 Preço médio: {formatter.format(averageVehiclesPrice)}
                             </span>
                             <span>
-                                Despesas esse mês: {expensesThisMonth.length}
+                                Despesas esse mês: {expensesThisMonth?.length}
                             </span>
                             <span>
                                 Valor total das despesas:{' '}
