@@ -1,6 +1,10 @@
 import clerkClient from '../../clerk/clerk.js';
 
 export class ClerkClientAdapter {
+    async getUser(userId) {
+        return await clerkClient.users.getUser(userId);
+    }
+
     async createUser(createClerkUserParams) {
         return await clerkClient.users.createUser(createClerkUserParams);
     }
