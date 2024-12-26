@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
 import { makeUpdateUserController } from '../factories/controllers/user.js';
+import { PostgresChangePaidStatusRepository } from '../respositories/postgres/user/change-paid-status.js';
 
 dotenv.config({ path: '.env' });
 
@@ -107,49 +108,55 @@ webhooksRouter.post(
         }
         let subscription;
         let status;
-        // Handle the event
+        const changePaidStatusRepository = new PostgresChangePaidStatusRepository();
+
         switch (event.type) {
-            case 'customer.subscription.trial_will_end':
+            case 'customer.subscription.deleted': {
                 subscription = event.data.object;
                 status = subscription.status;
+
                 console.log(`Subscription status is ${status}.`);
-                // Then define and call a method to handle the subscription trial ending.
-                // handleSubscriptionTrialEnding(subscription);
-                break;
-            case 'customer.subscription.deleted':
-                subscription = event.data.object;
-                status = subscription.status;
-                console.log(`Subscription status is ${status}.`);
-                // Then define and call a method to handle the subscription deleted.
-                // handleSubscriptionDeleted(subscriptionDeleted);
-                break;
-            case 'customer.subscription.created':
-                subscription = event.data.object;
-                status = subscription.status;
-                console.log(`Subscription status is ${status}.`);
-                // Then define and call a method to handle the subscription created.
-                // handleSubscriptionCreated(subscription);
-                break;
-            case 'customer.subscription.updated':
-                subscription = event.data.object;
-                status = subscription.status;
-                console.log(`Subscription status is ${status}.`);
-                // Then define and call a method to handle the subscription update.
-                // handleSubscriptionUpdated(subscription);
-                break;
-            case 'entitlements.active_entitlement_summary.updated':
-                subscription = event.data.object;
-                console.log(
-                    `Active entitlement summary updated for ${subscription}.`
+
+                const customer = await stripe.customers.retrieve(
+                    subscription.customer
                 );
-                // Then define and call a method to handle active entitlement summary updated
-                // handleEntitlementUpdated(subscription);
+
+                const userEmail = customer.email;
+
+                const userUpdated = await changePaidStatusRepository.execute(
+                    userEmail,
+                    false
+                );
+
+                console.log(userUpdated);
+
                 break;
+            }
+            case 'customer.subscription.created': {
+                subscription = event.data.object;
+                status = subscription.status;
+
+                console.log(`Subscription status is ${status}.`);
+
+                const customer = await stripe.customers.retrieve(
+                    subscription.customer
+                );
+
+                const userEmail = customer.email;
+
+                const userUpdated = await changePaidStatusRepository.execute(
+                    userEmail,
+                    true
+                );
+
+                console.log(userUpdated);
+
+                break;
+            }
             default:
-                // Unexpected event type
                 console.log(`Unhandled event type ${event.type}.`);
         }
-        // Return a 200 response to acknowledge receipt of the event
+
         response.send();
     }
 );
