@@ -123,12 +123,7 @@ webhooksRouter.post(
 
                 const userEmail = customer.email;
 
-                const userUpdated = await changePaidStatusRepository.execute(
-                    userEmail,
-                    false
-                );
-
-                console.log(userUpdated);
+                await changePaidStatusRepository.execute(userEmail, false);
 
                 break;
             }
@@ -144,12 +139,7 @@ webhooksRouter.post(
 
                 const userEmail = customer.email;
 
-                const userUpdated = await changePaidStatusRepository.execute(
-                    userEmail,
-                    true
-                );
-
-                console.log(userUpdated);
+                await changePaidStatusRepository.execute(userEmail, true);
 
                 break;
             }
