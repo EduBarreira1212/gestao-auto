@@ -9,7 +9,7 @@ const SubmitBtn = ({ value, disabled }: SubmitBtnPropsType) => {
             type="submit"
             value={value}
             disabled={disabled}
-            className="font-montserrat cursor-pointer border-2 bg-brand-secondary p-2 text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
+            className="cursor-pointer border-2 bg-brand-secondary p-2 font-montserrat text-brand-neutral transition-colors duration-200 hover:bg-[#070a1d] hover:text-brand-accent"
         />
     );
 };
