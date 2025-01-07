@@ -36,4 +36,26 @@ describe('Header', () => {
         expect(getByTestId('user-button')).toBeInTheDocument();
         expect(getByText(/test user/i)).toBeInTheDocument();
     });
+
+    test('should open and close navbar modal correctly', async () => {
+        const { getByText } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        const navbarButton = getByText('>');
+
+        expect(navbarButton).toBeInTheDocument();
+
+        await userEvent.click(navbarButton);
+
+        const closeNavbarButton = getByText('<');
+
+        expect(closeNavbarButton).toBeInTheDocument();
+
+        await userEvent.click(closeNavbarButton);
+
+        setTimeout(() => expect(closeNavbarButton).not.toBeInTheDocument(), 300);
+    });
 });
