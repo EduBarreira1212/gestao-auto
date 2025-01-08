@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
       "version": "1.0.0",
-      "title": "Car Manager API",
+      "title": "Gestão auto API",
       "description": "API documentation for managing car stores."
     },
     "host": "localhost:3000",
