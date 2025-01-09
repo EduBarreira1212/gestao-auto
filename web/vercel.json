@@ -5,6 +5,6 @@
       "destination": "/index.html"
     }
   ],
-  "exclude": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx"]
+  "ignore": ["**/*.test.*", "**/*.spec.*"]
 }
   
