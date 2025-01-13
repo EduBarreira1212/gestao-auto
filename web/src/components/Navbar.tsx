@@ -5,6 +5,7 @@ import moneyIcon from '../assets/icons/saco-de-dolar.png';
 import carIcon from '../assets/icons/carro-alt.png';
 import graphicIcon from '../assets/icons/graphicicon.png';
 import leadsIcon from '../assets/icons/leads.png';
+import subscriptionIcon from '../assets/icons/subscription.png';
 import ANavbar from './ANavbar';
 
 const Navbar = () => {
@@ -27,6 +28,14 @@ const Navbar = () => {
                 </ANavbar>
                 <ANavbar to="/leads" iconURL={leadsIcon}>
                     Leads
+                </ANavbar>
+            </div>
+            <div className="mt-auto">
+                <ANavbar
+                    to="https://billing.stripe.com/p/login/9AQbKv4jp0UU4mI7ss"
+                    iconURL={subscriptionIcon}
+                >
+                    Assinatura
                 </ANavbar>
             </div>
         </nav>
