@@ -6,6 +6,7 @@ import moneyIcon from '../assets/icons/saco-de-dolar.png';
 import carIcon from '../assets/icons/carro-alt.png';
 import graphicIcon from '../assets/icons/graphicicon.png';
 import leadsIcon from '../assets/icons/leads.png';
+import subscriptionIcon from '../assets/icons/subscription.png';
 import ANavbar from '../components/ANavbar';
 
 const NavbarModal = ({ onClose }: { onClose: () => void }) => {
@@ -27,7 +28,7 @@ const NavbarModal = ({ onClose }: { onClose: () => void }) => {
             }`}
         >
             <nav
-                className={`fixed left-0 top-0 flex h-1/2 w-1/2 flex-col items-center gap-8 bg-brand-primary p-5 transition-transform duration-300 ease-out ${
+                className={`fixed left-0 top-0 flex h-fit w-1/2 flex-col items-center gap-8 bg-brand-primary p-5 transition-transform duration-300 ease-out ${
                     isVisible ? 'translate-x-0' : '-translate-x-full'
                 }`}
             >
@@ -54,6 +55,14 @@ const NavbarModal = ({ onClose }: { onClose: () => void }) => {
                     </ANavbar>
                     <ANavbar to="/leads" iconURL={leadsIcon}>
                         Leads
+                    </ANavbar>
+                </div>
+                <div className="mt-auto">
+                    <ANavbar
+                        to="https://billing.stripe.com/p/login/9AQbKv4jp0UU4mI7ss"
+                        iconURL={subscriptionIcon}
+                    >
+                        Assinatura
                     </ANavbar>
                 </div>
             </nav>
