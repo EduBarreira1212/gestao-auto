@@ -99,6 +99,7 @@ const Vehicle = ({ car }: ICar) => {
                     <CreateSellModal
                         carId={car.id}
                         expenses={expensesAmount}
+                        entryPrice={car.entry_price}
                         onClose={() => setShowCreateSellModal(false)}
                     />,
                     document.body
