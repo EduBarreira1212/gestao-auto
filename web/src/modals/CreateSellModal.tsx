@@ -13,10 +13,16 @@ import CloseModalBtn from '../components/CloseModalBtn';
 type CreateSellModalprops = {
     carId: string;
     expenses: number;
+    entryPrice: number;
     onClose: () => void;
 };
 
-const CreateSellModal = ({ carId, expenses, onClose }: CreateSellModalprops) => {
+const CreateSellModal = ({
+    carId,
+    expenses,
+    entryPrice,
+    onClose,
+}: CreateSellModalprops) => {
     const { user } = useUser();
 
     const { mutate, isPending } = useCreateSell(user?.externalId ?? '');
@@ -34,7 +40,7 @@ const CreateSellModal = ({ carId, expenses, onClose }: CreateSellModalprops) => 
     const onSubmit: SubmitHandler<CreateSell> = async (createSellParams) => {
         if (!user || !user.externalId) return;
 
-        const profit = createSellParams.amount - expenses;
+        const profit = createSellParams.amount - (expenses + entryPrice);
 
         const newSell = {
             ...createSellParams,
