@@ -98,6 +98,7 @@ const Vehicle = ({ car }: ICar) => {
                 createPortal(
                     <CreateSellModal
                         carId={car.id}
+                        expenses={expensesAmount}
                         onClose={() => setShowCreateSellModal(false)}
                     />,
                     document.body
