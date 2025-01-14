@@ -12,10 +12,11 @@ import CloseModalBtn from '../components/CloseModalBtn';
 
 type CreateSellModalprops = {
     carId: string;
+    expenses: number;
     onClose: () => void;
 };
 
-const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
+const CreateSellModal = ({ carId, expenses, onClose }: CreateSellModalprops) => {
     const { user } = useUser();
 
     const { mutate, isPending } = useCreateSell(user?.externalId ?? '');
@@ -33,8 +34,11 @@ const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
     const onSubmit: SubmitHandler<CreateSell> = async (createSellParams) => {
         if (!user || !user.externalId) return;
 
+        const profit = createSellParams.amount - expenses;
+
         const newSell = {
             ...createSellParams,
+            profit,
             user_id: user?.externalId,
             car_id: carId,
         };
@@ -45,6 +49,11 @@ const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
             },
         });
     };
+
+    const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+    });
 
     return (
         <ModalContainer>
@@ -62,15 +71,7 @@ const CreateSellModal = ({ carId, onClose }: CreateSellModalprops) => {
                 {errors.amount && (
                     <InputErrorMessage>{errors.amount.message}</InputErrorMessage>
                 )}
-                <label>Lucro:</label>
-                <input
-                    className="border-2 p-2"
-                    type="number"
-                    {...register('profit', { valueAsNumber: true })}
-                />
-                {errors.profit && (
-                    <InputErrorMessage>{errors.profit.message}</InputErrorMessage>
-                )}
+                <p>Despesas: {formatter.format(expenses)}</p>
                 <label>Lead:</label>
                 <select className="border-2 p-2" {...register('lead_id')}>
                     <option value="" disabled>
