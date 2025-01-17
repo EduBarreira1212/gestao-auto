@@ -8,6 +8,7 @@ export class PostgresGetCarsByUserIdRepository {
             },
             include: {
                 expenses: true,
+                sell: true,
             },
         });
 
