@@ -26,9 +26,11 @@ const Leads = () => {
             <div className="flex w-full flex-col bg-brand-neutral">
                 <Header />
                 <ContentSection>
-                    <AddButton onClick={() => setShowAddLeadModal(true)}>
-                        Adicionar novo lead
-                    </AddButton>
+                    <div className="relative mt-4 flex w-full items-center">
+                        <AddButton onClick={() => setShowAddLeadModal(true)}>
+                            Adicionar novo veículo
+                        </AddButton>
+                    </div>
                     {isLoading ? (
                         <div className="flex h-full w-full items-center justify-center">
                             <img
