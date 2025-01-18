@@ -23,7 +23,11 @@ dotenv.config({ path: '.env' });
 app.use('/api/webhooks', webhooksRouter);
 
 app.use(express.json());
-app.use(cors());
+app.use(
+    cors({
+        origin: process.env.FRONTEND_URL,
+    })
+);
 
 app.use('/api/users', usersRouter);
 app.use('/api/stripe', stripeRouter);
