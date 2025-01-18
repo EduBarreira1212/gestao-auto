@@ -39,7 +39,7 @@ const Vehicles = () => {
                 <Header />
                 <ContentSection>
                     <div className="relative flex w-full items-center">
-                        <div className="flex gap-1">
+                        <div className="flex flex-col gap-1 md:flex-row">
                             <button
                                 className={`rounded-md border-2 bg-brand-secondary p-1 ${filter === 'all' ? 'border-brand-primary text-brand-accent' : 'text-brand-neutral'}`}
                                 onClick={() => setFilter('all')}
