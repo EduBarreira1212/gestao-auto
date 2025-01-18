@@ -18,6 +18,7 @@ type ICar = {
         km: number;
         entry_price: number;
         expenses: ExpenseType[];
+        sell: boolean;
         createdAt: Date;
     };
 };
@@ -64,11 +65,15 @@ const Vehicle = ({ car }: ICar) => {
                 Data de entrada:{' '}
                 {new Date(car.createdAt).toLocaleDateString('pt-BR')}
             </span>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-center gap-4">
                 <Button onClick={() => setShowVehicleDetailsModal(true)}>
                     Ver detalhes
                 </Button>
-                <Button onClick={() => setShowCreateSellModal(true)}>Vender</Button>
+                {!car.sell && (
+                    <Button onClick={() => setShowCreateSellModal(true)}>
+                        Vender
+                    </Button>
+                )}
             </div>
             {showDeleteVehicleModal &&
                 createPortal(
