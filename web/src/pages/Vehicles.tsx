@@ -41,19 +41,19 @@ const Vehicles = () => {
                     <div className="relative flex w-full items-center">
                         <div className="flex gap-1">
                             <button
-                                className={`rounded-md border-2 bg-brand-secondary p-1 text-brand-neutral ${filter === 'all' ? 'border-brand-primary text-brand-accent' : ''}`}
+                                className={`rounded-md border-2 bg-brand-secondary p-1 ${filter === 'all' ? 'border-brand-primary text-brand-accent' : 'text-brand-neutral'}`}
                                 onClick={() => setFilter('all')}
                             >
                                 Todos
                             </button>
                             <button
-                                className={`rounded-md border-2 bg-brand-secondary p-1 text-brand-neutral ${filter === 'stock' ? 'border-brand-primary text-brand-accent' : ''}`}
+                                className={`rounded-md border-2 bg-brand-secondary p-1 ${filter === 'stock' ? 'border-brand-primary text-brand-accent' : 'text-brand-neutral'}`}
                                 onClick={() => setFilter('stock')}
                             >
                                 Estoque
                             </button>
                             <button
-                                className={`rounded-md border-2 bg-brand-secondary p-1 text-brand-neutral ${filter === 'sold' ? 'border-brand-primary text-brand-accent' : ''}`}
+                                className={`rounded-md border-2 bg-brand-secondary p-1 ${filter === 'sold' ? 'border-brand-primary text-brand-accent' : 'text-brand-neutral'}`}
                                 onClick={() => setFilter('sold')}
                             >
                                 Vendidos
