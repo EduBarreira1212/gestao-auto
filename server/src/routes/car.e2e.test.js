@@ -85,8 +85,8 @@ describe('Cars Routes E2E Tests', () => {
 
         expect(response.status).toBe(200);
         expect(response.body).toStrictEqual([
-            { ...carCreated1, expenses: [] },
-            { ...carCreated2, expenses: [] },
+            { ...carCreated1, expenses: [], sell: null },
+            { ...carCreated2, expenses: [], sell: null },
         ]);
 
         await clerkClient.users.deleteUser(userCreated.external_id);
