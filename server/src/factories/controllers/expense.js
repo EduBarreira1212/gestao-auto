@@ -1,10 +1,10 @@
-import { PostgresGetCarByIdRepository } from '../../respositories/postgres/car/get-car-by-id.js';
+import { PostgresGetCarByIdRepository } from '../../repositories/postgres/car/get-car-by-id.js';
 import { IdGeneratorAdapter } from '../../adapters/id-generator.js';
-import { PostgresCreateExpenseRepository } from '../../respositories/postgres/expense/create-expense.js';
-import { PostgresGetExpenseByIdRepository } from '../../respositories/postgres/expense/get-expense-by-id.js';
-import { PostgresGetExpensesByCarIdRepository } from '../../respositories/postgres/expense/get-expenses-by-car-id.js';
-import { PostgresUpdateExpenseRepository } from '../../respositories/postgres/expense/update-expense.js';
-import { PostgresDeleteExpenseRepository } from '../../respositories/postgres/expense/delete-expense.js';
+import { PostgresCreateExpenseRepository } from '../../repositories/postgres/expense/create-expense.js';
+import { PostgresGetExpenseByIdRepository } from '../../repositories/postgres/expense/get-expense-by-id.js';
+import { PostgresGetExpensesByCarIdRepository } from '../../repositories/postgres/expense/get-expenses-by-car-id.js';
+import { PostgresUpdateExpenseRepository } from '../../repositories/postgres/expense/update-expense.js';
+import { PostgresDeleteExpenseRepository } from '../../repositories/postgres/expense/delete-expense.js';
 import { CreateExpenseUseCase } from '../../use-cases/expense/create-expense.js';
 import { GetExpenseByIdUseCase } from '../../use-cases/expense/get-expense-by-id.js';
 import { GetExpensesByCarIdUseCase } from '../../use-cases/expense/get-expenses-by-car-id.js';

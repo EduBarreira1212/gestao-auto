@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
 import { makeUpdateUserController } from '../factories/controllers/user.js';
-import { PostgresChangePaidStatusRepository } from '../respositories/postgres/user/change-paid-status.js';
+import { PostgresChangePaidStatusRepository } from '../repositories/postgres/user/change-paid-status.js';
 
 dotenv.config({ path: '.env' });
 
