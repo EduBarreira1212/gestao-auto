@@ -29,6 +29,7 @@ model Car {
   plate       String
   km          Int
   entry_price Float
+  photoUrls   String[]  @default([])
   expenses    Expense[] @relation("CarExpenses")
   createdAt   DateTime  @default(now())
   user        User      @relation(fields: [user_id], references: [id], name: "UserCars", onDelete: Cascade)
