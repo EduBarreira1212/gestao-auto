@@ -8,9 +8,12 @@ import ModalContainer from '../components/ModalContainer';
 import SubmitBtn from '../components/SubmitBtn';
 import InputErrorMessage from '../components/InputErrorMessage';
 import CloseModalBtn from '../components/CloseModalBtn';
+import { useState } from 'react';
 
 const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
     const { user } = useUser();
+
+    const [photos, setPhotos] = useState<File[]>([]);
 
     const { mutate, isPending } = useAddVehicle();
 
@@ -25,13 +28,33 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
     const onSubmit: SubmitHandler<CreateVehicle> = async (createVehicleParams) => {
         if (!user || !user.externalId) return;
 
-        const newVehicle = { ...createVehicleParams, user_id: user?.externalId };
+        const formData = new FormData();
 
-        mutate(newVehicle, {
+        formData.append('user_id', user?.externalId);
+        formData.append('name', createVehicleParams.name);
+        formData.append('brand', createVehicleParams.brand);
+        formData.append('year', createVehicleParams.year.toString());
+        formData.append('plate', createVehicleParams.plate);
+        formData.append('km', createVehicleParams.km.toString());
+        formData.append('entry_price', createVehicleParams.entry_price.toString());
+
+        photos.forEach((file: File, index: number) => {
+            formData.append(`photos[${index}]`, file);
+        });
+
+        mutate(formData, {
             onSuccess: () => {
                 onClose();
             },
         });
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFiles = e.target.files;
+
+        if (selectedFiles) {
+            setPhotos((prevPhotos) => [...prevPhotos, ...Array.from(selectedFiles)]);
+        }
     };
 
     return (
@@ -89,6 +112,23 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
                         {errors.entry_price.message}
                     </InputErrorMessage>
                 )}
+                <label>Fotos do veículo:</label>
+                <input
+                    className="border-2 p-2"
+                    type="file"
+                    {...register('photos')}
+                    onChange={handleFileChange}
+                    multiple
+                />
+                {errors.photos && (
+                    <InputErrorMessage>{errors.photos.message}</InputErrorMessage>
+                )}
+                <div>
+                    <h4>Fotos selecionadas:</h4>
+                    {photos.map((file, index) => (
+                        <p key={index}>{file.name}</p>
+                    ))}
+                </div>
                 <SubmitBtn value="Adicionar veículo" disabled={isPending} />
             </form>
         </ModalContainer>
