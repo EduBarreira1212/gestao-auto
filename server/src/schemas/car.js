@@ -1,5 +1,15 @@
 import { z } from 'zod';
 
+const fileSchema = z.object({
+    originalname: z.string().min(1, 'Nome do arquivo é obrigatório'),
+    mimetype: z.enum(['image/jpeg', 'image/png'], {
+        message: 'Apenas arquivos JPEG e PNG são permitidos',
+    }),
+    size: z
+        .number()
+        .max(5 * 1024 * 1024, 'O tamanho do arquivo deve ser no máximo 5MB'),
+});
+
 export const createCarSchema = z.object({
     user_id: z
         .string({ required_error: 'User ID is required.' })
@@ -26,6 +36,7 @@ export const createCarSchema = z.object({
     entry_price: z
         .number({ required_error: 'Entry price is required.' })
         .positive({ message: 'Entry price must be a positive number.' }),
+    photos: z.array(fileSchema).max(5, 'O limite são 5 arquivos').optional(),
 });
 
 export const updateCarSchema = createCarSchema
