@@ -38,8 +38,8 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
         formData.append('km', createVehicleParams.km.toString());
         formData.append('entry_price', createVehicleParams.entry_price.toString());
 
-        photos.forEach((file: File, index: number) => {
-            formData.append(`photos[${index}]`, file);
+        photos.forEach((file: File) => {
+            formData.append('photos', file);
         });
 
         mutate(formData, {
