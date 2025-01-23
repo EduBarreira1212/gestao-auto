@@ -7,6 +7,9 @@ import AddExpenseModal from '../modals/AddExpenseModal';
 import VehicleDetailsModal from '../modals/VehicleDetailsModal';
 import DeleteVehicleModal from '../modals/DeleteVehicleModal';
 
+import { SwiperSlide } from 'swiper/react';
+import SwiperStyled from './SwiperStyled';
+
 type ICar = {
     car: {
         id: string;
@@ -18,6 +21,7 @@ type ICar = {
         km: number;
         entry_price: number;
         expenses: ExpenseType[];
+        photoUrls: string[];
         sell: boolean;
         createdAt: Date;
     };
@@ -46,6 +50,23 @@ const Vehicle = ({ car }: ICar) => {
             >
                 X
             </button>
+            <div className="mt-5">
+                {car.photoUrls.length > 0 ? (
+                    <SwiperStyled>
+                        {car.photoUrls.map((url: string, index: number) => (
+                            <SwiperSlide key={index}>
+                                <img
+                                    className="h-64 w-full object-cover"
+                                    src={url}
+                                    alt={`Photo ${index}`}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </SwiperStyled>
+                ) : (
+                    <span>Nenhuma imagem disponível</span>
+                )}
+            </div>
             <span className="text-lg">{car.name}</span>
             <span className="text-lg">{car.brand}</span>
             <span>{car.year}</span>
