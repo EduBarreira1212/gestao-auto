@@ -142,8 +142,8 @@ const Overview = () => {
                                 {formatter.format(totalAmountExpensesThisMonth)}
                             </span>
                             <span>
-                                Tempo em estoque(Média): {averageTotalDaysInHouse}{' '}
-                                dias
+                                Tempo em estoque(Média):{' '}
+                                {averageTotalDaysInHouse.toFixed()} dias
                             </span>
                         </div>
                         <Button onClick={() => navigate('/veiculos')}>
