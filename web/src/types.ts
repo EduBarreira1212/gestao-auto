@@ -79,6 +79,7 @@ export type VehicleType = {
     km: number;
     entry_price: number;
     expenses: ExpenseType[];
+    photoUrls: string[];
     sell: boolean;
     createdAt: Date;
 };
