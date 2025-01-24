@@ -6,9 +6,9 @@ import { ExpenseType } from '../types';
 import AddExpenseModal from '../modals/AddExpenseModal';
 import VehicleDetailsModal from '../modals/VehicleDetailsModal';
 import DeleteVehicleModal from '../modals/DeleteVehicleModal';
-
 import { SwiperSlide } from 'swiper/react';
 import SwiperStyled from './SwiperStyled';
+import fallbackImg from '../assets/icons/fallback-image.png';
 
 type ICar = {
     car: {
@@ -64,7 +64,11 @@ const Vehicle = ({ car }: ICar) => {
                         ))}
                     </SwiperStyled>
                 ) : (
-                    <span>Nenhuma imagem disponível</span>
+                    <img
+                        src={fallbackImg}
+                        className="h-64 w-full object-cover"
+                        alt="Fallback image"
+                    />
                 )}
             </div>
             <span className="text-lg">{car.name}</span>
