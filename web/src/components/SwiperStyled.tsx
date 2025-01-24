@@ -15,6 +15,13 @@ const SwiperStyled = ({ children }: { children: ReactNode }) => {
             navigation
             pagination={{ clickable: true }}
             modules={[Navigation, Pagination]}
+            style={
+                {
+                    '--swiper-navigation-size': '1.75rem',
+                    '--swiper-navigation-color': '#00ADB5',
+                    '--swiper-pagination-color': '#00ADB5',
+                } as React.CSSProperties
+            }
         >
             {children}
         </Swiper>
