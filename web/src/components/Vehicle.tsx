@@ -43,7 +43,7 @@ const Vehicle = ({ car }: ICar) => {
     });
 
     return (
-        <div className="relative flex w-72 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 p-5 text-center text-brand-secondary shadow-md shadow-brand-primary">
+        <div className="relative flex w-80 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 p-5 text-center text-brand-secondary shadow-md shadow-brand-primary">
             <button
                 className="absolute right-1 top-1 rounded-md bg-red-600 px-2 py-1 transition-colors duration-200 hover:bg-red-700"
                 onClick={() => setShowDeleteVehicleModal(true)}
@@ -71,8 +71,9 @@ const Vehicle = ({ car }: ICar) => {
                     />
                 )}
             </div>
-            <span className="text-lg">{car.name}</span>
-            <span className="text-lg">{car.brand}</span>
+            <span className="text-lg">
+                {car.brand} {car.name}
+            </span>
             <span>{car.year}</span>
             <span>{car.plate}</span>
             <span>KM: {car.km.toLocaleString()}</span>
