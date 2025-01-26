@@ -6,6 +6,7 @@ import { useUser } from '@clerk/clerk-react';
 import { useGetVehicles } from '../hooks/data/useGetVehicles';
 import { useMemo } from 'react';
 import { ExpenseType, SellType, VehicleType } from '../types';
+import currencyFormatter from '../helpers/currency';
 
 const Overview = () => {
     const navigate = useNavigate();
@@ -86,11 +87,6 @@ const Overview = () => {
         return totalDaysInDays / vehicles?.length || 0;
     }, [vehicles]);
 
-    const formatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-    });
-
     return (
         <div className="flex w-full flex-col gap-5 p-5 md:flex-row">
             {isLoadingSells || isLoadingVehicles ? (
@@ -112,13 +108,13 @@ const Overview = () => {
                             <span>Vendas totais: {sells?.length}</span>
                             <span>
                                 Faturamento mês atual:{' '}
-                                {formatter.format(totalAmountThisMonth)}
+                                {currencyFormatter(totalAmountThisMonth)}
                             </span>
                             <span>
-                                Lucro mês atual: {formatter.format(profitThisMonth)}
+                                Lucro mês atual: {currencyFormatter(profitThisMonth)}
                             </span>
                             <span>
-                                Lucro médio: {formatter.format(totalProfitAverage)}
+                                Lucro médio: {currencyFormatter(totalProfitAverage)}
                             </span>
                         </div>
                         <Button onClick={() => navigate('/vendas')}>
@@ -132,14 +128,15 @@ const Overview = () => {
                         </div>
                         <div className="flex flex-col gap-5 border-b-2 border-solid p-3">
                             <span>
-                                Preço médio: {formatter.format(averageVehiclesPrice)}
+                                Preço médio:{' '}
+                                {currencyFormatter(averageVehiclesPrice)}
                             </span>
                             <span>
                                 Despesas esse mês: {expensesThisMonth?.length}
                             </span>
                             <span>
                                 Valor total das despesas:{' '}
-                                {formatter.format(totalAmountExpensesThisMonth)}
+                                {currencyFormatter(totalAmountExpensesThisMonth)}
                             </span>
                             <span>
                                 Tempo em estoque(Média):{' '}

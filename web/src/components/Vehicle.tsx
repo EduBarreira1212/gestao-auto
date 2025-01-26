@@ -9,6 +9,7 @@ import DeleteVehicleModal from '../modals/DeleteVehicleModal';
 import { SwiperSlide } from 'swiper/react';
 import SwiperStyled from './SwiperStyled';
 import fallbackImg from '../assets/icons/fallback-image.png';
+import currencyFormatter from '../helpers/currency';
 
 type ICar = {
     car: {
@@ -36,11 +37,6 @@ const Vehicle = ({ car }: ICar) => {
     const expensesAmount = car.expenses.reduce((acc, expense) => {
         return (acc += expense.amount);
     }, 0);
-
-    const formatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-    });
 
     return (
         <div className="relative flex w-80 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 p-5 text-center text-brand-secondary shadow-md shadow-brand-primary">
@@ -77,9 +73,9 @@ const Vehicle = ({ car }: ICar) => {
             <span>{car.year}</span>
             <span>{car.plate}</span>
             <span>KM: {car.km.toLocaleString()}</span>
-            <span>Preço de entrada: {formatter.format(car.entry_price)}</span>
+            <span>Preço de entrada: {currencyFormatter(car.entry_price)}</span>
             <div className="flex flex-row justify-between gap-2">
-                <span>Despesas: {formatter.format(expensesAmount)}</span>
+                <span>Despesas: {currencyFormatter(expensesAmount)}</span>
                 <button
                     className="rounded-sm border-2 bg-brand-neutral px-1 font-montserrat shadow-sm"
                     onClick={() => setShowAddExpenseModal(true)}
