@@ -8,7 +8,7 @@ type DeleteVehicleModalProps = {
 };
 
 const DeleteVehicleModal = ({ vehicleId, onClose }: DeleteVehicleModalProps) => {
-    const { mutate } = useDeleteVehicle(vehicleId);
+    const { mutate, isPending } = useDeleteVehicle(vehicleId);
 
     return (
         <ModalContainer>
@@ -31,6 +31,7 @@ const DeleteVehicleModal = ({ vehicleId, onClose }: DeleteVehicleModalProps) => 
                                 },
                             });
                         }}
+                        disabled={isPending}
                     >
                         Excluir
                     </button>
