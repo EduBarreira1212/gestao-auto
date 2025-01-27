@@ -29,6 +29,7 @@ describe('PostgresGetCarByIdRepository', () => {
             plate: car.plate,
             km: car.km,
             entry_price: car.entry_price,
+            photoUrls: [],
             createdAt: result.createdAt,
         });
     });
