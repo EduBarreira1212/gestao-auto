@@ -8,10 +8,19 @@ export class CreateCarController {
     async execute(httpRequest) {
         try {
             const params = httpRequest.body;
+            const photos = httpRequest.files;
 
-            await createCarSchema.parseAsync(params);
+            const createCarObject = {
+                ...params,
+                year: Number(params.year),
+                km: Number(params.km),
+                entry_price: Number(params.entry_price),
+                photos,
+            };
 
-            const createdCar = await this.createCarUseCase.execute(params);
+            await createCarSchema.parseAsync(createCarObject);
+
+            const createdCar = await this.createCarUseCase.execute(createCarObject);
 
             return { statusCode: 201, body: createdCar };
         } catch (error) {

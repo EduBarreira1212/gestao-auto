@@ -1,6 +1,6 @@
 import { DeleteCarController } from './delete-car.js';
 
-describe('DeleteUserController', () => {
+describe('DeleteCarController', () => {
     class DeleteCarUseCaseStub {
         async execute(carId) {
             const car = {
@@ -33,8 +33,6 @@ describe('DeleteUserController', () => {
         };
 
         const result = await sut.execute(httpRequest);
-
-        console.log(result);
 
         expect(result.statusCode).toBe(200);
         expect(result.body.id).toBe(httpRequest.params.userId);

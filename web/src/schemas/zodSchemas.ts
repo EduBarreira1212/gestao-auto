@@ -56,6 +56,25 @@ export const addVehicleschema = z.object({
     entry_price: z
         .number({ invalid_type_error: 'Preço de entrada deve ser um número.' })
         .positive('O preço de entrada deve ser positivo.'),
+    photos: z
+        .any()
+        .optional()
+        .transform((files) => Array.from(files as FileList))
+        .refine(
+            (files: File[]) => files.length <= 5,
+            'Você pode enviar no máximo 5 fotos.'
+        )
+        .refine(
+            (files) => files.every((file) => file.size <= 5 * 1024 * 1024),
+            'Cada arquivo deve ter no máximo 5MB.'
+        )
+        .refine(
+            (files) =>
+                files.every((file) =>
+                    ['image/jpeg', 'image/png', 'image/webp'].includes(file.type)
+                ),
+            'Apenas imagens JPEG, PNG ou WEBP são permitidas.'
+        ),
 });
 
 export const updateVehicleSchema = z.object({

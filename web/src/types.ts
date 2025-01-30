@@ -18,6 +18,7 @@ export type CreateVehicle = {
     plate: string;
     km: number;
     entry_price: number;
+    photos?: File[];
 };
 
 export type UpdateVehicle = {
@@ -78,6 +79,7 @@ export type VehicleType = {
     km: number;
     entry_price: number;
     expenses: ExpenseType[];
+    photoUrls: string[];
     sell: boolean;
     createdAt: Date;
 };

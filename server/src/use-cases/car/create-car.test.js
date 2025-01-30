@@ -83,6 +83,7 @@ describe('CreateCarUseCase', () => {
         expect(createCarRepositorySpy).toHaveBeenCalledWith({
             ...car,
             id: 'Generated_UUID',
+            photoUrls: [],
         });
     });
 
@@ -110,7 +111,6 @@ describe('CreateCarUseCase', () => {
             });
 
         const promise = sut.execute(car);
-
         await expect(promise).rejects.toThrow();
     });
 });

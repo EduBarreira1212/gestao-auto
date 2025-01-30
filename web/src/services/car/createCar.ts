@@ -1,10 +1,12 @@
-import { CreateVehicle } from '../../types';
 import { api } from '../../lib/axios';
 
-const createCar = async (createCarParams: CreateVehicle, token: string) => {
+const createCar = async (createCarParams: FormData, token: string) => {
     try {
         const response = await api.post(`/cars`, createCarParams, {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            },
         });
 
         return response;

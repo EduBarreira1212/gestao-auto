@@ -8,6 +8,10 @@ import {
     makeUpdateCarController,
 } from '../factories/controllers/car.js';
 
+import multer from 'multer';
+
+const upload = multer();
+
 export const carsRouter = Router();
 
 carsRouter.get('/:carId', async (req, res) => {
@@ -26,7 +30,7 @@ carsRouter.get('/', async (req, res) => {
     res.status(statusCode).send(body);
 });
 
-carsRouter.post('/', async (req, res) => {
+carsRouter.post('/', upload.array('photos', 5), async (req, res) => {
     const createCarController = makeCreateCarController();
 
     const { statusCode, body } = await createCarController.execute(req);

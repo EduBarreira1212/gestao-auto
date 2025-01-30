@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CreateVehicle, VehicleType } from '../../types';
+import { VehicleType } from '../../types';
 import createCar from '../../services/car/createCar';
 import { vehicleMutationsKeys } from '../../keys/mutations';
 import { vehicleQueriesKeys } from '../../keys/queries';
@@ -11,7 +11,7 @@ export const useAddVehicle = () => {
 
     return useMutation({
         mutationKey: vehicleMutationsKeys.addVehicle(),
-        mutationFn: async (vehicleData: CreateVehicle) => {
+        mutationFn: async (vehicleData: FormData) => {
             const token = await getToken();
 
             if (!token) {

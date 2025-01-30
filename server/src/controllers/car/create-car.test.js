@@ -1,6 +1,6 @@
 import { CreateCarController } from './create-car.js';
 
-describe('CreateUserController', () => {
+describe('CreateCarController', () => {
     class CreateCarUseCaseStub {
         execute(car) {
             return car;
@@ -27,12 +27,13 @@ describe('CreateUserController', () => {
                 km: 20000,
                 entry_price: 2500000,
             },
+            files: [],
         };
 
         const result = await sut.execute(httpRequest);
 
         expect(result.statusCode).toBe(201);
-        expect(result.body).toBe(httpRequest.body);
+        expect(result.body).toStrictEqual({ ...httpRequest.body, photos: [] });
     });
 
     test('should return 400 when httpRequest send invalid body', async () => {
@@ -62,6 +63,7 @@ describe('CreateUserController', () => {
                 km: 20000,
                 entry_price: 2500000,
             },
+            files: [],
         };
 
         import.meta.jest
@@ -71,7 +73,6 @@ describe('CreateUserController', () => {
             });
 
         const result = await sut.execute(httpRequest);
-
         expect(result.statusCode).toBe(404);
     });
 
@@ -88,12 +89,13 @@ describe('CreateUserController', () => {
                 km: 20000,
                 entry_price: 2500000,
             },
+            files: [],
         };
 
         const executeSpy = import.meta.jest.spyOn(sut.createCarUseCase, 'execute');
 
         await sut.execute(httpRequest);
 
-        expect(executeSpy).toHaveBeenCalledWith(httpRequest.body);
+        expect(executeSpy).toHaveBeenCalledWith({ ...httpRequest.body, photos: [] });
     });
 });

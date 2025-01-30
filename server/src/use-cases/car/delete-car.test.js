@@ -7,6 +7,7 @@ describe('DeleteUserUseCase', () => {
             const carToReturn = {
                 ...car,
                 id: carId,
+                photoUrls: [],
             };
 
             return carToReturn;
@@ -18,6 +19,7 @@ describe('DeleteUserUseCase', () => {
             const carToReturn = {
                 ...car,
                 id: carId,
+                photoUrls: [],
             };
 
             return carToReturn;
@@ -43,7 +45,7 @@ describe('DeleteUserUseCase', () => {
 
         const result = await sut.execute(car.id);
 
-        expect(result).toStrictEqual(car);
+        expect(result).toStrictEqual({ ...car, photoUrls: [] });
     });
 
     test('should throw a car do not exists error', async () => {
@@ -74,7 +76,7 @@ describe('DeleteUserUseCase', () => {
         expect(deleteUserRepository).toHaveBeenCalledWith(car.id);
     });
 
-    test('should throw if postgresDeleteUserRepositorie throws', async () => {
+    test('should throw if postgresDeleteUserRepository throws', async () => {
         const sut = makeSut();
 
         import.meta.jest

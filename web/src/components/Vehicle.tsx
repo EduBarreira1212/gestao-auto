@@ -6,6 +6,10 @@ import { ExpenseType } from '../types';
 import AddExpenseModal from '../modals/AddExpenseModal';
 import VehicleDetailsModal from '../modals/VehicleDetailsModal';
 import DeleteVehicleModal from '../modals/DeleteVehicleModal';
+import { SwiperSlide } from 'swiper/react';
+import SwiperStyled from './SwiperStyled';
+import fallbackImg from '../assets/icons/fallback-image.png';
+import currencyFormatter from '../helpers/currency';
 
 type ICar = {
     car: {
@@ -18,6 +22,7 @@ type ICar = {
         km: number;
         entry_price: number;
         expenses: ExpenseType[];
+        photoUrls: string[];
         sell: boolean;
         createdAt: Date;
     };
@@ -33,27 +38,44 @@ const Vehicle = ({ car }: ICar) => {
         return (acc += expense.amount);
     }, 0);
 
-    const formatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-    });
-
     return (
-        <div className="relative flex w-72 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 p-5 text-center text-brand-secondary shadow-md shadow-brand-primary">
+        <div className="relative flex w-80 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 p-5 text-center text-brand-secondary shadow-md shadow-brand-primary">
             <button
                 className="absolute right-1 top-1 rounded-md bg-red-600 px-2 py-1 transition-colors duration-200 hover:bg-red-700"
                 onClick={() => setShowDeleteVehicleModal(true)}
             >
                 X
             </button>
-            <span className="text-lg">{car.name}</span>
-            <span className="text-lg">{car.brand}</span>
+            <div className="mt-5">
+                {car.photoUrls.length > 0 ? (
+                    <SwiperStyled>
+                        {car.photoUrls.map((url: string, index: number) => (
+                            <SwiperSlide key={index}>
+                                <img
+                                    className="h-64 w-full object-cover"
+                                    src={url}
+                                    alt={`Photo ${index}`}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </SwiperStyled>
+                ) : (
+                    <img
+                        src={fallbackImg}
+                        className="h-64 w-full object-cover"
+                        alt="Fallback image"
+                    />
+                )}
+            </div>
+            <span className="text-lg">
+                {car.brand} {car.name}
+            </span>
             <span>{car.year}</span>
             <span>{car.plate}</span>
             <span>KM: {car.km.toLocaleString()}</span>
-            <span>Preço de entrada: {formatter.format(car.entry_price)}</span>
+            <span>Preço de entrada: {currencyFormatter(car.entry_price)}</span>
             <div className="flex flex-row justify-between gap-2">
-                <span>Despesas: {formatter.format(expensesAmount)}</span>
+                <span>Despesas: {currencyFormatter(expensesAmount)}</span>
                 <button
                     className="rounded-sm border-2 bg-brand-neutral px-1 font-montserrat shadow-sm"
                     onClick={() => setShowAddExpenseModal(true)}
