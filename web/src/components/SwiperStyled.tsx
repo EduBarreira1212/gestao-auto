@@ -20,6 +20,7 @@ const SwiperStyled = ({ children }: { children: ReactNode }) => {
                     '--swiper-navigation-size': '1.75rem',
                     '--swiper-navigation-color': '#00ADB5',
                     '--swiper-pagination-color': '#00ADB5',
+                    zIndex: 0,
                 } as React.CSSProperties
             }
         >
