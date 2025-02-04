@@ -28,7 +28,7 @@ const Leads = () => {
                 <ContentSection>
                     <div className="relative mt-4 flex w-full items-center">
                         <AddButton onClick={() => setShowAddLeadModal(true)}>
-                            Adicionar novo veículo
+                            Adicionar novo lead
                         </AddButton>
                     </div>
                     {isLoading ? (
