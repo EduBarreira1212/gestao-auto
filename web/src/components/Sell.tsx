@@ -6,6 +6,8 @@ import { createPortal } from 'react-dom';
 import SellDetailsModal from '../modals/SellDetailsModal';
 import DeleteSellModal from '../modals/DeleteSellModal';
 import currencyFormatter from '../helpers/currency';
+import { PDFViewer } from '@react-pdf/renderer';
+import Receipt from './Receipt';
 
 const Sell = ({ sell }: { sell: SellType }) => {
     const [showSellDetailsModal, setShowSelldetailsModal] = useState(false);
@@ -34,6 +36,9 @@ const Sell = ({ sell }: { sell: SellType }) => {
                     Excluir
                 </button>
             </div>
+            <PDFViewer>
+                <Receipt />
+            </PDFViewer>
             {showSellDetailsModal &&
                 createPortal(
                     <SellDetailsModal
