@@ -6,19 +6,32 @@ import { createPortal } from 'react-dom';
 import SellDetailsModal from '../modals/SellDetailsModal';
 import DeleteSellModal from '../modals/DeleteSellModal';
 import currencyFormatter from '../helpers/currency';
-import { PDFViewer } from '@react-pdf/renderer';
+import { pdf } from '@react-pdf/renderer';
 import Receipt from './Receipt';
+import { useGetLeadById } from '../hooks/data/useGetLeadById';
 
 const Sell = ({ sell }: { sell: SellType }) => {
     const [showSellDetailsModal, setShowSelldetailsModal] = useState(false);
     const [showDeleteSellModal, setShowDeleteSellModal] = useState(false);
 
     const { data: vehicle } = useGetVehicleById(sell.car_id);
+    const { data: lead } = useGetLeadById(sell.lead_id);
+
+    const handleDownload = async () => {
+        const blob = await pdf(
+            <Receipt vehicle={vehicle} sell={sell} lead={lead} />
+        ).toBlob();
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+    };
 
     return (
         <div className="flex h-fit w-72 flex-col gap-3 rounded-md border-2 border-solid bg-slate-50 p-5 text-center text-brand-secondary shadow-md shadow-brand-primary">
             <span>
                 Veículo: {vehicle?.name} {vehicle?.year} {vehicle?.plate}
+            </span>
+            <span>
+                Lead: {lead?.name} {lead?.email}
             </span>
             <span>Total: {currencyFormatter(sell.amount)}</span>
             <span>Lucro: {currencyFormatter(sell.profit)}</span>
@@ -36,9 +49,18 @@ const Sell = ({ sell }: { sell: SellType }) => {
                     Excluir
                 </button>
             </div>
-            <PDFViewer>
-                <Receipt />
-            </PDFViewer>
+
+            {lead && vehicle ? (
+                <button
+                    className="rounded-sm border-2 bg-brand-neutral px-1 font-montserrat shadow-sm transition-colors duration-200 hover:bg-slate-300"
+                    onClick={handleDownload}
+                >
+                    Visualizar recibo
+                </button>
+            ) : (
+                <span>Carregando Recibo...</span>
+            )}
+
             {showSellDetailsModal &&
                 createPortal(
                     <SellDetailsModal
