@@ -16,8 +16,6 @@ const styles = StyleSheet.create({
 });
 
 const Receipt = ({ vehicle, lead, sell }: ReceiptProps) => {
-    if (!vehicle || !lead || !sell) return <span>Carregando...</span>;
-
     return (
         <Document>
             <Page size="A4" style={styles.page}>
