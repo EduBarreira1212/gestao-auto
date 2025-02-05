@@ -43,7 +43,9 @@ const Receipt = ({ vehicle, lead, sell }: ReceiptProps) => {
                     <Text style={styles.text}>Email: {lead.email}</Text>
                     <Text style={styles.text}>
                         Data de nascimento:{' '}
-                        {new Date(lead.birthday).toLocaleDateString('pt-BR')}
+                        {new Date(lead.birthday).toLocaleDateString('pt-BR', {
+                            timeZone: 'UTC',
+                        })}
                     </Text>
                 </View>
 
