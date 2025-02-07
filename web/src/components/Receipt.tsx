@@ -9,9 +9,41 @@ type ReceiptProps = {
 };
 
 const styles = StyleSheet.create({
-    page: { padding: 20, fontSize: 12, fontFamily: 'Helvetica' },
-    section: { marginBottom: 10, paddingBottom: 5, borderBottom: '1 solid #000' },
-    title: { fontSize: 14, fontWeight: 'bold', marginBottom: 5 },
+    page: { padding: 30, fontSize: 10, fontFamily: 'Helvetica' },
+    section: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 5,
+        marginBottom: 10,
+        paddingBottom: 5,
+        borderBottom: '1 solid #000',
+    },
+    daysAndKm: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+    },
+    signatureContainer: {
+        marginTop: 20,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    signature: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 3,
+    },
+    title: {
+        backgroundColor: 'black',
+        color: 'white',
+        fontSize: 12,
+        padding: 4,
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
     text: { marginBottom: 3 },
 });
 
@@ -58,7 +90,8 @@ const Receipt = ({ vehicle, lead, sell }: ReceiptProps) => {
                     <Text style={styles.title}>Acerto Financeiro</Text>
                     <Text>Valor Total: R$ {currencyFormatter(sell.amount)}</Text>
                 </View>
-
+            </Page>
+            <Page size="A4" style={styles.page}>
                 <View style={styles.section}>
                     <Text style={styles.title}>
                         TERMOS DE RESP. CIVIL, CRIMINAL E MULTAS DE TRÂNSITO
@@ -93,8 +126,11 @@ const Receipt = ({ vehicle, lead, sell }: ReceiptProps) => {
                 </View>
                 <View style={styles.section}>
                     <Text style={styles.title}>CERTIFICADO DE GARANTIA</Text>
+                    <View style={styles.daysAndKm}>
+                        <Text>Quant. de dias de garantia: 90</Text>
+                        <Text>Km total de garantia: 5.000</Text>
+                    </View>
                     <Text>
-                        Quant. de dias de garantia: 90 Km total de garantia: 5.000
                         Tem o presente certificado a finalidade de formalizar as
                         condições de garantia do veículo descrito e identificado
                         neste documento, no que se refere única e exclusivamente às
@@ -147,13 +183,15 @@ const Receipt = ({ vehicle, lead, sell }: ReceiptProps) => {
                         homocinética).
                     </Text>
                 </View>
-                <View style={styles.section}>
-                    <Text>__________________________________</Text>
-                    <Text>EB Veículos</Text>
-                </View>
-                <View>
-                    <Text>__________________________________</Text>
-                    <Text>Comprador</Text>
+                <View style={styles.signatureContainer}>
+                    <View style={styles.signature}>
+                        <Text>__________________________________</Text>
+                        <Text>EB Veículos</Text>
+                    </View>
+                    <View style={styles.signature}>
+                        <Text>__________________________________</Text>
+                        <Text>Comprador</Text>
+                    </View>
                 </View>
             </Page>
         </Document>
