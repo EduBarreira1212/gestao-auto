@@ -9,18 +9,29 @@ import currencyFormatter from '../helpers/currency';
 import { pdf } from '@react-pdf/renderer';
 import Receipt from './Receipt';
 import { useGetLeadById } from '../hooks/data/useGetLeadById';
+import { useUser } from '@clerk/clerk-react';
 
 const Sell = ({ sell }: { sell: SellType }) => {
     const [showSellDetailsModal, setShowSelldetailsModal] = useState(false);
     const [showDeleteSellModal, setShowDeleteSellModal] = useState(false);
 
+    const { user } = useUser();
+
     const { data: vehicle } = useGetVehicleById(sell.car_id);
     const { data: lead } = useGetLeadById(sell.lead_id);
 
     const handleDownload = async () => {
+        if (!user?.fullName) return;
+
         const blob = await pdf(
-            <Receipt vehicle={vehicle} sell={sell} lead={lead} />
+            <Receipt
+                storeName={user.fullName}
+                vehicle={vehicle}
+                sell={sell}
+                lead={lead}
+            />
         ).toBlob();
+
         const url = URL.createObjectURL(blob);
         window.open(url, '_blank');
     };
@@ -50,7 +61,7 @@ const Sell = ({ sell }: { sell: SellType }) => {
                 </button>
             </div>
 
-            {lead && vehicle ? (
+            {user && lead && vehicle ? (
                 <button
                     className="rounded-sm border-2 bg-brand-neutral px-1 font-montserrat shadow-sm transition-colors duration-200 hover:bg-slate-300"
                     onClick={handleDownload}
