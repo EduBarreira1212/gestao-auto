@@ -48,12 +48,12 @@ const styles = StyleSheet.create({
     text: { marginBottom: 3 },
 });
 
-const Receipt = ({ vehicle, lead, sell }: ReceiptProps) => {
+const Receipt = ({ storeName, vehicle, lead, sell }: ReceiptProps) => {
     return (
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.section}>
-                    <Text style={styles.title}>EB Veículos</Text>
+                    <Text style={styles.title}>{storeName}</Text>
                     <Text>CNPJ: </Text>
                     <Text>
                         Data de emissão:{' '}
@@ -187,7 +187,7 @@ const Receipt = ({ vehicle, lead, sell }: ReceiptProps) => {
                 <View style={styles.signatureContainer}>
                     <View style={styles.signature}>
                         <Text>__________________________________</Text>
-                        <Text>EB Veículos</Text>
+                        <Text>{storeName}</Text>
                     </View>
                     <View style={styles.signature}>
                         <Text>__________________________________</Text>
