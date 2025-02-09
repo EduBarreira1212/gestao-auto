@@ -66,8 +66,9 @@ const Receipt = ({ storeName, vehicle, lead, sell }: ReceiptProps) => {
                 <View style={styles.section}>
                     <Text style={styles.title}>Cliente</Text>
                     <Text>Nome: {lead.name}</Text>
-                    <Text>CPF/CNPJ: {lead.phone}</Text>
-                    <Text>Telefone: {lead.email}</Text>
+                    <Text>CPF/CNPJ: </Text>
+                    <Text>E-mail: {lead.email}</Text>
+                    <Text>Telefone: {lead.phone}</Text>
                     <Text>
                         Data de nascimento:{' '}
                         {new Date(lead.birthday).toLocaleDateString('pt-BR', {
@@ -79,11 +80,13 @@ const Receipt = ({ storeName, vehicle, lead, sell }: ReceiptProps) => {
                 <View style={styles.section}>
                     <Text style={styles.title}>Veículo Vendido</Text>
                     <Text>
-                        Modelo: {vehicle.name} - Marcar: {vehicle.brand} - Placa:{' '}
-                        {vehicle.plate}
+                        Modelo: {vehicle.name} - Marca: {vehicle.brand}
                     </Text>
-                    <Text>Chassi: - Ano: {vehicle.year} - Motor: </Text>
-                    <Text>Combustível: - Cor:</Text>
+                    <Text>Renavam: </Text>
+                    <Text>
+                        Chassi: - Ano: {vehicle.year} - Placa: {vehicle.plate}
+                    </Text>
+                    <Text>Combustível: </Text>
                     <Text>Valor de Venda: {currencyFormatter(sell.amount)}</Text>
                 </View>
 
