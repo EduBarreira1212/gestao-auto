@@ -3,6 +3,7 @@ import { LeadType, SellType, VehicleType } from '../types';
 import currencyFormatter from '../helpers/currency';
 
 type ReceiptProps = {
+    storeName: string;
     vehicle: VehicleType;
     lead: LeadType;
     sell: SellType;
