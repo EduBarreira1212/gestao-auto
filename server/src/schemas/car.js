@@ -33,6 +33,16 @@ export const createCarSchema = z.object({
     km: z
         .number({ required_error: 'KM is required.' })
         .nonnegative({ message: 'KM must not be a negative number.' }),
+    fuel: z.enum(['Gasoline', 'Ethanol', 'Diesel', 'Flex', 'Electric', 'Hybrid'], {
+        message: 'Tipo de combustível inválido',
+    }),
+    renavam: z.string().regex(/^\d{11}$/, {
+        message: 'Renavam inválido. Deve conter exatamente 11 dígitos numéricos',
+    }),
+    chassis: z.string().regex(/^[A-HJ-NPR-Z0-9]{17}$/, {
+        message:
+            'Chassi inválido. Deve conter 17 caracteres alfanuméricos, sem O, I e Q',
+    }),
     entry_price: z
         .number({ required_error: 'Entry price is required.' })
         .positive({ message: 'Entry price must be a positive number.' }),
