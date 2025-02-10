@@ -67,6 +67,7 @@ model Lead {
   email     String   @unique
   phone     String   @unique
   birthday  DateTime
+  cpfCnpj   String   @map("CPF/CNPJ")
   purchases Sell[]   @relation("LeadPurchases")
   createdAt DateTime @default(now())
   user      User     @relation(fields: [user_id], references: [id], name: "UserLeads", onDelete: Cascade)
