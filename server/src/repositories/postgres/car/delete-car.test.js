@@ -21,14 +21,8 @@ describe('PostgresCreateCarRepository', () => {
         const result = await sut.execute(car.id);
 
         expect(result).toStrictEqual({
-            id: car.id,
+            ...car,
             user_id: user.id,
-            brand: car.brand,
-            name: car.name,
-            year: car.year,
-            plate: car.plate,
-            km: car.km,
-            entry_price: car.entry_price,
             photoUrls: [],
             createdAt: result.createdAt,
         });
