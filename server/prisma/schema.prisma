@@ -28,7 +28,7 @@ model Car {
   year        Int
   plate       String
   km          Int
-  renavam     Int
+  renavam     String
   chassis     String
   fuel        String
   entry_price Float
