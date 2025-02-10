@@ -28,6 +28,9 @@ model Car {
   year        Int
   plate       String
   km          Int
+  renavam     Int
+  chassis     String
+  fuel        String
   entry_price Float
   photoUrls   String[]  @default([])
   expenses    Expense[] @relation("CarExpenses")
