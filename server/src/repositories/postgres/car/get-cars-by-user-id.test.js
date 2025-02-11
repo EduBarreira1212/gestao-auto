@@ -17,7 +17,9 @@ describe('PostgresGetCarsByUserIdRepository', () => {
 
     test('should return a car with correct properties', async () => {
         await prisma.user.create({ data: user });
-        await prisma.car.create({ data: { ...car, user_id: user.id } });
+        const carCreated = await prisma.car.create({
+            data: { ...car, user_id: user.id },
+        });
         const result = await sut.execute(user.id);
 
         expect(result).toStrictEqual([
@@ -25,7 +27,9 @@ describe('PostgresGetCarsByUserIdRepository', () => {
                 ...car,
                 user_id: user.id,
                 photoUrls: [],
-                createdAt: result.createdAt,
+                createdAt: carCreated.createdAt,
+                expenses: [],
+                sell: null,
             },
         ]);
     });
