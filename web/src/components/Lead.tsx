@@ -13,6 +13,7 @@ type LeadType = {
         email: string;
         phone: string;
         birthday: Date;
+        cpfCnpj: string;
         purchases: SellType[];
         createdAt: Date;
     };
@@ -27,6 +28,7 @@ const Lead = ({ lead }: LeadType) => {
             <span>{lead.name}</span>
             <span>{lead.email}</span>
             <span>{lead.phone}</span>
+            <span>{lead.cpfCnpj}</span>
             <span>
                 Data de nascimento:{' '}
                 {new Date(lead.birthday).toLocaleDateString('pt-BR', {
