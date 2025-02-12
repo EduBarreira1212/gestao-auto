@@ -27,6 +27,9 @@ const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => 
             brand: vehicle.brand,
             year: vehicle.year,
             plate: vehicle.plate,
+            renavam: vehicle.renavam,
+            chassis: vehicle.chassis,
+            fuel: vehicle.fuel,
             km: vehicle.km,
             entry_price: vehicle.entry_price,
         },
@@ -74,6 +77,39 @@ const VehicleDetailsModal = ({ vehicle, onClose }: VehicleDetailsModalprops) => 
                 />
                 {errors.plate && (
                     <InputErrorMessage>{errors.plate.message}</InputErrorMessage>
+                )}
+                <label htmlFor="">Renavam:</label>
+                <input
+                    className="border-2 p-2"
+                    type="string"
+                    {...register('renavam')}
+                />
+                {errors.renavam && (
+                    <InputErrorMessage>{errors.renavam.message}</InputErrorMessage>
+                )}
+                <label htmlFor="">Chassi:</label>
+                <input
+                    className="border-2 p-2"
+                    type="string"
+                    {...register('chassis')}
+                />
+                {errors.chassis && (
+                    <InputErrorMessage>{errors.chassis.message}</InputErrorMessage>
+                )}
+                <label htmlFor="">Combustível:</label>
+                <select className="border-2 p-2" {...register('fuel')}>
+                    <option value="" disabled>
+                        Selecione um tipo de combustível
+                    </option>
+                    <option value="Gasoline">Gasolina</option>
+                    <option value="Ethanol">Etanol</option>
+                    <option value="Flex">Flex</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Eletric">Életrico</option>
+                    <option value="Hybrid">Híbrido</option>
+                </select>
+                {errors.fuel && (
+                    <InputErrorMessage>{errors.fuel.message}</InputErrorMessage>
                 )}
                 <label htmlFor="">Quilometragem:</label>
                 <input
