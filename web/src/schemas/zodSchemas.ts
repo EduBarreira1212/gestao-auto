@@ -50,6 +50,16 @@ export const addVehicleschema = z.object({
             /^([A-Z]{3}-\d{4}|[A-Z]{3}\d[A-Z]\d{2})$/,
             'Placa deve estar no formato ABC-1234 ou ABC1D23.'
         ),
+    fuel: z.enum(['Gasoline', 'Ethanol', 'Diesel', 'Flex', 'Electric', 'Hybrid'], {
+        message: 'Tipo de combustível inválido',
+    }),
+    renavam: z.string().regex(/^\d{11}$/, {
+        message: 'Renavam inválido. Deve conter exatamente 11 dígitos numéricos',
+    }),
+    chassis: z.string().regex(/^[A-HJ-NPR-Z0-9]{17}$/, {
+        message:
+            'Chassi inválido. Deve conter 17 caracteres alfanuméricos, sem O, I e Q',
+    }),
     km: z
         .number({ invalid_type_error: 'KM deve ser um número.' })
         .min(0, 'A KM não deve ser negativa.'),
@@ -96,6 +106,24 @@ export const updateVehicleSchema = z.object({
             'Placa deve estar no formato ABC-1234 ou ABC1D23.'
         )
         .nullable()
+        .optional(),
+    fuel: z
+        .enum(['Gasoline', 'Ethanol', 'Diesel', 'Flex', 'Electric', 'Hybrid'], {
+            message: 'Tipo de combustível inválido',
+        })
+        .optional(),
+    renavam: z
+        .string()
+        .regex(/^\d{11}$/, {
+            message: 'Renavam inválido. Deve conter exatamente 11 dígitos numéricos',
+        })
+        .optional(),
+    chassis: z
+        .string()
+        .regex(/^[A-HJ-NPR-Z0-9]{17}$/, {
+            message:
+                'Chassi inválido. Deve conter 17 caracteres alfanuméricos, sem O, I e Q',
+        })
         .optional(),
     km: z
         .number({ invalid_type_error: 'KM deve ser um número.' })
