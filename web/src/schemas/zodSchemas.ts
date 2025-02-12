@@ -160,6 +160,12 @@ export const addLeadSchema = z.object({
             /^\(\d{2}\) \d{5}-\d{4}$/,
             "Telefone deve seguir o formato: '(xx) xxxxx-xxxx'"
         ),
+    cpfCnpj: z
+        .string()
+        .regex(/^(?:\d{3}\.\d{3}\.\d{3}-\d{2}|\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})$/, {
+            message:
+                'O campo deve ser um CPF (000.000.000-00) ou um CNPJ (00.000.000/0000-00)',
+        }),
     birthday: z.string({ required_error: 'A data de nascimento é obrigatória' }),
 });
 
@@ -178,6 +184,13 @@ export const updateLeadSchema = z.object({
             /^\(\d{2}\) \d{5}-\d{4}$/,
             "Telefone deve seguir o formato: '(xx) xxxxx-xxxx'"
         )
+        .optional(),
+    cpfCnpj: z
+        .string()
+        .regex(/^(?:\d{3}\.\d{3}\.\d{3}-\d{2}|\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})$/, {
+            message:
+                'O campo deve ser um CPF (000.000.000-00) ou um CNPJ (00.000.000/0000-00)',
+        })
         .optional(),
     birthday: z.string().optional(),
 });
