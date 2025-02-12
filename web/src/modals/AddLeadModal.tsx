@@ -56,6 +56,15 @@ const AddLeadModal = ({ onClose }: { onClose: () => void }) => {
                 {errors.phone && (
                     <InputErrorMessage>{errors.phone.message}</InputErrorMessage>
                 )}
+                <label htmlFor="">CPF ou CNPJ:</label>
+                <input
+                    className="border-2 p-2"
+                    type="text"
+                    {...register('cpfCnpj')}
+                />
+                {errors.cpfCnpj && (
+                    <InputErrorMessage>{errors.cpfCnpj.message}</InputErrorMessage>
+                )}
                 <label htmlFor="">Data de nascimento:</label>
                 <input
                     className="border-2 p-2"
