@@ -66,7 +66,7 @@ const Receipt = ({ storeName, vehicle, lead, sell }: ReceiptProps) => {
                 <View style={styles.section}>
                     <Text style={styles.title}>Cliente</Text>
                     <Text>Nome: {lead.name}</Text>
-                    <Text>CPF/CNPJ: </Text>
+                    <Text>CPF/CNPJ: {lead.cpfCnpj}</Text>
                     <Text>E-mail: {lead.email}</Text>
                     <Text>Telefone: {lead.phone}</Text>
                     <Text>
@@ -82,11 +82,11 @@ const Receipt = ({ storeName, vehicle, lead, sell }: ReceiptProps) => {
                     <Text>
                         Modelo: {vehicle.name} - Marca: {vehicle.brand}
                     </Text>
-                    <Text>Renavam: </Text>
+                    <Text>Renavam: {vehicle.renavam}</Text>
                     <Text>
-                        Chassi: - Ano: {vehicle.year} - Placa: {vehicle.plate}
+                        Chassi: {vehicle.chassis} - Ano: {vehicle.year} - Placa: {vehicle.plate}
                     </Text>
-                    <Text>Combustível: </Text>
+                    <Text>Combustível: {vehicle.fuel}</Text>
                     <Text>Valor de Venda: {currencyFormatter(sell.amount)}</Text>
                 </View>
 
