@@ -11,6 +11,15 @@ type ReceiptProps = {
 
 const styles = StyleSheet.create({
     page: { padding: 30, fontSize: 10, fontFamily: 'Helvetica' },
+    infoContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        border: '1 solid #000',
+    },
+    infoTextForm: {
+        borderBottom: '1 solid #000', 
+        padding: 1
+    },
     section: {
         display: 'flex',
         flexDirection: 'column',
@@ -63,13 +72,13 @@ const Receipt = ({ storeName, vehicle, lead, sell }: ReceiptProps) => {
                     </Text>
                 </View>
 
-                <View style={styles.section}>
+                <View style={styles.infoContainer}>
                     <Text style={styles.title}>Cliente</Text>
-                    <Text>Nome: {lead.name}</Text>
-                    <Text>CPF/CNPJ: {lead.cpfCnpj}</Text>
-                    <Text>E-mail: {lead.email}</Text>
-                    <Text>Telefone: {lead.phone}</Text>
-                    <Text>
+                    <Text style={styles.infoTextForm}>Nome: {lead.name}</Text>
+                    <Text style={styles.infoTextForm}>CPF/CNPJ: {lead.cpfCnpj}</Text>
+                    <Text style={styles.infoTextForm}>E-mail: {lead.email}</Text>
+                    <Text style={styles.infoTextForm}>Telefone: {lead.phone}</Text>
+                    <Text style={styles.infoTextForm}>
                         Data de nascimento:{' '}
                         {new Date(lead.birthday).toLocaleDateString('pt-BR', {
                             timeZone: 'UTC',
@@ -77,20 +86,20 @@ const Receipt = ({ storeName, vehicle, lead, sell }: ReceiptProps) => {
                     </Text>
                 </View>
 
-                <View style={styles.section}>
+                <View style={styles.infoContainer}>
                     <Text style={styles.title}>Veículo Vendido</Text>
-                    <Text>
+                    <Text style={styles.infoTextForm}>
                         Modelo: {vehicle.name} - Marca: {vehicle.brand}
                     </Text>
-                    <Text>Renavam: {vehicle.renavam}</Text>
-                    <Text>
+                    <Text style={styles.infoTextForm}>Renavam: {vehicle.renavam}</Text>
+                    <Text style={styles.infoTextForm}>
                         Chassi: {vehicle.chassis} - Ano: {vehicle.year} - Placa: {vehicle.plate}
                     </Text>
-                    <Text>Combustível: {vehicle.fuel}</Text>
+                    <Text style={styles.infoTextForm}>Combustível: {vehicle.fuel}</Text>
                     <Text>Valor de Venda: {currencyFormatter(sell.amount)}</Text>
                 </View>
 
-                <View style={styles.section}>
+                <View style={styles.infoContainer}>
                     <Text style={styles.title}>Acerto Financeiro</Text>
                     <Text>Valor Total: R$ {currencyFormatter(sell.amount)}</Text>
                 </View>
