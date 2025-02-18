@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     page: { padding: 30, fontSize: 10, fontFamily: 'Helvetica' },
     infoContainer: {
         display: 'flex',
+        margin: '2 0',
         flexDirection: 'column',
         border: '1 solid #000',
     },
@@ -89,19 +90,28 @@ const Receipt = ({ storeName, vehicle, lead, sell }: ReceiptProps) => {
                 <View style={styles.infoContainer}>
                     <Text style={styles.title}>Veículo Vendido</Text>
                     <Text style={styles.infoTextForm}>
-                        Modelo: {vehicle.name} - Marca: {vehicle.brand}
+                        Modelo: {vehicle.name}
                     </Text>
+                    <Text style={styles.infoTextForm}>Marca: {vehicle.brand}</Text>
                     <Text style={styles.infoTextForm}>Renavam: {vehicle.renavam}</Text>
                     <Text style={styles.infoTextForm}>
-                        Chassi: {vehicle.chassis} - Ano: {vehicle.year} - Placa: {vehicle.plate}
+                        Chassi: {vehicle.chassis}
                     </Text>
+                    <Text style={styles.infoTextForm}>Ano: {vehicle.year}</Text>
+                    <Text style={styles.infoTextForm}>Placa: {vehicle.plate}</Text>
                     <Text style={styles.infoTextForm}>Combustível: {vehicle.fuel}</Text>
-                    <Text>Valor de Venda: {currencyFormatter(sell.amount)}</Text>
+                    <Text style={styles.infoTextForm}>Valor de Venda: {currencyFormatter(sell.amount)}</Text>
                 </View>
 
                 <View style={styles.infoContainer}>
                     <Text style={styles.title}>Acerto Financeiro</Text>
-                    <Text>Valor Total: R$ {currencyFormatter(sell.amount)}</Text>
+                    <Text style={styles.infoTextForm}>Valor Total: R$ {currencyFormatter(sell.amount)}</Text>
+                    <Text style={styles.infoTextForm}>Forma de pagamento: </Text>
+                </View>
+
+                <View style={styles.infoContainer}>
+                    <Text style={styles.title}>Detalhes da negociação:</Text>
+                    <Text style={styles.infoTextForm}>Descrição:</Text>
                 </View>
             </Page>
             <Page size="A4" style={styles.page}>
