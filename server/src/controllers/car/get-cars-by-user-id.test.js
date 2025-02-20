@@ -1,16 +1,13 @@
 import { GetCarsByUserIdController } from './get-cars-by-user-id.js';
+import { carFixture } from '../../tests/fixtures/car.js';
 
 describe('GetCarsByUserIdController', () => {
     class GetCarsByUserIdUseCase {
         async execute(carId) {
             const car = {
+                ...carFixture,
+                id: undefined,
                 user_id: carId,
-                brand: 'Ferrari',
-                name: '488',
-                year: 2018,
-                plate: 'FFF0F00',
-                km: 20000,
-                entry_price: 2500000,
             };
             return [car];
         }
@@ -33,8 +30,6 @@ describe('GetCarsByUserIdController', () => {
         };
 
         const result = await sut.execute(httpRequest);
-
-        console.log(result);
 
         expect(result.statusCode).toBe(200);
     });

@@ -28,6 +28,9 @@ model Car {
   year        Int
   plate       String
   km          Int
+  renavam     String
+  chassis     String
+  fuel        String
   entry_price Float
   photoUrls   String[]  @default([])
   expenses    Expense[] @relation("CarExpenses")
@@ -67,6 +70,7 @@ model Lead {
   email     String   @unique
   phone     String   @unique
   birthday  DateTime
+  cpfCnpj   String   @map("CPF/CNPJ")
   purchases Sell[]   @relation("LeadPurchases")
   createdAt DateTime @default(now())
   user      User     @relation(fields: [user_id], references: [id], name: "UserLeads", onDelete: Cascade)

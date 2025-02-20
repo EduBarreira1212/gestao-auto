@@ -1,4 +1,5 @@
 import { CreateCarController } from './create-car.js';
+import { carFixture } from '../../tests/fixtures/car.js';
 
 describe('CreateCarController', () => {
     class CreateCarUseCaseStub {
@@ -19,13 +20,8 @@ describe('CreateCarController', () => {
 
         const httpRequest = {
             body: {
-                user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
-                brand: 'Ferrari',
-                name: '488',
-                year: 2018,
-                plate: 'FFF0F00',
-                km: 20000,
-                entry_price: 2500000,
+                ...carFixture,
+                id: undefined,
             },
             files: [],
         };
@@ -55,13 +51,8 @@ describe('CreateCarController', () => {
 
         const httpRequest = {
             body: {
-                user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
-                brand: 'Ferrari',
-                name: '488',
-                year: 2018,
-                plate: 'FFF0F00',
-                km: 20000,
-                entry_price: 2500000,
+                ...carFixture,
+                id: undefined,
             },
             files: [],
         };
@@ -81,13 +72,8 @@ describe('CreateCarController', () => {
 
         const httpRequest = {
             body: {
-                user_id: '6625edd1-2b56-42f9-84b4-2f86ba234c41',
-                brand: 'Ferrari',
-                name: '488',
-                year: 2018,
-                plate: 'FFF0F00',
-                km: 20000,
-                entry_price: 2500000,
+                ...carFixture,
+                id: undefined,
             },
             files: [],
         };

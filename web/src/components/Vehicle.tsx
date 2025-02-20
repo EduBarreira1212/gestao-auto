@@ -20,6 +20,9 @@ type ICar = {
         year: number;
         plate: string;
         km: number;
+        renavam: string;
+        fuel: string;
+        chassis: string;
         entry_price: number;
         expenses: ExpenseType[];
         photoUrls: string[];
@@ -72,7 +75,10 @@ const Vehicle = ({ car }: ICar) => {
             </span>
             <span>{car.year}</span>
             <span>{car.plate}</span>
+            <span>Combustível: {car.fuel}</span>
             <span>KM: {car.km.toLocaleString()}</span>
+            <span>Renavam: {car.renavam}</span>
+            <span>Chassi: {car.chassis}</span>
             <span>Preço de entrada: {currencyFormatter(car.entry_price)}</span>
             <div className="flex flex-row justify-between gap-2">
                 <span>Despesas: {currencyFormatter(expensesAmount)}</span>

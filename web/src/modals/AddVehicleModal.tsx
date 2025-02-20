@@ -35,6 +35,9 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
         formData.append('brand', createVehicleParams.brand);
         formData.append('year', createVehicleParams.year.toString());
         formData.append('plate', createVehicleParams.plate);
+        formData.append('renavam', createVehicleParams.renavam);
+        formData.append('chassis', createVehicleParams.chassis);
+        formData.append('fuel', createVehicleParams.fuel);
         formData.append('km', createVehicleParams.km.toString());
         formData.append('entry_price', createVehicleParams.entry_price.toString());
 
@@ -91,6 +94,39 @@ const AddVehicleModal = ({ onClose }: { onClose: () => void }) => {
                 />
                 {errors.plate && (
                     <InputErrorMessage>{errors.plate.message}</InputErrorMessage>
+                )}
+                <label htmlFor="">Renavam:</label>
+                <input
+                    className="border-2 p-2"
+                    type="string"
+                    {...register('renavam')}
+                />
+                {errors.renavam && (
+                    <InputErrorMessage>{errors.renavam.message}</InputErrorMessage>
+                )}
+                <label htmlFor="">Chassi:</label>
+                <input
+                    className="border-2 p-2"
+                    type="string"
+                    {...register('chassis')}
+                />
+                {errors.chassis && (
+                    <InputErrorMessage>{errors.chassis.message}</InputErrorMessage>
+                )}
+                <label htmlFor="">Combustível:</label>
+                <select className="border-2 p-2" {...register('fuel')}>
+                    <option value="" disabled>
+                        Selecione um tipo de combustível
+                    </option>
+                    <option value="Gasoline">Gasolina</option>
+                    <option value="Ethanol">Etanol</option>
+                    <option value="Flex">Flex</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Eletric">Életrico</option>
+                    <option value="Hybrid">Híbrido</option>
+                </select>
+                {errors.fuel && (
+                    <InputErrorMessage>{errors.fuel.message}</InputErrorMessage>
                 )}
                 <label htmlFor="">Quilometragem:</label>
                 <input

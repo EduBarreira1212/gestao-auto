@@ -17,6 +17,12 @@ export const createLeadSchema = z.object({
             /^\(\d{2}\) \d{5}-\d{4}$/,
             "Phone number must follow the format '(xx) xxxxx-xxxx'"
         ),
+    cpfCnpj: z
+        .string()
+        .regex(/^(?:\d{3}\.\d{3}\.\d{3}-\d{2}|\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})$/, {
+            message:
+                'O campo deve ser um CPF (000.000.000-00) ou um CNPJ (00.000.000/0000-00)',
+        }),
     birthday: z.date({ required_error: 'Birthday is required.' }),
 });
 

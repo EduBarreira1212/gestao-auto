@@ -17,22 +17,18 @@ describe('PostgresGetCarsByUserIdRepository', () => {
 
     test('should return a car with correct properties', async () => {
         await prisma.user.create({ data: user });
-        await prisma.car.create({ data: { ...car, user_id: user.id } });
+        const carCreated = await prisma.car.create({
+            data: { ...car, user_id: user.id },
+        });
         const result = await sut.execute(user.id);
 
         expect(result).toStrictEqual([
             {
-                id: car.id,
+                ...car,
                 user_id: user.id,
-                brand: car.brand,
-                name: car.name,
-                year: car.year,
-                plate: car.plate,
-                km: car.km,
-                entry_price: car.entry_price,
-                createdAt: result[0].createdAt,
-                expenses: [],
                 photoUrls: [],
+                createdAt: carCreated.createdAt,
+                expenses: [],
                 sell: null,
             },
         ]);

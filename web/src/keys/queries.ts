@@ -12,5 +12,6 @@ export const vehicleQueriesKeys = {
 };
 
 export const leadQueriesKeys = {
+    getLeadById: (leadId: string) => ['lead', leadId],
     getLeads: () => ['leads'],
 };

@@ -18,6 +18,9 @@ export type CreateVehicle = {
     plate: string;
     km: number;
     entry_price: number;
+    renavam: string;
+    fuel: string;
+    chassis: string;
     photos?: File[];
 };
 
@@ -27,6 +30,9 @@ export type UpdateVehicle = {
     year?: number;
     plate?: string;
     km?: number;
+    renavam?: string;
+    fuel?: string;
+    chassis?: string;
     entry_price?: number;
 };
 
@@ -60,6 +66,7 @@ export type CreateLead = {
     email: string;
     phone: string;
     birthday: string;
+    cpfCnpj: string;
 };
 
 export type UpdateLead = {
@@ -67,6 +74,7 @@ export type UpdateLead = {
     email?: string;
     phone?: string;
     birthday?: string;
+    cpfCnpj?: string;
 };
 
 export type VehicleType = {
@@ -77,6 +85,9 @@ export type VehicleType = {
     year: number;
     plate: string;
     km: number;
+    renavam: string;
+    fuel: string;
+    chassis: string;
     entry_price: number;
     expenses: ExpenseType[];
     photoUrls: string[];
@@ -109,6 +120,7 @@ export type LeadType = {
     email: string;
     phone: string;
     birthday: Date;
+    cpfCnpj: string;
     purchases: SellType[];
     createdAt: Date;
 };

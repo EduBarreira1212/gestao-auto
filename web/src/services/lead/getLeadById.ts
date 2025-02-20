@@ -6,7 +6,7 @@ const getLeadById = async (leadId: string, token: string) => {
             headers: { Authorization: `Bearer ${token}` },
         });
 
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
