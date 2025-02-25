@@ -37,12 +37,10 @@ describe('PostgresCreateSellRepository', () => {
         });
 
         expect(result).toStrictEqual({
-            id: sell.id,
+            ...sell,
             user_id: user.id,
             car_id: car.id,
             lead_id: lead.id,
-            amount: sell.amount,
-            profit: sell.profit,
             createdAt: result.createdAt,
         });
     });
