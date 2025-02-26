@@ -11,6 +11,7 @@ export const createSellSchema = z.object({
         .number({ required_error: 'Sell amount is required.' })
         .positive({ message: 'Amount must be a positive number.' }),
     profit: z.number({ required_error: 'Profit is required.' }),
+    description: z.string().optional(),
 });
 
 export const updateSellSchema = createSellSchema

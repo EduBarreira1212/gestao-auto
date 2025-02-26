@@ -53,11 +53,13 @@ export type CreateSell = {
     lead_id: string;
     amount: number;
     profit: number;
+    description?: string;
 };
 
 export type UpdateSell = {
     amount?: number;
     profit?: number;
+    description?: string;
 };
 
 export type CreateLead = {
@@ -102,6 +104,7 @@ export type SellType = {
     lead_id: string;
     amount: number;
     profit: number;
+    description?: string;
     createdAt: Date;
 };
 
