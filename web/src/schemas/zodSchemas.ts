@@ -147,6 +147,11 @@ export const createSellSchema = z.object({
         .refine((val) => val !== '', {
             message: 'A seleção de um lead é obrigatória.',
         }),
+    description: z
+        .string()
+        .trim()
+        .max(500, 'A descrição não pode ter mais de 500 caractéres')
+        .optional(),
 });
 
 export const updateSellSchema = z.object({
@@ -156,6 +161,11 @@ export const updateSellSchema = z.object({
         .optional(),
     profit: z
         .number({ invalid_type_error: 'O lucro deve ser um número.' })
+        .optional(),
+    description: z
+        .string()
+        .trim()
+        .max(500, 'A descrição não pode ter mais de 500 caractéres')
         .optional(),
 });
 
