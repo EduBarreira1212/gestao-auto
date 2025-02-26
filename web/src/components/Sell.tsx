@@ -46,6 +46,12 @@ const Sell = ({ sell }: { sell: SellType }) => {
             </span>
             <span>Total: {currencyFormatter(sell.amount)}</span>
             <span>Lucro: {currencyFormatter(sell.profit)}</span>
+            <div className="flex flex-col gap-1">
+                <label>Descrição:</label>
+                <span className="h-36 overflow-auto break-words">
+                    {sell.description ? sell.description : 'Não informada'}
+                </span>
+            </div>
             <span>
                 Data da venda: {new Date(sell.createdAt).toLocaleDateString('pt-BR')}
             </span>

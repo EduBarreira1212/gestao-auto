@@ -78,6 +78,19 @@ const CreateSellModal = ({
                     <InputErrorMessage>{errors.amount.message}</InputErrorMessage>
                 )}
                 <p>Despesas: {formatter.format(expenses)}</p>
+                <label>Descrição:</label>
+                <textarea
+                    className="border-2 p-2"
+                    maxLength={500}
+                    rows={4}
+                    placeholder="Insira detalhes da venda. Ex: Forma de pagamento"
+                    {...register('description')}
+                />
+                {errors.description && (
+                    <InputErrorMessage>
+                        {errors.description.message}
+                    </InputErrorMessage>
+                )}
                 <label>Lead:</label>
                 <select className="border-2 p-2" {...register('lead_id')}>
                     <option value="" disabled>

@@ -57,6 +57,19 @@ const SellDetailsModal = ({ onClose, sellId }: SellDetailsModalProps) => {
                 {errors.profit && (
                     <InputErrorMessage>{errors.profit.message}</InputErrorMessage>
                 )}
+                <label>Descrição:</label>
+                <textarea
+                    className="border-2 p-2"
+                    maxLength={500}
+                    rows={4}
+                    placeholder="Insira detalhes da venda. Ex: Forma de pagamento"
+                    {...register('description')}
+                />
+                {errors.description && (
+                    <InputErrorMessage>
+                        {errors.description.message}
+                    </InputErrorMessage>
+                )}
                 <SubmitBtn value="Atualizar venda" disabled={isPending} />
             </form>
         </ModalContainer>
