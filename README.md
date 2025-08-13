@@ -59,6 +59,12 @@ The project includes a **React + TypeScript** front-end, a **Node.js** back-end,
 - Cypress (E2E)
 - Supertest
 
+**DevOps & Tools:**
+
+- Docker
+- ESLint + Prettier for linting & formatting
+- GitHub Actions for CI/CD
+
 ---
 
 ## **Architecture**
