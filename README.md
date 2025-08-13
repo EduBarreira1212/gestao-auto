@@ -86,6 +86,28 @@ root/
 
 ---
 
+## **Folder Structure**
+
+```
+web/
+  src/
+    components/
+    hooks/
+    pages/
+    services/
+    utils/
+
+server/
+  src/
+    routes/
+    controllers/
+    services/
+    middlewares/
+    prisma/
+```
+
+---
+
 ## **Installation**
 
 ### **1. Clone the repository**
