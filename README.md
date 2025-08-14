@@ -153,16 +153,30 @@ npm install
 ### **Backend (.env)**
 
 ```
-DATABASE_URL=postgresql://user:password@localhost:5432/gestaoauto
-CLERK_SECRET_KEY=your-clerk-secret-key
-PORT=4000
+PORT=
+FRONTEND_URL=
+DATABASE_URL=
+LOCAL_DATABASE=
+EXTERNAL_DB_URL=
+CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+WEBHOOK_SECRET=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=
+AWS_BUCKET_NAME=
 ```
 
 ### **Frontend (.env)**
 
 ```
-VITE_CLERK_PUBLISHABLE_KEY=your-clerk-publishable-key
-VITE_API_URL=http://localhost:4000
+VITE_API_URL=
+VITE_CLERK_API_KEY=
+VITE_STRIPE_PUBLIC_KEY=
+VITE_MONTH_STRIPE_PRICE_ID=
+VITE_ANNUAL_STRIPE_PRICE_ID=
 ```
 
 For testing, create a `.env.test` file with test-specific variables.
