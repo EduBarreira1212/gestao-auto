@@ -51,6 +51,7 @@ The project includes a **React + TypeScript** front-end, a **Node.js** back-end,
 - Prisma ORM
 - PostgreSQL (Docker)
 - ESLint + Prettier
+- AWS S3 (file storage integration)
 
 **Testing:**
 
