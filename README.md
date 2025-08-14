@@ -197,7 +197,7 @@ docker compose up -d
 
 ```bash
 cd server
-yarn prisma migrate dev
+npx prisma migrate dev
 ```
 
 ---
@@ -208,14 +208,14 @@ yarn prisma migrate dev
 
 ```bash
 cd server
-yarn dev
+npm run dev
 ```
 
 ### **Frontend**
 
 ```bash
 cd web
-yarn dev
+npm run dev
 ```
 
 ---
@@ -226,21 +226,14 @@ yarn dev
 
 ```bash
 cd server
-yarn test
+npm run test
 ```
 
 ### **Run frontend tests**
 
 ```bash
 cd web
-yarn test
-```
-
-### **E2E tests with Cypress**
-
-```bash
-cd web
-yarn cypress open
+npm run test
 ```
 
 ---
@@ -248,8 +241,8 @@ yarn cypress open
 ## **Deployment**
 
 - **Frontend:** Vercel (output folder: `dist`).
-- **Backend:** Render / Railway.
-- **Database:** Amazon RDS / Render / Railway (PostgreSQL).
+- **Backend:** Render
+- **Database:** Render
 
 ---
 
