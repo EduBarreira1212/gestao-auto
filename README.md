@@ -3,7 +3,7 @@
 A **B2B SaaS** for managing vehicles, tracking expenses, and storing related user data.
 The system allows authenticated users to register cars, log expenses, and view all recorded transactions in an intuitive interface.
 
-The project includes a **React + TypeScript** front-end, a **Node.js** back-end, and a **PostgreSQL** database running in **Docker**. Authentication is powered by **Clerk**.
+The project includes a **React + TypeScript** front-end, a **Node.js** back-end, and a **PostgreSQL** database running in **Docker**. Authentication is powered by **Clerk**, and **Stripe** is integrated to handle payments and subscriptions for users.
 
 ---
 
