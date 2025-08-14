@@ -136,14 +136,14 @@ Install **backend** dependencies:
 
 ```bash
 cd server
-yarn install
+npm install
 ```
 
 Install **frontend** dependencies:
 
 ```bash
 cd ../web
-yarn install
+npm install
 ```
 
 ---
