@@ -67,43 +67,55 @@ The project includes a **React + TypeScript** front-end, a **Node.js** back-end,
 
 ---
 
-## **Architecture**
-
-The project follows a **monorepo** pattern:
-
-```
-root/
- ├── server/         # Backend API
- │   ├── prisma/     # Prisma schema & migrations
- │   ├── src/        # Backend code
- │   └── tests/      # Backend tests
- ├── web/            # Frontend React app
- │   ├── src/        # React components, hooks, and pages
- │   └── tests/      # Frontend tests
- ├── docker/         # Docker setup for PostgreSQL
- └── .github/        # CI/CD workflows (inside server folder)
-```
-
----
-
 ## **Folder Structure**
 
 ```
-web/
-  src/
-    components/
-    hooks/
-    pages/
-    services/
-    utils/
+root/
+│── web/                     # Frontend (React + Vite + Tailwind)
+│   ├── node_modules/        # Frontend dependencies
+│   ├── public/              # Static assets (favicon, images, etc.)
+│   ├── src/                 # Frontend source code
+│   ├── .env.local           # Environment variables for frontend
+│   ├── .gitignore           # Git ignore rules (frontend)
+│   ├── .prettierrc.json     # Prettier config
+│   ├── .vercelignore        # Ignore files during Vercel deploy
+│   ├── eslint.config.js     # ESLint rules for linting frontend
+│   ├── index.html           # Root HTML template
+│   ├── package.json         # Frontend dependencies & scripts
+│   ├── package-lock.json    # Lockfile for dependencies
+│   ├── postcss.config.js    # PostCSS setup for Tailwind
+│   ├── tailwind.config.js   # TailwindCSS configuration
+│   ├── tsconfig.json        # TypeScript config
+│   ├── tsconfig.app.json    # App-specific TS config
+│   ├── tsconfig.node.json   # Node-specific TS config
+│   ├── vercel.json          # Vercel deployment configuration
+│   ├── vite.config.ts       # Vite build configuration
+│   └── README.md            # Documentation (this file)
+│
+│── server/                  # Backend (Node.js + Express + Prisma + PostgreSQL)
+│   ├── .postgres-data/      # Local database volume (ignored in Git)
+│   ├── aws-S3/              # AWS S3 integration logic
+│   ├── clerk/               # Clerk authentication setup
+│   ├── coverage/            # Test coverage reports
+│   ├── docs/                # Backend documentation
+│   ├── node_modules/        # Backend dependencies
+│   ├── prisma/              # Prisma schema & migrations
+│   ├── src/                 # Backend source code
+│   ├── .env                 # Backend environment variables
+│   ├── .env.test            # Environment variables for testing
+│   ├── .gitignore           # Git ignore rules (backend)
+│   ├── .prettierrc.json     # Prettier config
+│   ├── docker-compose.yml   # Docker config for DB & services
+│   ├── eslint.config.mjs    # ESLint rules for backend
+│   ├── jest.config.mjs      # Jest testing configuration
+│   ├── jest.global-setup.js # Global setup for Jest
+│   ├── jest.setup-after-env.js # Setup after Jest environment loads
+│   ├── package.json         # Backend dependencies & scripts
+│   ├── package-lock.json    # Lockfile for dependencies
+│
+│── .gitignore               # Global gitignore rules
+│── README.md                # Project documentation
 
-server/
-  src/
-    routes/
-    controllers/
-    services/
-    middlewares/
-    prisma/
 ```
 
 ---
