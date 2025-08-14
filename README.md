@@ -208,7 +208,7 @@ npx prisma migrate dev
 
 ```bash
 cd server
-npm run dev
+npm run start
 ```
 
 ### **Frontend**
